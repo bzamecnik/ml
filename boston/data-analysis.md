@@ -65,6 +65,7 @@ The average number of rooms is likely to correlate with price, its no surprise. 
 
 Intra-attribute (Pearson) correlations with absolute value > 0.5.
 
+```
 (RAD, TAX)     0.910228
 (INDUS, NOX)   0.763651
 (AGE, NOX)     0.731470
@@ -89,12 +90,24 @@ Intra-attribute (Pearson) correlations with absolute value > 0.5.
 (DIS, INDUS)  -0.708027
 (AGE, DIS)    -0.747881
 (DIS, NOX)    -0.769230
+```
 
 ## Visualize Data
 
 ### Attribute Histograms
 
 - What families of distributions are shown (if any)?
+	- CRIM - after log it looks like two gaussians
+	- CHAS - Bernoulli
+	- RM - normal
+	- MEDV - looks like normal
+	- B, CRIM, RAD, ZN - a very strong peak on a side
+	- which could be transformed?
+		- CRIM - log
+		- DIS - log
+		- LSTAT - log
+		- RM - ^2
+
 - Are there any obvious structures in the attributes that map to class values?
 
 TODO
