@@ -65,6 +65,8 @@ The average number of rooms is likely to correlate with price, its no surprise. 
 
 Intra-attribute (Pearson) correlations with absolute value > 0.5.
 
+![attribute correlations](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/attr_correlations.png?_subject_uid=14861432&w=AAC0SZm1KjJgCIFxPrqw2WkCVeR3MK9DmidewkGWmc4M9A)
+
 ```
 (RAD, TAX)     0.910228
 (INDUS, NOX)   0.763651
@@ -108,13 +110,43 @@ Intra-attribute (Pearson) correlations with absolute value > 0.5.
 		- LSTAT - log
 		- RM - ^2
 
-- Are there any obvious structures in the attributes that map to class values?
+![CRIM](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/dist_CRIM.png?_subject_uid=14861432&w=AABmXpvclCGdnFJpw3A_vcJN2QqEjf8gptYI7uHUT4NfIA)
 
-TODO
+![RM](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/dist_RM.png?_subject_uid=14861432&w=AADwDVYISIqhNlF1ylhhEF1UeDfIVwvCo2MPG0TZdiC0vA)
+
+![MEDV](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/dist_MEDV.png?_subject_uid=14861432&w=AADABgNUr_5wN_IxKqCoy9JGdnUEMfU5kANe52W59z18dw)
+
+![RAD](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/dist_RAD.png?_subject_uid=14861432&w=AADZoUQktvP5KSPRDocJWP0WtgjQEb0ItgfFUf31GfmKnQ)
+
+![DIS](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/dist_DIS.png?_subject_uid=14861432&w=AABh_uzBpz5SKa6XvTwo8KuXts9TYPH_iB5kEjV4kfoO6Q)
+
+![ZN](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/dist_ZN.png?_subject_uid=14861432&w=AADtgdnhP77ZQNcrvoUQuD3wgZNFNT7pX2CRwTQwmHDdnw)
+
+[more images](https://www.dropbox.com/sh/4p84gpd8dmg7kck/AAA1_hZOX2Q3yhcamau4F4nza?dl=0)
+
+- Are there any obvious structures in the attributes that map to class values?
 
 ### Pairwise Scatter-plots
 
 - What interesting two-dimensional structures are shown?
 - What interesting relationships between the attributes to class values are shown?
 
-TODO
+<a href="https://www.dropbox.com/s/w9mfescc5inrz02/pairwise_scatter_matrix.png?dl=0" title="view/download original big image"><img alt="pairwise scatter plot matrix" src="https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/pairwise_scatter_matrix_t.png?_subject_uid=14861432&w=AAAV8nbhkH901EihT2qiumPGttw2eZPcfyh_1A1kHkPNow"></a>
+
+![MEDV-RM](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_MEDV_RM.png?_subject_uid=14861432&w=AACBzLPYHN9S_fGQorsCNXxqOueNrrEM7ZSstwaoS8-x-Q)
+
+![MEDV-LSTAT](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_MEDV_LSTAT.png?_subject_uid=14861432&w=AABnhEoE6HuBop8MCZtU12HyBUDR1cEeNVQiGMQJI8KzJQ)
+
+![MEDV-DIS](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_MEDV_DIS.png?_subject_uid=14861432&w=AAB4ySDSMO9QiwUfXsCRDbsTLfPDkAY-awHZEvaXsP1OXw)
+
+![MEDV-AGE](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_MEDV_AGE.png?_subject_uid=14861432&w=AADhVKtgDZGmV4Xtr54NtPZoSH66MT4dfn5EA9urWd5Z2Q)
+
+![INDUS-NOX](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_INDUS_NOX.png?_subject_uid=14861432&w=AAAdVIg1cepUlmuHzXGDuotjKjuT_BrjfMn_3h51srPaBQ)
+
+![AGE-NOX](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_AGE_NOX.png?_subject_uid=14861432&w=AABUpcWwRx5YppztDHqtzySXwZCE6oou7NpANtNfZs2WXg)
+
+![LSTAT-AGE](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_LSTAT_AGE.png?_subject_uid=14861432&w=AAABIObdMENYMsro31vyXoB2kMzJOBmMhn5Z6IF1qbop8w)
+
+![DIS-NOX](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_DIS_NOX.png?_subject_uid=14861432&w=AAAKXsagjEx4zGQic9JupOe4CEJstzo4KVG8PfV4hOrTzg)
+
+![LSTAT-NOX](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_LSTAT_NOX.png?_subject_uid=14861432&w=AACRNYHEMLveAGewXThxRilONf0O4n4yWhswXydHfYA9Qw)
