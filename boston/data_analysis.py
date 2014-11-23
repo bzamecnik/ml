@@ -16,13 +16,13 @@ def dataset_to_dataframe(dataset, target_name):
 
 def print_structure(dataset, file):
     logging.debug('Analyzing dataset structure')
-    print('number of instances:', dataset.data.shape[0], file=file)
-    print('number of attributes:', dataset.data.shape[1], file=file)
-    print('attribute names:', ', '.join(dataset.feature_names), file=file)
+    print('Number of instances:', dataset.data.shape[0], file=file)
+    print('Number of attributes:', dataset.data.shape[1], file=file)
+    print('Attribute names:', ', '.join(dataset.feature_names), file=file)
 
 def summarize_distributions(df, file):
     logging.debug('Summarizing attribute distributions')
-    print('attribute distribution summary:', file=file)
+    print('Attribute distribution summary:', file=file)
     # pd.set_option('display.width', 200)
     desc = df.describe().T
     desc['mode'] = df.mode().ix[0]
@@ -31,10 +31,10 @@ def summarize_distributions(df, file):
 
     missing_counts = pd.isnull(df).sum()
     if missing_counts.any():
-        print('missing values:', file=file)
+        print('Missing values:', file=file)
         print(missing_counts, file=file)
     else:
-        print('missing values: NONE', file=file)
+        print('Missing values: NONE', file=file)
 
 def print_correlations(df, file):
     logging.debug('Analyzing attribute pairwise correlations')
@@ -52,7 +52,7 @@ def print_correlations(df, file):
     
     print('Attribute-target correlations (Pearson):', file=file)
     print(predictivity(pearson), file=file)
-    print('Attribute-target correlations (Sparman):', file=file)
+    print('Attribute-target correlations (Spearman):', file=file)
     print(predictivity(spearman), file=file)
     
     print('Important attribute correlations (Pearson):', file=file)
