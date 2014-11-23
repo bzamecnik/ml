@@ -153,6 +153,6 @@ if __name__ == '__main__':
     
     make_report(boston, df)
     
-    # visualize(df, int_cols=['CHAS', 'RAD'])
+    visualize(df, int_cols=['CHAS', 'RAD'])
    
     logging.debug('Done')
