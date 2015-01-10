@@ -94,6 +94,6 @@ In real world: estimating prices more precisely than human guess -> higher liqui
 
 To have a template for solving further ML problems.
 
-## How would I solve the problem?
+## How would I solve the problem (manually)?
 
 I'd look at the data, compare each attribute to houses with similar attribute values and try to average the price somehow.

@@ -1,5 +1,7 @@
 # Boston house prices - data analysis
 
+[data_analysis_report.txt](http://i.neural.cz/boston-dataset-exploration/data_analysis_report.txt)
+
 ## Summarize Data
 
 ### Data Structure
@@ -65,7 +67,7 @@ The average number of rooms is likely to correlate with price, its no surprise. 
 
 Intra-attribute (Pearson) correlations with absolute value > 0.5.
 
-![attribute correlations](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/attr_correlations.png?_subject_uid=14861432&w=AAC0SZm1KjJgCIFxPrqw2WkCVeR3MK9DmidewkGWmc4M9A)
+![attribute correlations](http://i.neural.cz/boston-dataset-exploration/attr_correlations.png)
 
 ```
 (RAD, TAX)     0.910228
@@ -110,19 +112,39 @@ Intra-attribute (Pearson) correlations with absolute value > 0.5.
 		- LSTAT - log
 		- RM - ^2
 
-![CRIM](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/dist_CRIM.png?_subject_uid=14861432&w=AABmXpvclCGdnFJpw3A_vcJN2QqEjf8gptYI7uHUT4NfIA)
+![CRIM](http://i.neural.cz/boston-dataset-exploration/dist_CRIM.png)
 
-![RM](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/dist_RM.png?_subject_uid=14861432&w=AADwDVYISIqhNlF1ylhhEF1UeDfIVwvCo2MPG0TZdiC0vA)
+![RM](http://i.neural.cz/boston-dataset-exploration/dist_RM.png)
 
-![MEDV](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/dist_MEDV.png?_subject_uid=14861432&w=AADABgNUr_5wN_IxKqCoy9JGdnUEMfU5kANe52W59z18dw)
+![MEDV](http://i.neural.cz/boston-dataset-exploration/dist_MEDV.png)
 
-![RAD](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/dist_RAD.png?_subject_uid=14861432&w=AADZoUQktvP5KSPRDocJWP0WtgjQEb0ItgfFUf31GfmKnQ)
+![RAD](http://i.neural.cz/boston-dataset-exploration/dist_RAD.png)
 
-![DIS](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/dist_DIS.png?_subject_uid=14861432&w=AABh_uzBpz5SKa6XvTwo8KuXts9TYPH_iB5kEjV4kfoO6Q)
+![DIS](http://i.neural.cz/boston-dataset-exploration/dist_DIS.png)
 
-![ZN](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/dist_ZN.png?_subject_uid=14861432&w=AADtgdnhP77ZQNcrvoUQuD3wgZNFNT7pX2CRwTQwmHDdnw)
+![ZN](http://i.neural.cz/boston-dataset-exploration/dist_ZN.png)
 
-[more images](https://www.dropbox.com/sh/4p84gpd8dmg7kck/AAA1_hZOX2Q3yhcamau4F4nza?dl=0)
+When transformed (scatter with traget attribute):
+
+![MEDV x log(CRIM)](http://i.neural.cz/boston-dataset-exploration/more/pair_CRIM_log.png)
+![MEDV x log(DIS)](http://i.neural.cz/boston-dataset-exploration/more/pair_DIS_log.png)
+![MEDV x log(LSTAT)](http://i.neural.cz/boston-dataset-exploration/more/pair_LSTAT_log.png)
+![MEDV x log(RAD)](http://i.neural.cz/boston-dataset-exploration/more/pair_RAD_log.png)
+
+All distributions: [AGE](http://i.neural.cz/boston-dataset-exploration/dist_AGE.png),
+[B](http://i.neural.cz/boston-dataset-exploration/dist_B.png),
+[CHAS](http://i.neural.cz/boston-dataset-exploration/dist_CHAS.png),
+[CRIM](http://i.neural.cz/boston-dataset-exploration/dist_CRIM.png),
+[DIS](http://i.neural.cz/boston-dataset-exploration/dist_DIS.png),
+[INDUS](http://i.neural.cz/boston-dataset-exploration/dist_INDUS.png),
+[LSTAT](http://i.neural.cz/boston-dataset-exploration/dist_LSTAT.png),
+[MEDV](http://i.neural.cz/boston-dataset-exploration/dist_MEDV.png),
+[NOX](http://i.neural.cz/boston-dataset-exploration/dist_NOX.png),
+[PTRATIO](http://i.neural.cz/boston-dataset-exploration/dist_PTRATIO.png),
+[RAD](http://i.neural.cz/boston-dataset-exploration/dist_RAD.png),
+[RM](http://i.neural.cz/boston-dataset-exploration/dist_RM.png),
+[TAX](http://i.neural.cz/boston-dataset-exploration/dist_TAX.png),
+[ZN](http://i.neural.cz/boston-dataset-exploration/dist_ZN.png)
 
 - Are there any obvious structures in the attributes that map to class values?
 
@@ -131,22 +153,172 @@ Intra-attribute (Pearson) correlations with absolute value > 0.5.
 - What interesting two-dimensional structures are shown?
 - What interesting relationships between the attributes to class values are shown?
 
-<a href="https://www.dropbox.com/s/w9mfescc5inrz02/pairwise_scatter_matrix.png?dl=0" title="view/download original big image"><img alt="pairwise scatter plot matrix" src="https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/pairwise_scatter_matrix_t.png?_subject_uid=14861432&w=AAAV8nbhkH901EihT2qiumPGttw2eZPcfyh_1A1kHkPNow"></a>
+<a href="http://i.neural.cz/boston-dataset-exploration/pairwise_scatter_matrix.png"
+title="view/download original big image">
+<img alt="pairwise scatter plot matrix"
+src="http://i.neural.cz/boston-dataset-exploration/pairwise_scatter_matrix_t.png">
+</a>
 
-![MEDV-RM](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_MEDV_RM.png?_subject_uid=14861432&w=AACBzLPYHN9S_fGQorsCNXxqOueNrrEM7ZSstwaoS8-x-Q)
+Some interesting joint plots:
 
-![MEDV-LSTAT](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_MEDV_LSTAT.png?_subject_uid=14861432&w=AABnhEoE6HuBop8MCZtU12HyBUDR1cEeNVQiGMQJI8KzJQ)
+![MEDV-LSTAT](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_LSTAT.png)
 
-![MEDV-DIS](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_MEDV_DIS.png?_subject_uid=14861432&w=AAB4ySDSMO9QiwUfXsCRDbsTLfPDkAY-awHZEvaXsP1OXw)
+![MEDV-DIS](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_DIS.png)
 
-![MEDV-AGE](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_MEDV_AGE.png?_subject_uid=14861432&w=AADhVKtgDZGmV4Xtr54NtPZoSH66MT4dfn5EA9urWd5Z2Q)
+![MEDV-AGE](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_AGE.png)
 
-![INDUS-NOX](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_INDUS_NOX.png?_subject_uid=14861432&w=AAAdVIg1cepUlmuHzXGDuotjKjuT_BrjfMn_3h51srPaBQ)
+![INDUS-NOX](http://i.neural.cz/boston-dataset-exploration/joint_INDUS_NOX.png)
 
-![AGE-NOX](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_AGE_NOX.png?_subject_uid=14861432&w=AABUpcWwRx5YppztDHqtzySXwZCE6oou7NpANtNfZs2WXg)
+![AGE-NOX](http://i.neural.cz/boston-dataset-exploration/joint_AGE_NOX.png)
 
-![LSTAT-AGE](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_LSTAT_AGE.png?_subject_uid=14861432&w=AAABIObdMENYMsro31vyXoB2kMzJOBmMhn5Z6IF1qbop8w)
+![LSTAT-AGE](http://i.neural.cz/boston-dataset-exploration/joint_LSTAT_AGE.png)
 
-![DIS-NOX](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_DIS_NOX.png?_subject_uid=14861432&w=AAAKXsagjEx4zGQic9JupOe4CEJstzo4KVG8PfV4hOrTzg)
+![DIS-NOX](http://i.neural.cz/boston-dataset-exploration/joint_DIS_NOX.png)
 
-![LSTAT-NOX](https://dl-web.dropbox.com/get/blogs/neural.cz/data-analysis-boston/joint_LSTAT_NOX.png?_subject_uid=14861432&w=AACRNYHEMLveAGewXThxRilONf0O4n4yWhswXydHfYA9Qw)
+![LSTAT-NOX](http://i.neural.cz/boston-dataset-exploration/joint_LSTAT_NOX.png)
+
+All joint plots:
+
+[`AGE_B`](http://i.neural.cz/boston-dataset-exploration/joint_AGE_B.png),
+[`AGE_CRIM`](http://i.neural.cz/boston-dataset-exploration/joint_AGE_CRIM.png),
+[`AGE_DIS`](http://i.neural.cz/boston-dataset-exploration/joint_AGE_DIS.png),
+[`AGE_INDUS`](http://i.neural.cz/boston-dataset-exploration/joint_AGE_INDUS.png),
+[`AGE_LSTAT`](http://i.neural.cz/boston-dataset-exploration/joint_AGE_LSTAT.png),
+[`AGE_MEDV`](http://i.neural.cz/boston-dataset-exploration/joint_AGE_MEDV.png),
+[`AGE_NOX`](http://i.neural.cz/boston-dataset-exploration/joint_AGE_NOX.png),
+[`AGE_PTRATIO`](http://i.neural.cz/boston-dataset-exploration/joint_AGE_PTRATIO.png),
+[`AGE_RM`](http://i.neural.cz/boston-dataset-exploration/joint_AGE_RM.png),
+[`AGE_TAX`](http://i.neural.cz/boston-dataset-exploration/joint_AGE_TAX.png),
+[`AGE_ZN`](http://i.neural.cz/boston-dataset-exploration/joint_AGE_ZN.png)
+
+[`B_AGE`](http://i.neural.cz/boston-dataset-exploration/joint_B_AGE.png),
+[`B_CRIM`](http://i.neural.cz/boston-dataset-exploration/joint_B_CRIM.png),
+[`B_DIS`](http://i.neural.cz/boston-dataset-exploration/joint_B_DIS.png),
+[`B_INDUS`](http://i.neural.cz/boston-dataset-exploration/joint_B_INDUS.png),
+[`B_LSTAT`](http://i.neural.cz/boston-dataset-exploration/joint_B_LSTAT.png),
+[`B_MEDV`](http://i.neural.cz/boston-dataset-exploration/joint_B_MEDV.png),
+[`B_NOX`](http://i.neural.cz/boston-dataset-exploration/joint_B_NOX.png),
+[`B_PTRATIO`](http://i.neural.cz/boston-dataset-exploration/joint_B_PTRATIO.png),
+[`B_RM`](http://i.neural.cz/boston-dataset-exploration/joint_B_RM.png),
+[`B_TAX`](http://i.neural.cz/boston-dataset-exploration/joint_B_TAX.png),
+[`B_ZN`](http://i.neural.cz/boston-dataset-exploration/joint_B_ZN.png)
+
+[`CRIM_AGE`](http://i.neural.cz/boston-dataset-exploration/joint_CRIM_AGE.png),
+[`CRIM_B`](http://i.neural.cz/boston-dataset-exploration/joint_CRIM_B.png),
+[`CRIM_DIS`](http://i.neural.cz/boston-dataset-exploration/joint_CRIM_DIS.png),
+[`CRIM_INDUS`](http://i.neural.cz/boston-dataset-exploration/joint_CRIM_INDUS.png),
+[`CRIM_LSTAT`](http://i.neural.cz/boston-dataset-exploration/joint_CRIM_LSTAT.png),
+[`CRIM_MEDV`](http://i.neural.cz/boston-dataset-exploration/joint_CRIM_MEDV.png),
+[`CRIM_NOX`](http://i.neural.cz/boston-dataset-exploration/joint_CRIM_NOX.png),
+[`CRIM_PTRATIO`](http://i.neural.cz/boston-dataset-exploration/joint_CRIM_PTRATIO.png),
+[`CRIM_RM`](http://i.neural.cz/boston-dataset-exploration/joint_CRIM_RM.png),
+[`CRIM_TAX`](http://i.neural.cz/boston-dataset-exploration/joint_CRIM_TAX.png),
+[`CRIM_ZN`](http://i.neural.cz/boston-dataset-exploration/joint_CRIM_ZN.png)
+
+[`DIS_AGE`](http://i.neural.cz/boston-dataset-exploration/joint_DIS_AGE.png),
+[`DIS_B`](http://i.neural.cz/boston-dataset-exploration/joint_DIS_B.png),
+[`DIS_CRIM`](http://i.neural.cz/boston-dataset-exploration/joint_DIS_CRIM.png),
+[`DIS_INDUS`](http://i.neural.cz/boston-dataset-exploration/joint_DIS_INDUS.png),
+[`DIS_LSTAT`](http://i.neural.cz/boston-dataset-exploration/joint_DIS_LSTAT.png),
+[`DIS_MEDV`](http://i.neural.cz/boston-dataset-exploration/joint_DIS_MEDV.png),
+[`DIS_NOX`](http://i.neural.cz/boston-dataset-exploration/joint_DIS_NOX.png),
+[`DIS_PTRATIO`](http://i.neural.cz/boston-dataset-exploration/joint_DIS_PTRATIO.png),
+[`DIS_RM`](http://i.neural.cz/boston-dataset-exploration/joint_DIS_RM.png),
+[`DIS_TAX`](http://i.neural.cz/boston-dataset-exploration/joint_DIS_TAX.png),
+[`DIS_ZN`](http://i.neural.cz/boston-dataset-exploration/joint_DIS_ZN.png)
+
+[`INDUS_AGE`](http://i.neural.cz/boston-dataset-exploration/joint_INDUS_AGE.png),
+[`INDUS_B`](http://i.neural.cz/boston-dataset-exploration/joint_INDUS_B.png),
+[`INDUS_CRIM`](http://i.neural.cz/boston-dataset-exploration/joint_INDUS_CRIM.png),
+[`INDUS_DIS`](http://i.neural.cz/boston-dataset-exploration/joint_INDUS_DIS.png),
+[`INDUS_LSTAT`](http://i.neural.cz/boston-dataset-exploration/joint_INDUS_LSTAT.png),
+[`INDUS_MEDV`](http://i.neural.cz/boston-dataset-exploration/joint_INDUS_MEDV.png),
+[`INDUS_NOX`](http://i.neural.cz/boston-dataset-exploration/joint_INDUS_NOX.png),
+[`INDUS_PTRATIO`](http://i.neural.cz/boston-dataset-exploration/joint_INDUS_PTRATIO.png),
+[`INDUS_RM`](http://i.neural.cz/boston-dataset-exploration/joint_INDUS_RM.png),
+[`INDUS_TAX`](http://i.neural.cz/boston-dataset-exploration/joint_INDUS_TAX.png),
+[`INDUS_ZN`](http://i.neural.cz/boston-dataset-exploration/joint_INDUS_ZN.png)
+
+[`LSTAT_AGE`](http://i.neural.cz/boston-dataset-exploration/joint_LSTAT_AGE.png),
+[`LSTAT_B`](http://i.neural.cz/boston-dataset-exploration/joint_LSTAT_B.png),
+[`LSTAT_CRIM`](http://i.neural.cz/boston-dataset-exploration/joint_LSTAT_CRIM.png),
+[`LSTAT_DIS`](http://i.neural.cz/boston-dataset-exploration/joint_LSTAT_DIS.png),
+[`LSTAT_INDUS`](http://i.neural.cz/boston-dataset-exploration/joint_LSTAT_INDUS.png),
+[`LSTAT_MEDV`](http://i.neural.cz/boston-dataset-exploration/joint_LSTAT_MEDV.png),
+[`LSTAT_NOX`](http://i.neural.cz/boston-dataset-exploration/joint_LSTAT_NOX.png),
+[`LSTAT_PTRATIO`](http://i.neural.cz/boston-dataset-exploration/joint_LSTAT_PTRATIO.png),
+[`LSTAT_RM`](http://i.neural.cz/boston-dataset-exploration/joint_LSTAT_RM.png),
+[`LSTAT_TAX`](http://i.neural.cz/boston-dataset-exploration/joint_LSTAT_TAX.png),
+[`LSTAT_ZN`](http://i.neural.cz/boston-dataset-exploration/joint_LSTAT_ZN.png)
+
+[`MEDV_AGE`](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_AGE.png),
+[`MEDV_B`](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_B.png),
+[`MEDV_CRIM`](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_CRIM.png),
+[`MEDV_DIS`](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_DIS.png),
+[`MEDV_INDUS`](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_INDUS.png),
+[`MEDV_LSTAT`](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_LSTAT.png),
+[`MEDV_NOX`](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_NOX.png),
+[`MEDV_PTRATIO`](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_PTRATIO.png),
+[`MEDV_RM`](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_RM.png),
+[`MEDV_TAX`](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_TAX.png),
+[`MEDV_ZN`](http://i.neural.cz/boston-dataset-exploration/joint_MEDV_ZN.png)
+
+[`NOX_AGE`](http://i.neural.cz/boston-dataset-exploration/joint_NOX_AGE.png),
+[`NOX_B`](http://i.neural.cz/boston-dataset-exploration/joint_NOX_B.png),
+[`NOX_CRIM`](http://i.neural.cz/boston-dataset-exploration/joint_NOX_CRIM.png),
+[`NOX_DIS`](http://i.neural.cz/boston-dataset-exploration/joint_NOX_DIS.png),
+[`NOX_INDUS`](http://i.neural.cz/boston-dataset-exploration/joint_NOX_INDUS.png),
+[`NOX_LSTAT`](http://i.neural.cz/boston-dataset-exploration/joint_NOX_LSTAT.png),
+[`NOX_MEDV`](http://i.neural.cz/boston-dataset-exploration/joint_NOX_MEDV.png),
+[`NOX_PTRATIO`](http://i.neural.cz/boston-dataset-exploration/joint_NOX_PTRATIO.png),
+[`NOX_RM`](http://i.neural.cz/boston-dataset-exploration/joint_NOX_RM.png),
+[`NOX_TAX`](http://i.neural.cz/boston-dataset-exploration/joint_NOX_TAX.png),
+[`NOX_ZN`](http://i.neural.cz/boston-dataset-exploration/joint_NOX_ZN.png)
+
+[`PTRATIO_AGE`](http://i.neural.cz/boston-dataset-exploration/joint_PTRATIO_AGE.png),
+[`PTRATIO_B`](http://i.neural.cz/boston-dataset-exploration/joint_PTRATIO_B.png),
+[`PTRATIO_CRIM`](http://i.neural.cz/boston-dataset-exploration/joint_PTRATIO_CRIM.png),
+[`PTRATIO_DIS`](http://i.neural.cz/boston-dataset-exploration/joint_PTRATIO_DIS.png),
+[`PTRATIO_INDUS`](http://i.neural.cz/boston-dataset-exploration/joint_PTRATIO_INDUS.png),
+[`PTRATIO_LSTAT`](http://i.neural.cz/boston-dataset-exploration/joint_PTRATIO_LSTAT.png),
+[`PTRATIO_MEDV`](http://i.neural.cz/boston-dataset-exploration/joint_PTRATIO_MEDV.png),
+[`PTRATIO_NOX`](http://i.neural.cz/boston-dataset-exploration/joint_PTRATIO_NOX.png),
+[`PTRATIO_RM`](http://i.neural.cz/boston-dataset-exploration/joint_PTRATIO_RM.png),
+[`PTRATIO_TAX`](http://i.neural.cz/boston-dataset-exploration/joint_PTRATIO_TAX.png),
+[`PTRATIO_ZN`](http://i.neural.cz/boston-dataset-exploration/joint_PTRATIO_ZN.png)
+
+[`RM_AGE`](http://i.neural.cz/boston-dataset-exploration/joint_RM_AGE.png),
+[`RM_B`](http://i.neural.cz/boston-dataset-exploration/joint_RM_B.png),
+[`RM_CRIM`](http://i.neural.cz/boston-dataset-exploration/joint_RM_CRIM.png),
+[`RM_DIS`](http://i.neural.cz/boston-dataset-exploration/joint_RM_DIS.png),
+[`RM_INDUS`](http://i.neural.cz/boston-dataset-exploration/joint_RM_INDUS.png),
+[`RM_LSTAT`](http://i.neural.cz/boston-dataset-exploration/joint_RM_LSTAT.png),
+[`RM_MEDV`](http://i.neural.cz/boston-dataset-exploration/joint_RM_MEDV.png),
+[`RM_NOX`](http://i.neural.cz/boston-dataset-exploration/joint_RM_NOX.png),
+[`RM_PTRATIO`](http://i.neural.cz/boston-dataset-exploration/joint_RM_PTRATIO.png),
+[`RM_TAX`](http://i.neural.cz/boston-dataset-exploration/joint_RM_TAX.png),
+[`RM_ZN`](http://i.neural.cz/boston-dataset-exploration/joint_RM_ZN.png)
+
+[`TAX_AGE`](http://i.neural.cz/boston-dataset-exploration/joint_TAX_AGE.png),
+[`TAX_B`](http://i.neural.cz/boston-dataset-exploration/joint_TAX_B.png),
+[`TAX_CRIM`](http://i.neural.cz/boston-dataset-exploration/joint_TAX_CRIM.png),
+[`TAX_DIS`](http://i.neural.cz/boston-dataset-exploration/joint_TAX_DIS.png),
+[`TAX_INDUS`](http://i.neural.cz/boston-dataset-exploration/joint_TAX_INDUS.png),
+[`TAX_LSTAT`](http://i.neural.cz/boston-dataset-exploration/joint_TAX_LSTAT.png),
+[`TAX_MEDV`](http://i.neural.cz/boston-dataset-exploration/joint_TAX_MEDV.png),
+[`TAX_NOX`](http://i.neural.cz/boston-dataset-exploration/joint_TAX_NOX.png),
+[`TAX_PTRATIO`](http://i.neural.cz/boston-dataset-exploration/joint_TAX_PTRATIO.png),
+[`TAX_RM`](http://i.neural.cz/boston-dataset-exploration/joint_TAX_RM.png),
+[`TAX_ZN`](http://i.neural.cz/boston-dataset-exploration/joint_TAX_ZN.png)
+
+[`ZN_AGE`](http://i.neural.cz/boston-dataset-exploration/joint_ZN_AGE.png),
+[`ZN_B`](http://i.neural.cz/boston-dataset-exploration/joint_ZN_B.png),
+[`ZN_CRIM`](http://i.neural.cz/boston-dataset-exploration/joint_ZN_CRIM.png),
+[`ZN_DIS`](http://i.neural.cz/boston-dataset-exploration/joint_ZN_DIS.png),
+[`ZN_INDUS`](http://i.neural.cz/boston-dataset-exploration/joint_ZN_INDUS.png),
+[`ZN_LSTAT`](http://i.neural.cz/boston-dataset-exploration/joint_ZN_LSTAT.png),
+[`ZN_MEDV`](http://i.neural.cz/boston-dataset-exploration/joint_ZN_MEDV.png),
+[`ZN_NOX`](http://i.neural.cz/boston-dataset-exploration/joint_ZN_NOX.png),
+[`ZN_PTRATIO`](http://i.neural.cz/boston-dataset-exploration/joint_ZN_PTRATIO.png),
+[`ZN_RM`](http://i.neural.cz/boston-dataset-exploration/joint_ZN_RM.png),
+[`ZN_TAX`](http://i.neural.cz/boston-dataset-exploration/joint_ZN_TAX.png)
