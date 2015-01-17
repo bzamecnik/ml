@@ -10,8 +10,8 @@ import seaborn as sns
 from sklearn.datasets import load_boston
 
 def dataset_to_dataframe(dataset, target_name):
-    df = pd.DataFrame(boston.data, columns=boston.feature_names)
-    df[target_name] = boston.target
+    df = pd.DataFrame(dataset.data, columns=dataset.feature_names)
+    df[target_name] = dataset.target
     return df
 
 def print_structure(dataset, file):
@@ -122,13 +122,15 @@ def pairwise_joint_plots(df, cols):
 def make_report(dataset, df, report_file_name='data_analysis_report.txt'):
     report_file = open(report_file_name, 'w')
     
-    print_structure(boston, report_file)
+    print_structure(dataset, report_file)
     summarize_distributions(df, report_file)
     print_correlations(df, report_file)
 
     logging.info('Report is in file: %s', report_file_name)    
 
 def visualize(df, int_cols):
+    sns.set(style='darkgrid')
+    
     int_cols = set(int_cols)
     real_cols = set(df.columns) - int_cols
 
@@ -141,7 +143,7 @@ if __name__ == '__main__':
     log_format='%(asctime)s %(levelname)s %(message)s'
     logging.basicConfig(format=log_format, level=logging.DEBUG)
     
-    sns.set(style='darkgrid')
+    # load data
     
     boston = load_boston()
 
@@ -150,9 +152,9 @@ if __name__ == '__main__':
     report_dir = 'report'
     os.makedirs(report_dir, exist_ok=True)
     os.chdir(report_dir)
-    
+
     make_report(boston, df)
-    
+
     visualize(df, int_cols=['CHAS', 'RAD'])
    
     logging.debug('Done')
