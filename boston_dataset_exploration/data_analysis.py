@@ -1,3 +1,8 @@
+'''
+This script analyzes the Boston housing dataset available via scikit-learn. It
+generates a textual report and a set of plot images into the 'report' directory.
+'''
+
 import logging
 import matplotlib
 # non-interactive plotting - just outputs the images and doesn't open the window
