@@ -99,60 +99,58 @@ B        0.249595 -0.282533 -0.329843 -0.072027  1.000000 -0.210562  0.185664
 LSTAT   -0.564262  0.394322  0.534423  0.467259 -0.210562  1.000000 -0.852914  
 MEDV     0.445857 -0.346776 -0.562411 -0.555905  0.185664 -0.852914  1.000000  
 Attribute-target correlations (Pearson):
-MEDV       1.000000
+LSTAT     -0.737663
 RM         0.695360
+PTRATIO   -0.507787
+INDUS     -0.483725
+TAX       -0.468536
+NOX       -0.427321
+CRIM      -0.385832
+RAD       -0.381626
+AGE       -0.376955
 ZN         0.360445
 B          0.333461
 DIS        0.249929
 CHAS       0.175260
-AGE       -0.376955
-RAD       -0.381626
-CRIM      -0.385832
-NOX       -0.427321
-TAX       -0.468536
-INDUS     -0.483725
-PTRATIO   -0.507787
-LSTAT     -0.737663
 Name: MEDV, dtype: float64
 Attribute-target correlations (Spearman):
-MEDV       1.000000
+LSTAT     -0.852914
 RM         0.633576
+INDUS     -0.578255
+NOX       -0.562609
+TAX       -0.562411
+CRIM      -0.557032
+PTRATIO   -0.555905
+AGE       -0.547562
 DIS        0.445857
 ZN         0.438179
+RAD       -0.346776
 B          0.185664
 CHAS       0.140612
-RAD       -0.346776
-AGE       -0.547562
-PTRATIO   -0.555905
-CRIM      -0.557032
-TAX       -0.562411
-NOX       -0.562609
-INDUS     -0.578255
-LSTAT     -0.852914
 Name: MEDV, dtype: float64
 Important attribute correlations (Pearson):
     attribute pair  correlation
-7       (RAD, TAX)     0.910228
-12    (INDUS, NOX)     0.763651
-4       (AGE, NOX)     0.731470
-17    (INDUS, TAX)     0.720760
-16      (NOX, TAX)     0.668023
-15       (DIS, ZN)     0.664408
-2     (AGE, INDUS)     0.644779
-10     (CRIM, RAD)     0.622029
-1       (NOX, RAD)     0.611441
-14  (INDUS, LSTAT)     0.603800
+6       (RAD, TAX)     0.910228
+19      (DIS, NOX)    -0.769230
+11    (INDUS, NOX)     0.763651
+17      (AGE, DIS)    -0.747881
+7       (AGE, NOX)     0.731470
+21    (INDUS, TAX)     0.720760
+22    (DIS, INDUS)    -0.708027
+8       (NOX, TAX)     0.668023
+10       (DIS, ZN)     0.664408
+16    (AGE, INDUS)     0.644779
+12     (CRIM, RAD)     0.622029
+23     (LSTAT, RM)    -0.613808
+9       (NOX, RAD)     0.611441
+0   (INDUS, LSTAT)     0.603800
 13    (AGE, LSTAT)     0.602339
-19    (INDUS, RAD)     0.595129
-21    (LSTAT, NOX)     0.590879
-5      (CRIM, TAX)     0.579564
-8     (LSTAT, TAX)     0.543993
-0       (AGE, TAX)     0.506456
-20       (NOX, ZN)    -0.516604
-3      (INDUS, ZN)    -0.533828
-11      (DIS, TAX)    -0.534432
-9        (AGE, ZN)    -0.569537
-22     (LSTAT, RM)    -0.613808
-23    (DIS, INDUS)    -0.708027
-6       (AGE, DIS)    -0.747881
-18      (DIS, NOX)    -0.769230
+3     (INDUS, RAD)     0.595129
+2     (LSTAT, NOX)     0.590879
+20     (CRIM, TAX)     0.579564
+14       (AGE, ZN)    -0.569537
+1     (LSTAT, TAX)     0.543993
+5       (DIS, TAX)    -0.534432
+15     (INDUS, ZN)    -0.533828
+4        (NOX, ZN)    -0.516604
+18      (AGE, TAX)     0.506456
