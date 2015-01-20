@@ -51,9 +51,8 @@ def print_correlations(df, file):
     print(spearman, file=file)
     
     def predictivity(correlations):
-        best = correlations.ix[-1]
-        best.sort(ascending=False)
-        return best
+        corrs_with_target = correlations.ix[-1][:-1]
+        return corrs_with_target[abs(corrs_with_target).argsort()[::-1]]
     
     print('Attribute-target correlations (Pearson):', file=file)
     print(predictivity(pearson), file=file)
@@ -63,21 +62,31 @@ def print_correlations(df, file):
     print('Important attribute correlations (Pearson):', file=file)
     attrs = pearson.iloc[:-1,:-1] # all except target
     # only important correlations and not auto-correlations
-    important_corrs = (attrs[abs(attrs) > 0.5][attrs != 1.0]) \
+    threshold = 0.5
+    important_corrs = (attrs[abs(attrs) > threshold][attrs != 1.0]) \
         .unstack().dropna().to_dict()
     unique_important_corrs = pd.DataFrame(
         list(set([(tuple(sorted(key)), important_corrs[key]) \
         for key in important_corrs])), columns=['attribute pair', 'correlation'])
-    unique_important_corrs.sort('correlation', ascending=False, inplace=True)
+    unique_important_corrs = unique_important_corrs.ix[
+        abs(unique_important_corrs['correlation']).argsort()[::-1]]
     print(unique_important_corrs, file=file)
 
 def attribute_correlations(df, img_file='attr_correlations.png'):
     logging.debug('Plotting attribute pairwise correlations')
-    fig, ax = plt.subplots(figsize=(9, 9))
-    cmap = sns.blend_palette(['#00008B', '#6A5ACD', '#F0F8FF',
-        '#FFE6F8', '#C71585', '#8B0000'], as_cmap=True)
-    sns.corrplot(df, annot=False, sig_stars=False,
-        diag_names=False, cmap=cmap, ax=ax)
+    # custom figure size (in inches) to cotrol the relative font size
+    fig, ax = plt.subplots(figsize=(10, 10))
+    # nice custom red-blue diverging colormap with white center
+    cmap = sns.diverging_palette(250, 10, n=3, as_cmap=True)
+    # Correlation plot
+    # - attribute names on diagonal
+    # - color-coded correlation value in lower triangle
+    # - values and significance in the upper triangle
+    # - color bar
+    # If there a lot of attributes we can disable the annotations:
+    # annot=False, sig_stars=False, diag_names=False
+    sns.corrplot(df, ax=ax, cmap=cmap)
+    # remove white borders
     fig.tight_layout()
     fig.savefig(img_file)
     plt.close(fig)
@@ -93,10 +102,10 @@ def attribute_histograms(df, real_cols, int_cols):
         plt.close(fig)
 
     def plot_real(col):
-        sns.distplot(df[col], kde=False)
+        sns.distplot(df[col])
     
     def plot_int(col):
-        plt.bar(*list(zip(*df[col].value_counts().items())))
+        plt.bar(*list(zip(*df[col].value_counts().items())), alpha=0.5)
         plt.xlabel(col)
     
     logging.debug('Plotting attribute histograms')
