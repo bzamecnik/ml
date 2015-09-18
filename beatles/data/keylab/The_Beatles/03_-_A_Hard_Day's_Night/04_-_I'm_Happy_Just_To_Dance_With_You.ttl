@@ -1,0 +1,129 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT0.35S"^^xsd:duration ;
+        tl:onTimeLine :timeline_55728c069c13 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT0.35S"^^xsd:duration ;
+        tl:duration "PT14.25S"^^xsd:duration ;
+        tl:onTimeLine :timeline_55728c069c13 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C#:minor" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT14.6S"^^xsd:duration ;
+        tl:duration "PT29.007S"^^xsd:duration ;
+        tl:onTimeLine :timeline_55728c069c13 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "E" .
+
+:key_000004
+    event:time [
+        tl:beginsAt "PT43.607S"^^xsd:duration ;
+        tl:duration "PT14.462S"^^xsd:duration ;
+        tl:onTimeLine :timeline_55728c069c13 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C#:minor" .
+
+:key_000005
+    event:time [
+        tl:beginsAt "PT58.069S"^^xsd:duration ;
+        tl:duration "PT14.479S"^^xsd:duration ;
+        tl:onTimeLine :timeline_55728c069c13 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "E" .
+
+:key_000006
+    event:time [
+        tl:beginsAt "PT1M12.548S"^^xsd:duration ;
+        tl:duration "PT14.588S"^^xsd:duration ;
+        tl:onTimeLine :timeline_55728c069c13 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C#:minor" .
+
+:key_000007
+    event:time [
+        tl:beginsAt "PT1M27.136S"^^xsd:duration ;
+        tl:duration "PT27.169S"^^xsd:duration ;
+        tl:onTimeLine :timeline_55728c069c13 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "E" .
+
+:key_000008
+    event:time [
+        tl:beginsAt "PT1M54.305S"^^xsd:duration ;
+        tl:duration "PT4.375S"^^xsd:duration ;
+        tl:onTimeLine :timeline_55728c069c13 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_b75367bc4741
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_e6aa7408d65a
+    dc:title "A Hard Day's Night" ;
+    mo:release_type mo:album ;
+    mo:track :track_955979caf25a ;
+    a mo:Record ;
+    foaf:maker :maker_b75367bc4741 .
+
+:timeline_55728c069c13
+    a tl:Timeline .
+
+:track_955979caf25a
+    dc:title "I'm Happy Just To Dance With You" ;
+    mo:available_as <file:The%20Beatles/A%20Hard%20Day's%20Night/04_-_I'm_Happy_Just_To_Dance_With_You.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_b75367bc4741 .
+
+<file:The%20Beatles/A%20Hard%20Day's%20Night/04_-_I'm_Happy_Just_To_Dance_With_You.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_55728c069c13 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

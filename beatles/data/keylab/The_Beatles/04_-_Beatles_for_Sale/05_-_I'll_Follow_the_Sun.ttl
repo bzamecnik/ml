@@ -1,0 +1,59 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT1M51.04S"^^xsd:duration ;
+        tl:onTimeLine :timeline_22e899144179 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C" .
+
+:maker_880c8aa9513d
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_e9ad62251820
+    dc:title "Beatles for Sale" ;
+    mo:release_type mo:album ;
+    mo:track :track_292d9c7e9ec6 ;
+    a mo:Record ;
+    foaf:maker :maker_880c8aa9513d .
+
+:timeline_22e899144179
+    a tl:Timeline .
+
+:track_292d9c7e9ec6
+    dc:title "I'll Follow the Sun" ;
+    mo:available_as <file:The%20Beatles/Beatles%20for%20Sale/05_-_I'll_Follow_the_Sun.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_880c8aa9513d .
+
+<file:The%20Beatles/Beatles%20for%20Sale/05_-_I'll_Follow_the_Sun.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_22e899144179 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

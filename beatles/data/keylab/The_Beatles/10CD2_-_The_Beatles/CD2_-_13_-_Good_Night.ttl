@@ -1,0 +1,59 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT3M11.8S"^^xsd:duration ;
+        tl:onTimeLine :timeline_6e3b6d74def6 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "G" .
+
+:maker_0016dcac6610
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_5f5ae65b258c
+    dc:title "CD2 - The Beatles" ;
+    mo:release_type mo:album ;
+    mo:track :track_27a22fd4cec7 ;
+    a mo:Record ;
+    foaf:maker :maker_0016dcac6610 .
+
+:timeline_6e3b6d74def6
+    a tl:Timeline .
+
+:track_27a22fd4cec7
+    dc:title "Good Night" ;
+    mo:available_as <file:The%20Beatles/CD2%20-%20The%20Beatles/CD2_-_13_-_Good_Night.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_0016dcac6610 .
+
+<file:The%20Beatles/CD2%20-%20The%20Beatles/CD2_-_13_-_Good_Night.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_6e3b6d74def6 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

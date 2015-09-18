@@ -1,0 +1,59 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT2M24.8S"^^xsd:duration ;
+        tl:onTimeLine :timeline_5d9e6a5f4ba4 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "E" .
+
+:maker_ed0e70ed5f1a
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_7abe391f0c85
+    dc:title "CD2 - The Beatles" ;
+    mo:release_type mo:album ;
+    mo:track :track_e356ac09ad65 ;
+    a mo:Record ;
+    foaf:maker :maker_ed0e70ed5f1a .
+
+:timeline_5d9e6a5f4ba4
+    a tl:Timeline .
+
+:track_e356ac09ad65
+    dc:title "Everybody's Got Something To Hide Except Me and My Monkey" ;
+    mo:available_as <file:The%20Beatles/CD2%20-%20The%20Beatles/CD2_-_04_-_Everybody's_Got_Something_To_Hide_Except_Me_and_My_Monkey.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_ed0e70ed5f1a .
+
+<file:The%20Beatles/CD2%20-%20The%20Beatles/CD2_-_04_-_Everybody's_Got_Something_To_Hide_Except_Me_and_My_Monkey.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_5d9e6a5f4ba4 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

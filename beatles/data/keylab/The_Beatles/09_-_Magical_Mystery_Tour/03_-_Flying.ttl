@@ -1,0 +1,59 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT2M16.96S"^^xsd:duration ;
+        tl:onTimeLine :timeline_72c83e5c751a ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C" .
+
+:maker_34bb985fac0d
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_0a61f8096b55
+    dc:title "Magical Mystery Tour" ;
+    mo:release_type mo:album ;
+    mo:track :track_15003333e086 ;
+    a mo:Record ;
+    foaf:maker :maker_34bb985fac0d .
+
+:timeline_72c83e5c751a
+    a tl:Timeline .
+
+:track_15003333e086
+    dc:title "Flying" ;
+    mo:available_as <file:The%20Beatles/Magical%20Mystery%20Tour/03_-_Flying.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_34bb985fac0d .
+
+<file:The%20Beatles/Magical%20Mystery%20Tour/03_-_Flying.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_72c83e5c751a ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

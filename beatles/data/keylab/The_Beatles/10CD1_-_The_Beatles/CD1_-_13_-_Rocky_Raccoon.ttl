@@ -1,0 +1,59 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT3M32.893S"^^xsd:duration ;
+        tl:onTimeLine :timeline_df6da70125c6 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C" .
+
+:maker_bb64ce7ca7db
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_32e04b0d0900
+    dc:title "CD1 - The Beatles" ;
+    mo:release_type mo:album ;
+    mo:track :track_cd11fa2a4d3f ;
+    a mo:Record ;
+    foaf:maker :maker_bb64ce7ca7db .
+
+:timeline_df6da70125c6
+    a tl:Timeline .
+
+:track_cd11fa2a4d3f
+    dc:title "Rocky Raccoon" ;
+    mo:available_as <file:The%20Beatles/CD1%20-%20The%20Beatles/CD1_-_13_-_Rocky_Raccoon.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_bb64ce7ca7db .
+
+<file:The%20Beatles/CD1%20-%20The%20Beatles/CD1_-_13_-_Rocky_Raccoon.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_df6da70125c6 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

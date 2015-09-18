@@ -1,0 +1,119 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT0.98S"^^xsd:duration ;
+        tl:onTimeLine :timeline_d93485155853 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT0.98S"^^xsd:duration ;
+        tl:duration "PT1M9.516S"^^xsd:duration ;
+        tl:onTimeLine :timeline_d93485155853 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT1M10.496S"^^xsd:duration ;
+        tl:duration "PT17.422S"^^xsd:duration ;
+        tl:onTimeLine :timeline_d93485155853 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C" .
+
+:key_000004
+    event:time [
+        tl:beginsAt "PT1M27.918S"^^xsd:duration ;
+        tl:duration "PT27.694S"^^xsd:duration ;
+        tl:onTimeLine :timeline_d93485155853 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000005
+    event:time [
+        tl:beginsAt "PT1M55.612S"^^xsd:duration ;
+        tl:duration "PT17.221S"^^xsd:duration ;
+        tl:onTimeLine :timeline_d93485155853 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C" .
+
+:key_000006
+    event:time [
+        tl:beginsAt "PT2M12.833S"^^xsd:duration ;
+        tl:duration "PT30.089S"^^xsd:duration ;
+        tl:onTimeLine :timeline_d93485155853 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000007
+    event:time [
+        tl:beginsAt "PT2M42.922S"^^xsd:duration ;
+        tl:duration "PT23H59M59.985S"^^xsd:duration ;
+        tl:onTimeLine :timeline_d93485155853 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_16e376045f2f
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_c53b3088257d
+    dc:title "CD2 - The Beatles" ;
+    mo:release_type mo:album ;
+    mo:track :track_ceebdd89b760 ;
+    a mo:Record ;
+    foaf:maker :maker_16e376045f2f .
+
+:timeline_d93485155853
+    a tl:Timeline .
+
+:track_ceebdd89b760
+    dc:title "Birthday" ;
+    mo:available_as <file:The%20Beatles/CD2%20-%20The%20Beatles/CD2_-_01_-_Birthday.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_16e376045f2f .
+
+<file:The%20Beatles/CD2%20-%20The%20Beatles/CD2_-_01_-_Birthday.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_d93485155853 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

@@ -1,0 +1,159 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT0.546S"^^xsd:duration ;
+        tl:onTimeLine :timeline_a9b0baaac572 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT0.546S"^^xsd:duration ;
+        tl:duration "PT6.423S"^^xsd:duration ;
+        tl:onTimeLine :timeline_a9b0baaac572 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "D:minor" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT6.969S"^^xsd:duration ;
+        tl:duration "PT15.313S"^^xsd:duration ;
+        tl:onTimeLine :timeline_a9b0baaac572 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C:minor" .
+
+:key_000004
+    event:time [
+        tl:beginsAt "PT22.282S"^^xsd:duration ;
+        tl:duration "PT14.906S"^^xsd:duration ;
+        tl:onTimeLine :timeline_a9b0baaac572 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "D:minor" .
+
+:key_000005
+    event:time [
+        tl:beginsAt "PT37.188S"^^xsd:duration ;
+        tl:duration "PT14.918S"^^xsd:duration ;
+        tl:onTimeLine :timeline_a9b0baaac572 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C:minor" .
+
+:key_000006
+    event:time [
+        tl:beginsAt "PT52.106S"^^xsd:duration ;
+        tl:duration "PT23.976S"^^xsd:duration ;
+        tl:onTimeLine :timeline_a9b0baaac572 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "D:minor" .
+
+:key_000007
+    event:time [
+        tl:beginsAt "PT1M16.082S"^^xsd:duration ;
+        tl:duration "PT12.986S"^^xsd:duration ;
+        tl:onTimeLine :timeline_a9b0baaac572 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "E:minor" .
+
+:key_000008
+    event:time [
+        tl:beginsAt "PT1M29.068S"^^xsd:duration ;
+        tl:duration "PT15.171S"^^xsd:duration ;
+        tl:onTimeLine :timeline_a9b0baaac572 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C:minor" .
+
+:key_000009
+    event:time [
+        tl:beginsAt "PT1M44.239S"^^xsd:duration ;
+        tl:duration "PT27.964S"^^xsd:duration ;
+        tl:onTimeLine :timeline_a9b0baaac572 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "D:minor" .
+
+:key_000010
+    event:time [
+        tl:beginsAt "PT2M12.203S"^^xsd:duration ;
+        tl:duration "PT22.553S"^^xsd:duration ;
+        tl:onTimeLine :timeline_a9b0baaac572 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "E:minor" .
+
+:key_000011
+    event:time [
+        tl:beginsAt "PT2M34.756S"^^xsd:duration ;
+        tl:duration "PT2.337S"^^xsd:duration ;
+        tl:onTimeLine :timeline_a9b0baaac572 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_2683f06a48f4
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_c85e38ab48f4
+    dc:title "Sgt. Pepper's Lonely Hearts Club Band" ;
+    mo:release_type mo:album ;
+    mo:track :track_909cca607641 ;
+    a mo:Record ;
+    foaf:maker :maker_2683f06a48f4 .
+
+:timeline_a9b0baaac572
+    a tl:Timeline .
+
+:track_909cca607641
+    dc:title "Being For The Benefit Of Mr. Kite!" ;
+    mo:available_as <file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/07_-_Being_For_The_Benefit_Of_Mr._Kite!.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_2683f06a48f4 .
+
+<file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/07_-_Being_For_The_Benefit_Of_Mr._Kite!.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_a9b0baaac572 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

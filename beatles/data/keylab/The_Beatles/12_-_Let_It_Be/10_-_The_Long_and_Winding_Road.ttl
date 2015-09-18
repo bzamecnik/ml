@@ -1,0 +1,79 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT0.345S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8244ee2e0042 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT0.345S"^^xsd:duration ;
+        tl:duration "PT3M35.645S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8244ee2e0042 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Eb" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT3M35.99S"^^xsd:duration ;
+        tl:duration "PT1.877S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8244ee2e0042 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_6f6202a65926
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_127d899e2316
+    dc:title "Let It Be" ;
+    mo:release_type mo:album ;
+    mo:track :track_20eae1f0acec ;
+    a mo:Record ;
+    foaf:maker :maker_6f6202a65926 .
+
+:timeline_8244ee2e0042
+    a tl:Timeline .
+
+:track_20eae1f0acec
+    dc:title "The Long and Winding Road" ;
+    mo:available_as <file:The%20Beatles/Let%20It%20Be/10_-_The_Long_and_Winding_Road.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_6f6202a65926 .
+
+<file:The%20Beatles/Let%20It%20Be/10_-_The_Long_and_Winding_Road.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_8244ee2e0042 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

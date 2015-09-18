@@ -1,0 +1,69 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT1M56.6S"^^xsd:duration ;
+        tl:onTimeLine :timeline_ac3e495d06b9 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT1M56.6S"^^xsd:duration ;
+        tl:duration "PT1.133S"^^xsd:duration ;
+        tl:onTimeLine :timeline_ac3e495d06b9 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_2a2f24192794
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_16056df562a9
+    dc:title "Abbey Road" ;
+    mo:release_type mo:album ;
+    mo:track :track_2594fb36f32f ;
+    a mo:Record ;
+    foaf:maker :maker_2a2f24192794 .
+
+:timeline_ac3e495d06b9
+    a tl:Timeline .
+
+:track_2594fb36f32f
+    dc:title "She Came In Through The Bathroom Window" ;
+    mo:available_as <file:The%20Beatles/Abbey%20Road/13_-_She_Came_In_Through_The_Bathroom_Window.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_2a2f24192794 .
+
+<file:The%20Beatles/Abbey%20Road/13_-_She_Came_In_Through_The_Bathroom_Window.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_ac3e495d06b9 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

@@ -1,0 +1,229 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT5.178S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT5.178S"^^xsd:duration ;
+        tl:duration "PT7.605S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:minor" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT12.783S"^^xsd:duration ;
+        tl:duration "PT3.815S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000004
+    event:time [
+        tl:beginsAt "PT16.598S"^^xsd:duration ;
+        tl:duration "PT7.528S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:minor" .
+
+:key_000005
+    event:time [
+        tl:beginsAt "PT24.126S"^^xsd:duration ;
+        tl:duration "PT16.335S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000006
+    event:time [
+        tl:beginsAt "PT40.461S"^^xsd:duration ;
+        tl:duration "PT7.612S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:minor" .
+
+:key_000007
+    event:time [
+        tl:beginsAt "PT48.073S"^^xsd:duration ;
+        tl:duration "PT3.813S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000008
+    event:time [
+        tl:beginsAt "PT51.886S"^^xsd:duration ;
+        tl:duration "PT7.722S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:minor" .
+
+:key_000009
+    event:time [
+        tl:beginsAt "PT59.608S"^^xsd:duration ;
+        tl:duration "PT22.221S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000010
+    event:time [
+        tl:beginsAt "PT1M21.829S"^^xsd:duration ;
+        tl:duration "PT7.73S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:minor" .
+
+:key_000011
+    event:time [
+        tl:beginsAt "PT1M29.559S"^^xsd:duration ;
+        tl:duration "PT3.906S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000012
+    event:time [
+        tl:beginsAt "PT1M33.465S"^^xsd:duration ;
+        tl:duration "PT7.716S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:minor" .
+
+:key_000013
+    event:time [
+        tl:beginsAt "PT1M41.181S"^^xsd:duration ;
+        tl:duration "PT16.678S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000014
+    event:time [
+        tl:beginsAt "PT1M57.859S"^^xsd:duration ;
+        tl:duration "PT7.773S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:minor" .
+
+:key_000015
+    event:time [
+        tl:beginsAt "PT2M5.632S"^^xsd:duration ;
+        tl:duration "PT5.895S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000016
+    event:time [
+        tl:beginsAt "PT2M11.527S"^^xsd:duration ;
+        tl:duration "PT3.918S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:minor" .
+
+:key_000017
+    event:time [
+        tl:beginsAt "PT2M15.445S"^^xsd:duration ;
+        tl:duration "PT3.378S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000018
+    event:time [
+        tl:beginsAt "PT2M18.823S"^^xsd:duration ;
+        tl:duration "PT1.724S"^^xsd:duration ;
+        tl:onTimeLine :timeline_cdf008d80729 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:minor" .
+
+:maker_bed112ec89d9
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_4d01bacafd48
+    dc:title "A Hard Day's Night" ;
+    mo:release_type mo:album ;
+    mo:track :track_46513f482103 ;
+    a mo:Record ;
+    foaf:maker :maker_bed112ec89d9 .
+
+:timeline_cdf008d80729
+    a tl:Timeline .
+
+:track_46513f482103
+    dc:title "I'll Be Back" ;
+    mo:available_as <file:The%20Beatles/A%20Hard%20Day's%20Night/13_-_I'll_Be_Back.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_bed112ec89d9 .
+
+<file:The%20Beatles/A%20Hard%20Day's%20Night/13_-_I'll_Be_Back.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_cdf008d80729 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

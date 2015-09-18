@@ -1,0 +1,129 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT21.107S"^^xsd:duration ;
+        tl:onTimeLine :timeline_6d9573ea9882 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C:minor" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT21.107S"^^xsd:duration ;
+        tl:duration "PT9.887S"^^xsd:duration ;
+        tl:onTimeLine :timeline_6d9573ea9882 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Eb" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT30.994S"^^xsd:duration ;
+        tl:duration "PT19.974S"^^xsd:duration ;
+        tl:onTimeLine :timeline_6d9573ea9882 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C:minor" .
+
+:key_000004
+    event:time [
+        tl:beginsAt "PT50.968S"^^xsd:duration ;
+        tl:duration "PT39.59S"^^xsd:duration ;
+        tl:onTimeLine :timeline_6d9573ea9882 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Eb" .
+
+:key_000005
+    event:time [
+        tl:beginsAt "PT1M30.558S"^^xsd:duration ;
+        tl:duration "PT19.939S"^^xsd:duration ;
+        tl:onTimeLine :timeline_6d9573ea9882 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C:minor" .
+
+:key_000006
+    event:time [
+        tl:beginsAt "PT1M50.497S"^^xsd:duration ;
+        tl:duration "PT9.895S"^^xsd:duration ;
+        tl:onTimeLine :timeline_6d9573ea9882 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Eb" .
+
+:key_000007
+    event:time [
+        tl:beginsAt "PT2M0.392S"^^xsd:duration ;
+        tl:duration "PT19.959S"^^xsd:duration ;
+        tl:onTimeLine :timeline_6d9573ea9882 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C:minor" .
+
+:key_000008
+    event:time [
+        tl:beginsAt "PT2M20.351S"^^xsd:duration ;
+        tl:duration "PT13.516S"^^xsd:duration ;
+        tl:onTimeLine :timeline_6d9573ea9882 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Eb" .
+
+:maker_7c489b53369c
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_5bd9c14585c1
+    dc:title "Rubber Soul" ;
+    mo:release_type mo:album ;
+    mo:track :track_eac765790ec1 ;
+    a mo:Record ;
+    foaf:maker :maker_7c489b53369c .
+
+:timeline_6d9573ea9882
+    a tl:Timeline .
+
+:track_eac765790ec1
+    dc:title "Girl" ;
+    mo:available_as <file:The%20Beatles/Rubber%20Soul/09_-_Girl.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_7c489b53369c .
+
+<file:The%20Beatles/Rubber%20Soul/09_-_Girl.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_6d9573ea9882 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

@@ -1,0 +1,169 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT8.759S"^^xsd:duration ;
+        tl:onTimeLine :timeline_c7ad9d8eae07 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT8.759S"^^xsd:duration ;
+        tl:duration "PT7.39S"^^xsd:duration ;
+        tl:onTimeLine :timeline_c7ad9d8eae07 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:minor" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT16.149S"^^xsd:duration ;
+        tl:duration "PT14.98S"^^xsd:duration ;
+        tl:onTimeLine :timeline_c7ad9d8eae07 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C" .
+
+:key_000004
+    event:time [
+        tl:beginsAt "PT31.129S"^^xsd:duration ;
+        tl:duration "PT7.702S"^^xsd:duration ;
+        tl:onTimeLine :timeline_c7ad9d8eae07 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000005
+    event:time [
+        tl:beginsAt "PT38.831S"^^xsd:duration ;
+        tl:duration "PT7.365S"^^xsd:duration ;
+        tl:onTimeLine :timeline_c7ad9d8eae07 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:minor" .
+
+:key_000006
+    event:time [
+        tl:beginsAt "PT46.196S"^^xsd:duration ;
+        tl:duration "PT15.02S"^^xsd:duration ;
+        tl:onTimeLine :timeline_c7ad9d8eae07 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C" .
+
+:key_000007
+    event:time [
+        tl:beginsAt "PT1M1.216S"^^xsd:duration ;
+        tl:duration "PT7.739S"^^xsd:duration ;
+        tl:onTimeLine :timeline_c7ad9d8eae07 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000008
+    event:time [
+        tl:beginsAt "PT1M8.955S"^^xsd:duration ;
+        tl:duration "PT7.665S"^^xsd:duration ;
+        tl:onTimeLine :timeline_c7ad9d8eae07 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:minor" .
+
+:key_000009
+    event:time [
+        tl:beginsAt "PT1M16.62S"^^xsd:duration ;
+        tl:duration "PT34.406S"^^xsd:duration ;
+        tl:onTimeLine :timeline_c7ad9d8eae07 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C" .
+
+:key_000010
+    event:time [
+        tl:beginsAt "PT1M51.026S"^^xsd:duration ;
+        tl:duration "PT19.309S"^^xsd:duration ;
+        tl:onTimeLine :timeline_c7ad9d8eae07 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A" .
+
+:key_000011
+    event:time [
+        tl:beginsAt "PT2M10.335S"^^xsd:duration ;
+        tl:duration "PT3.714S"^^xsd:duration ;
+        tl:onTimeLine :timeline_c7ad9d8eae07 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C" .
+
+:key_000012
+    event:time [
+        tl:beginsAt "PT2M14.049S"^^xsd:duration ;
+        tl:duration "PT4.298S"^^xsd:duration ;
+        tl:onTimeLine :timeline_c7ad9d8eae07 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_e51aaf67346f
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_769f3c5cb419
+    dc:title "A Hard Day's Night" ;
+    mo:release_type mo:album ;
+    mo:track :track_ff71aaa69e52 ;
+    a mo:Record ;
+    foaf:maker :maker_e51aaf67346f .
+
+:timeline_c7ad9d8eae07
+    a tl:Timeline .
+
+:track_ff71aaa69e52
+    dc:title "When I Get Home" ;
+    mo:available_as <file:The%20Beatles/A%20Hard%20Day's%20Night/11_-_When_I_Get_Home.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_e51aaf67346f .
+
+<file:The%20Beatles/A%20Hard%20Day's%20Night/11_-_When_I_Get_Home.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_c7ad9d8eae07 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

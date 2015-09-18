@@ -1,0 +1,69 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT1M12.75S"^^xsd:duration ;
+        tl:onTimeLine :timeline_1499426692f0 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "E" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT1M12.75S"^^xsd:duration ;
+        tl:duration "PT23H59M59.983S"^^xsd:duration ;
+        tl:onTimeLine :timeline_1499426692f0 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_152f3569352e
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_7f6305a22c74
+    dc:title "Abbey Road" ;
+    mo:release_type mo:album ;
+    mo:track :track_9692629d6b4a ;
+    a mo:Record ;
+    foaf:maker :maker_152f3569352e .
+
+:timeline_1499426692f0
+    a tl:Timeline .
+
+:track_9692629d6b4a
+    dc:title "Polythene Pam" ;
+    mo:available_as <file:The%20Beatles/Abbey%20Road/12_-_Polythene_Pam.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_152f3569352e .
+
+<file:The%20Beatles/Abbey%20Road/12_-_Polythene_Pam.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_1499426692f0 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

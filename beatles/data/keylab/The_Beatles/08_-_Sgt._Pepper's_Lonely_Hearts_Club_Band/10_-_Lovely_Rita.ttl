@@ -1,0 +1,89 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT0.23S"^^xsd:duration ;
+        tl:onTimeLine :timeline_3cbb2ba36941 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT0.23S"^^xsd:duration ;
+        tl:duration "PT2M11.591S"^^xsd:duration ;
+        tl:onTimeLine :timeline_3cbb2ba36941 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "E" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT2M11.821S"^^xsd:duration ;
+        tl:duration "PT29.779S"^^xsd:duration ;
+        tl:onTimeLine :timeline_3cbb2ba36941 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:minor" .
+
+:key_000004
+    event:time [
+        tl:beginsAt "PT2M41.6S"^^xsd:duration ;
+        tl:duration "PT0.493S"^^xsd:duration ;
+        tl:onTimeLine :timeline_3cbb2ba36941 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_bb4ec304dfec
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_ca6bdf281af8
+    dc:title "Sgt. Pepper's Lonely Hearts Club Band" ;
+    mo:release_type mo:album ;
+    mo:track :track_7b8bca92c56c ;
+    a mo:Record ;
+    foaf:maker :maker_bb4ec304dfec .
+
+:timeline_3cbb2ba36941
+    a tl:Timeline .
+
+:track_7b8bca92c56c
+    dc:title "Lovely Rita" ;
+    mo:available_as <file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/10_-_Lovely_Rita.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_bb4ec304dfec .
+
+<file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/10_-_Lovely_Rita.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_3cbb2ba36941 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

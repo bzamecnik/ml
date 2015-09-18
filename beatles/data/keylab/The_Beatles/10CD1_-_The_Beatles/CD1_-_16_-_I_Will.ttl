@@ -1,0 +1,59 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT1M46.027S"^^xsd:duration ;
+        tl:onTimeLine :timeline_6dfdd7d6f524 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "F" .
+
+:maker_866e092d48c2
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_bf20e7ad872a
+    dc:title "CD1 - The Beatles" ;
+    mo:release_type mo:album ;
+    mo:track :track_c113e5917274 ;
+    a mo:Record ;
+    foaf:maker :maker_866e092d48c2 .
+
+:timeline_6dfdd7d6f524
+    a tl:Timeline .
+
+:track_c113e5917274
+    dc:title "I Will" ;
+    mo:available_as <file:The%20Beatles/CD1%20-%20The%20Beatles/CD1_-_16_-_I_Will.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_866e092d48c2 .
+
+<file:The%20Beatles/CD1%20-%20The%20Beatles/CD1_-_16_-_I_Will.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_6dfdd7d6f524 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

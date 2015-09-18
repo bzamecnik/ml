@@ -1,0 +1,59 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT2M1.707S"^^xsd:duration ;
+        tl:onTimeLine :timeline_fcf5878824d9 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "B" .
+
+:maker_c485ceced44a
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_4e907659d7aa
+    dc:title "Revolver" ;
+    mo:release_type mo:album ;
+    mo:track :track_a84d1c64b2ec ;
+    a mo:Record ;
+    foaf:maker :maker_c485ceced44a .
+
+:timeline_fcf5878824d9
+    a tl:Timeline .
+
+:track_a84d1c64b2ec
+    dc:title "For No One" ;
+    mo:available_as <file:The%20Beatles/Revolver/10_-_For_No_One.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_c485ceced44a .
+
+<file:The%20Beatles/Revolver/10_-_For_No_One.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_fcf5878824d9 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

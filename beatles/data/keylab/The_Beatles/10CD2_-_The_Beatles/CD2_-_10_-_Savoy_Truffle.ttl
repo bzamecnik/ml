@@ -1,0 +1,59 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT2M54.893S"^^xsd:duration ;
+        tl:onTimeLine :timeline_671739aa5619 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "G" .
+
+:maker_bad5065a0bd8
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_a9f1c31370e1
+    dc:title "CD2 - The Beatles" ;
+    mo:release_type mo:album ;
+    mo:track :track_ae81887444f3 ;
+    a mo:Record ;
+    foaf:maker :maker_bad5065a0bd8 .
+
+:timeline_671739aa5619
+    a tl:Timeline .
+
+:track_ae81887444f3
+    dc:title "Savoy Truffle" ;
+    mo:available_as <file:The%20Beatles/CD2%20-%20The%20Beatles/CD2_-_10_-_Savoy_Truffle.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_bad5065a0bd8 .
+
+<file:The%20Beatles/CD2%20-%20The%20Beatles/CD2_-_10_-_Savoy_Truffle.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_671739aa5619 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

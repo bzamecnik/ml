@@ -20,3 +20,17 @@ $ ipython notebook
 ```
 
 Open `time_map_of_chord_events.ipynb` in the Jupyter (http://localhost:8888/).
+
+## Chord labels to pitch class segments as features for further ML
+
+`classification_based_on_chords`
+
+- Chord labels parsed to binary pitch class sets via https://github.com/bzamecnik/chord-labels and added to the dataframe.
+- It can be used to:
+  - better analyses and visualizations
+  - key classification based on chord contexts
+  - chord classification based on chroma features
+  - chord imputation and prediction
+  - etc.
+
+The classification in the notebook is really not complete...

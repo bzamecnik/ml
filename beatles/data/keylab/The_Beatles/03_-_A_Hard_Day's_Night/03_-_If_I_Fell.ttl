@@ -1,0 +1,79 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT0.385S"^^xsd:duration ;
+        tl:onTimeLine :timeline_d1c02a3d2835 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT0.385S"^^xsd:duration ;
+        tl:duration "PT2M16.755S"^^xsd:duration ;
+        tl:onTimeLine :timeline_d1c02a3d2835 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "D" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT2M17.14S"^^xsd:duration ;
+        tl:duration "PT4.887S"^^xsd:duration ;
+        tl:onTimeLine :timeline_d1c02a3d2835 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_531b8032a3da
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_8c7d5e207adb
+    dc:title "A Hard Day's Night" ;
+    mo:release_type mo:album ;
+    mo:track :track_ba8734b9440f ;
+    a mo:Record ;
+    foaf:maker :maker_531b8032a3da .
+
+:timeline_d1c02a3d2835
+    a tl:Timeline .
+
+:track_ba8734b9440f
+    dc:title "If I Fell" ;
+    mo:available_as <file:The%20Beatles/A%20Hard%20Day's%20Night/03_-_If_I_Fell.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_531b8032a3da .
+
+<file:The%20Beatles/A%20Hard%20Day's%20Night/03_-_If_I_Fell.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_d1c02a3d2835 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

@@ -1,0 +1,79 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT0.23S"^^xsd:duration ;
+        tl:onTimeLine :timeline_12bf5ccf9e3d ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT0.23S"^^xsd:duration ;
+        tl:duration "PT2M32.93S"^^xsd:duration ;
+        tl:onTimeLine :timeline_12bf5ccf9e3d ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "F:dorian" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT2M33.16S"^^xsd:duration ;
+        tl:duration "PT3.467S"^^xsd:duration ;
+        tl:onTimeLine :timeline_12bf5ccf9e3d ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_5e13db45b460
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_a0457ad3639a
+    dc:title "Sgt. Pepper's Lonely Hearts Club Band" ;
+    mo:release_type mo:album ;
+    mo:track :track_f59954a5e6c8 ;
+    a mo:Record ;
+    foaf:maker :maker_5e13db45b460 .
+
+:timeline_12bf5ccf9e3d
+    a tl:Timeline .
+
+:track_f59954a5e6c8
+    dc:title "Fixing A Hole" ;
+    mo:available_as <file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/05_-_Fixing_A_Hole.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_5e13db45b460 .
+
+<file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/05_-_Fixing_A_Hole.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_12bf5ccf9e3d ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

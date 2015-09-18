@@ -1,0 +1,79 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT0.365S"^^xsd:duration ;
+        tl:onTimeLine :timeline_4b8aa3d0267d ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT0.365S"^^xsd:duration ;
+        tl:duration "PT3M4.99S"^^xsd:duration ;
+        tl:onTimeLine :timeline_4b8aa3d0267d ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "A:mixolydian" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT3M5.355S"^^xsd:duration ;
+        tl:duration "PT1.738S"^^xsd:duration ;
+        tl:onTimeLine :timeline_4b8aa3d0267d ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_c4d39dff861f
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_80e2735cabf9
+    dc:title "Let It Be" ;
+    mo:release_type mo:album ;
+    mo:track :track_39f2d7d7e6c5 ;
+    a mo:Record ;
+    foaf:maker :maker_c4d39dff861f .
+
+:timeline_4b8aa3d0267d
+    a tl:Timeline .
+
+:track_39f2d7d7e6c5
+    dc:title "Get Back" ;
+    mo:available_as <file:The%20Beatles/Let%20It%20Be/12_-_Get_Back.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_c4d39dff861f .
+
+<file:The%20Beatles/Let%20It%20Be/12_-_Get_Back.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_4b8aa3d0267d ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

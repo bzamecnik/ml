@@ -1,0 +1,79 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT0.43S"^^xsd:duration ;
+        tl:onTimeLine :timeline_f0ec4ec28fe7 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT0.43S"^^xsd:duration ;
+        tl:duration "PT2M24.08S"^^xsd:duration ;
+        tl:onTimeLine :timeline_f0ec4ec28fe7 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "E:minor" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT2M24.51S"^^xsd:duration ;
+        tl:duration "PT4.863S"^^xsd:duration ;
+        tl:onTimeLine :timeline_f0ec4ec28fe7 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_242d408eafd2
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_c234c185e818
+    dc:title "With the Beatles" ;
+    mo:release_type mo:album ;
+    mo:track :track_4fe1f0474e5d ;
+    a mo:Record ;
+    foaf:maker :maker_242d408eafd2 .
+
+:timeline_f0ec4ec28fe7
+    a tl:Timeline .
+
+:track_4fe1f0474e5d
+    dc:title "Don't Bother Me" ;
+    mo:available_as <file:The%20Beatles/With%20the%20Beatles/04_-_Don't_Bother_Me.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_242d408eafd2 .
+
+<file:The%20Beatles/With%20the%20Beatles/04_-_Don't_Bother_Me.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_f0ec4ec28fe7 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

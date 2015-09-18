@@ -1,0 +1,79 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT1.035S"^^xsd:duration ;
+        tl:onTimeLine :timeline_93ef2d7f44b5 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT1.035S"^^xsd:duration ;
+        tl:duration "PT2M50.845S"^^xsd:duration ;
+        tl:onTimeLine :timeline_93ef2d7f44b5 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "E" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT2M51.88S"^^xsd:duration ;
+        tl:duration "PT3.92S"^^xsd:duration ;
+        tl:onTimeLine :timeline_93ef2d7f44b5 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_6c67a50b4e42
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_30d154218392
+    dc:title "Please Please Me" ;
+    mo:release_type mo:album ;
+    mo:track :track_44b8ef4ef8df ;
+    a mo:Record ;
+    foaf:maker :maker_6c67a50b4e42 .
+
+:timeline_93ef2d7f44b5
+    a tl:Timeline .
+
+:track_44b8ef4ef8df
+    dc:title "I Saw Her Standing There" ;
+    mo:available_as <file:The%20Beatles/Please%20Please%20Me/01_-_I_Saw_Her_Standing_There.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_6c67a50b4e42 .
+
+<file:The%20Beatles/Please%20Please%20Me/01_-_I_Saw_Her_Standing_There.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_93ef2d7f44b5 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

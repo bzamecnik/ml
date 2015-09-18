@@ -1,0 +1,99 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT2M15.83S"^^xsd:duration ;
+        tl:onTimeLine :timeline_1b3fd4655728 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "G" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT2M15.83S"^^xsd:duration ;
+        tl:duration "PT1M2.48S"^^xsd:duration ;
+        tl:onTimeLine :timeline_1b3fd4655728 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "E" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT3M18.31S"^^xsd:duration ;
+        tl:duration "PT1M0.916S"^^xsd:duration ;
+        tl:onTimeLine :timeline_1b3fd4655728 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "G" .
+
+:key_000004
+    event:time [
+        tl:beginsAt "PT4M19.226S"^^xsd:duration ;
+        tl:duration "PT1M14.681S"^^xsd:duration ;
+        tl:onTimeLine :timeline_1b3fd4655728 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "E" .
+
+:key_000005
+    event:time [
+        tl:beginsAt "PT5M33.907S"^^xsd:duration ;
+        tl:duration "PT0S"^^xsd:duration ;
+        tl:onTimeLine :timeline_1b3fd4655728 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_20ca3df65011
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_3c9b978aaf68
+    dc:title "Sgt. Pepper's Lonely Hearts Club Band" ;
+    mo:release_type mo:album ;
+    mo:track :track_de7a8b7f85ee ;
+    a mo:Record ;
+    foaf:maker :maker_20ca3df65011 .
+
+:timeline_1b3fd4655728
+    a tl:Timeline .
+
+:track_de7a8b7f85ee
+    dc:title "A Day In The Life" ;
+    mo:available_as <file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/13_-_A_Day_In_The_Life.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_20ca3df65011 .
+
+<file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/13_-_A_Day_In_The_Life.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_1b3fd4655728 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

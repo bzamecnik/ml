@@ -1,0 +1,59 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT2M43.467S"^^xsd:duration ;
+        tl:onTimeLine :timeline_4af525b19454 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C" .
+
+:maker_f72f65e5a4d5
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_2fa37ccc1f0a
+    dc:title "CD1 - The Beatles" ;
+    mo:release_type mo:album ;
+    mo:track :track_e0c83d67def9 ;
+    a mo:Record ;
+    foaf:maker :maker_f72f65e5a4d5 .
+
+:timeline_4af525b19454
+    a tl:Timeline .
+
+:track_e0c83d67def9
+    dc:title "Happiness is a Warm Gun" ;
+    mo:available_as <file:The%20Beatles/CD1%20-%20The%20Beatles/CD1_-_08_-_Happiness_is_a_Warm_Gun.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_f72f65e5a4d5 .
+
+<file:The%20Beatles/CD1%20-%20The%20Beatles/CD1_-_08_-_Happiness_is_a_Warm_Gun.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_4af525b19454 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

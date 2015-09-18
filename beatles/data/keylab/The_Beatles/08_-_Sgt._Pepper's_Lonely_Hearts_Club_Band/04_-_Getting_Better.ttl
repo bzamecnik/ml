@@ -1,0 +1,79 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.6" ;
+    ov:versionnumber "1.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:key_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT0.41S"^^xsd:duration ;
+        tl:onTimeLine :timeline_98268eaffd19 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:key_000002
+    event:time [
+        tl:beginsAt "PT0.41S"^^xsd:duration ;
+        tl:duration "PT2M47.46S"^^xsd:duration ;
+        tl:onTimeLine :timeline_98268eaffd19 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "C" .
+
+:key_000003
+    event:time [
+        tl:beginsAt "PT2M47.87S"^^xsd:duration ;
+        tl:duration "PT23H59M59.997S"^^xsd:duration ;
+        tl:onTimeLine :timeline_98268eaffd19 ;
+        a tl:Interval
+    ] ;
+    a af:KeySegment ;
+    rdfs:label "Silence" .
+
+:maker_e71ba2760165
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_c87f1ce48530
+    dc:title "Sgt. Pepper's Lonely Hearts Club Band" ;
+    mo:release_type mo:album ;
+    mo:track :track_03ebab253d6a ;
+    a mo:Record ;
+    foaf:maker :maker_e71ba2760165 .
+
+:timeline_98268eaffd19
+    a tl:Timeline .
+
+:track_03ebab253d6a
+    dc:title "Getting Better" ;
+    mo:available_as <file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/04_-_Getting_Better.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_e71ba2760165 .
+
+<file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/04_-_Getting_Better.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_98268eaffd19 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+
