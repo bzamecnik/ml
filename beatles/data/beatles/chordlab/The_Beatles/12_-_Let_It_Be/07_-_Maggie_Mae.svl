@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+		<!DOCTYPE sonic-visualiser>
+		<sv>
+		<data>
+		<model id="2" name="" sampleRate="44100" start="0" end="0" type="sparse" dimensions="3" resolution="1" notifyOnAdd="true" dataset="1"  subtype="note" valueQuantization="0" minimum="0" maximum="69" units=""/>
+		<dataset id="1" dimensions="3">
+				<point frame="15199" value="43" duration="122297" level="0.3" label=" " />
+				<point frame="15199" value="59" duration="122297" level="0.3" label=" " />
+				<point frame="15199" value="62" duration="122297" level="0.3" label=" " />
+				<point frame="15199" value="67" duration="122297" level="0.3" label=" " />
+				<point frame="137496" value="36" duration="118272" level="0.3" label=" " />
+				<point frame="137496" value="60" duration="118272" level="0.3" label=" " />
+				<point frame="137496" value="64" duration="118272" level="0.3" label=" " />
+				<point frame="137496" value="67" duration="118272" level="0.3" label=" " />
+				<point frame="255768" value="43" duration="244224" level="0.3" label=" " />
+				<point frame="255768" value="59" duration="244224" level="0.3" label=" " />
+				<point frame="255768" value="62" duration="244224" level="0.3" label=" " />
+				<point frame="255768" value="67" duration="244224" level="0.3" label=" " />
+				<point frame="499992" value="38" duration="124416" level="0.3" label=" " />
+				<point frame="499992" value="62" duration="124416" level="0.3" label=" " />
+				<point frame="499992" value="66" duration="124416" level="0.3" label=" " />
+				<point frame="499992" value="69" duration="124416" level="0.3" label=" " />
+				<point frame="624408" value="43" duration="125440" level="0.3" label=" " />
+				<point frame="624408" value="59" duration="125440" level="0.3" label=" " />
+				<point frame="624408" value="62" duration="125440" level="0.3" label=" " />
+				<point frame="624408" value="67" duration="125440" level="0.3" label=" " />
+				<point frame="749848" value="36" duration="125440" level="0.3" label=" " />
+				<point frame="749848" value="60" duration="125440" level="0.3" label=" " />
+				<point frame="749848" value="64" duration="125440" level="0.3" label=" " />
+				<point frame="749848" value="67" duration="125440" level="0.3" label=" " />
+				<point frame="875288" value="45" duration="62464" level="0.3" label=" " />
+				<point frame="875288" value="62" duration="62464" level="0.3" label=" " />
+				<point frame="875288" value="66" duration="62464" level="0.3" label=" " />
+				<point frame="875288" value="69" duration="62464" level="0.3" label=" " />
+				<point frame="937752" value="38" duration="62464" level="0.3" label=" " />
+				<point frame="937752" value="62" duration="62464" level="0.3" label=" " />
+				<point frame="937752" value="66" duration="62464" level="0.3" label=" " />
+				<point frame="937752" value="69" duration="62464" level="0.3" label=" " />
+				<point frame="1000216" value="43" duration="128000" level="0.3" label=" " />
+				<point frame="1000216" value="59" duration="128000" level="0.3" label=" " />
+				<point frame="1000216" value="62" duration="128000" level="0.3" label=" " />
+				<point frame="1000216" value="67" duration="128000" level="0.3" label=" " />
+				<point frame="1128216" value="36" duration="128512" level="0.3" label=" " />
+				<point frame="1128216" value="60" duration="128512" level="0.3" label=" " />
+				<point frame="1128216" value="64" duration="128512" level="0.3" label=" " />
+				<point frame="1128216" value="67" duration="128512" level="0.3" label=" " />
+				<point frame="1256728" value="43" duration="251392" level="0.3" label=" " />
+				<point frame="1256728" value="59" duration="251392" level="0.3" label=" " />
+				<point frame="1256728" value="62" duration="251392" level="0.3" label=" " />
+				<point frame="1256728" value="67" duration="251392" level="0.3" label=" " />
+				<point frame="1508120" value="38" duration="171410" level="0.3" label=" " />
+				<point frame="1508120" value="62" duration="171410" level="0.3" label=" " />
+				<point frame="1508120" value="66" duration="171410" level="0.3" label=" " />
+				<point frame="1508120" value="69" duration="171410" level="0.3" label=" " /></dataset>       </data>        <display>            <layer id="3" type="notes" name="Notes" model="2"  verticalScale="0" scaleMinimum="0" scaleMaximum="0"  colourName="Red" colour="#800000" darkBackground="false" />        </display>    </sv>

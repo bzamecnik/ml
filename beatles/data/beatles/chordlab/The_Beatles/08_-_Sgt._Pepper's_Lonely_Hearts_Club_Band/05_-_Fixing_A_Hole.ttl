@@ -1,0 +1,1039 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.95" ;
+    ov:versionnumber "2.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:chord_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT0.331S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "N" .
+
+:chord_000002
+    event:time [
+        tl:beginsAt "PT0.331S"^^xsd:duration ;
+        tl:duration "PT1.428S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000003
+    event:time [
+        tl:beginsAt "PT1.759S"^^xsd:duration ;
+        tl:duration "PT1.219S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C:aug" .
+
+:chord_000004
+    event:time [
+        tl:beginsAt "PT2.979S"^^xsd:duration ;
+        tl:duration "PT1.349S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000005
+    event:time [
+        tl:beginsAt "PT4.327S"^^xsd:duration ;
+        tl:duration "PT2.378S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "Bb:7" .
+
+:chord_000006
+    event:time [
+        tl:beginsAt "PT6.705S"^^xsd:duration ;
+        tl:duration "PT1.149S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000007
+    event:time [
+        tl:beginsAt "PT7.855S"^^xsd:duration ;
+        tl:duration "PT1.149S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C:aug" .
+
+:chord_000008
+    event:time [
+        tl:beginsAt "PT9.004S"^^xsd:duration ;
+        tl:duration "PT1.149S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000009
+    event:time [
+        tl:beginsAt "PT10.153S"^^xsd:duration ;
+        tl:duration "PT1.126S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6/5" .
+
+:chord_000010
+    event:time [
+        tl:beginsAt "PT11.28S"^^xsd:duration ;
+        tl:duration "PT2.276S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000011
+    event:time [
+        tl:beginsAt "PT13.555S"^^xsd:duration ;
+        tl:duration "PT2.222S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000012
+    event:time [
+        tl:beginsAt "PT15.778S"^^xsd:duration ;
+        tl:duration "PT2.294S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000013
+    event:time [
+        tl:beginsAt "PT18.071S"^^xsd:duration ;
+        tl:duration "PT2.252S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000014
+    event:time [
+        tl:beginsAt "PT20.324S"^^xsd:duration ;
+        tl:duration "PT2.252S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000015
+    event:time [
+        tl:beginsAt "PT22.576S"^^xsd:duration ;
+        tl:duration "PT2.264S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000016
+    event:time [
+        tl:beginsAt "PT24.84S"^^xsd:duration ;
+        tl:duration "PT1.103S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000017
+    event:time [
+        tl:beginsAt "PT25.943S"^^xsd:duration ;
+        tl:duration "PT1.091S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C:aug" .
+
+:chord_000018
+    event:time [
+        tl:beginsAt "PT27.034S"^^xsd:duration ;
+        tl:duration "PT1.068S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000019
+    event:time [
+        tl:beginsAt "PT28.103S"^^xsd:duration ;
+        tl:duration "PT1.138S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6/5" .
+
+:chord_000020
+    event:time [
+        tl:beginsAt "PT29.24S"^^xsd:duration ;
+        tl:duration "PT2.229S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000021
+    event:time [
+        tl:beginsAt "PT31.469S"^^xsd:duration ;
+        tl:duration "PT2.148S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000022
+    event:time [
+        tl:beginsAt "PT33.617S"^^xsd:duration ;
+        tl:duration "PT2.194S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000023
+    event:time [
+        tl:beginsAt "PT35.812S"^^xsd:duration ;
+        tl:duration "PT2.136S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000024
+    event:time [
+        tl:beginsAt "PT37.948S"^^xsd:duration ;
+        tl:duration "PT2.148S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000025
+    event:time [
+        tl:beginsAt "PT40.096S"^^xsd:duration ;
+        tl:duration "PT2.229S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000026
+    event:time [
+        tl:beginsAt "PT42.325S"^^xsd:duration ;
+        tl:duration "PT1.115S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000027
+    event:time [
+        tl:beginsAt "PT43.439S"^^xsd:duration ;
+        tl:duration "PT1.091S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C:9(*3)" .
+
+:chord_000028
+    event:time [
+        tl:beginsAt "PT44.531S"^^xsd:duration ;
+        tl:duration "PT1.057S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000029
+    event:time [
+        tl:beginsAt "PT45.587S"^^xsd:duration ;
+        tl:duration "PT1.057S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C:9(*3)" .
+
+:chord_000030
+    event:time [
+        tl:beginsAt "PT46.644S"^^xsd:duration ;
+        tl:duration "PT1.08S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000031
+    event:time [
+        tl:beginsAt "PT47.723S"^^xsd:duration ;
+        tl:duration "PT1.033S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C:9(*3)" .
+
+:chord_000032
+    event:time [
+        tl:beginsAt "PT48.757S"^^xsd:duration ;
+        tl:duration "PT2.171S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000033
+    event:time [
+        tl:beginsAt "PT50.928S"^^xsd:duration ;
+        tl:duration "PT1.091S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C" .
+
+:chord_000034
+    event:time [
+        tl:beginsAt "PT52.019S"^^xsd:duration ;
+        tl:duration "PT1.068S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "G" .
+
+:chord_000035
+    event:time [
+        tl:beginsAt "PT53.087S"^^xsd:duration ;
+        tl:duration "PT1.068S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C" .
+
+:chord_000036
+    event:time [
+        tl:beginsAt "PT54.155S"^^xsd:duration ;
+        tl:duration "PT1.022S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "G" .
+
+:chord_000037
+    event:time [
+        tl:beginsAt "PT55.177S"^^xsd:duration ;
+        tl:duration "PT1.103S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C" .
+
+:chord_000038
+    event:time [
+        tl:beginsAt "PT56.28S"^^xsd:duration ;
+        tl:duration "PT1.08S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "G" .
+
+:chord_000039
+    event:time [
+        tl:beginsAt "PT57.36S"^^xsd:duration ;
+        tl:duration "PT2.136S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C" .
+
+:chord_000040
+    event:time [
+        tl:beginsAt "PT59.496S"^^xsd:duration ;
+        tl:duration "PT1.138S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000041
+    event:time [
+        tl:beginsAt "PT1M0.634S"^^xsd:duration ;
+        tl:duration "PT1.057S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C:aug" .
+
+:chord_000042
+    event:time [
+        tl:beginsAt "PT1M1.69S"^^xsd:duration ;
+        tl:duration "PT1.103S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000043
+    event:time [
+        tl:beginsAt "PT1M2.793S"^^xsd:duration ;
+        tl:duration "PT1.068S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6/5" .
+
+:chord_000044
+    event:time [
+        tl:beginsAt "PT1M3.861S"^^xsd:duration ;
+        tl:duration "PT2.148S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000045
+    event:time [
+        tl:beginsAt "PT1M6.009S"^^xsd:duration ;
+        tl:duration "PT2.09S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000046
+    event:time [
+        tl:beginsAt "PT1M8.099S"^^xsd:duration ;
+        tl:duration "PT2.194S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000047
+    event:time [
+        tl:beginsAt "PT1M10.293S"^^xsd:duration ;
+        tl:duration "PT2.078S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000048
+    event:time [
+        tl:beginsAt "PT1M12.371S"^^xsd:duration ;
+        tl:duration "PT2.159S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000049
+    event:time [
+        tl:beginsAt "PT1M14.531S"^^xsd:duration ;
+        tl:duration "PT2.078S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000050
+    event:time [
+        tl:beginsAt "PT1M16.609S"^^xsd:duration ;
+        tl:duration "PT1.091S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000051
+    event:time [
+        tl:beginsAt "PT1M17.7S"^^xsd:duration ;
+        tl:duration "PT1.08S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C:aug" .
+
+:chord_000052
+    event:time [
+        tl:beginsAt "PT1M18.78S"^^xsd:duration ;
+        tl:duration "PT1.057S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000053
+    event:time [
+        tl:beginsAt "PT1M19.837S"^^xsd:duration ;
+        tl:duration "PT1.033S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000054
+    event:time [
+        tl:beginsAt "PT1M20.87S"^^xsd:duration ;
+        tl:duration "PT2.09S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000055
+    event:time [
+        tl:beginsAt "PT1M22.96S"^^xsd:duration ;
+        tl:duration "PT2.078S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000056
+    event:time [
+        tl:beginsAt "PT1M25.038S"^^xsd:duration ;
+        tl:duration "PT2.055S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000057
+    event:time [
+        tl:beginsAt "PT1M27.093S"^^xsd:duration ;
+        tl:duration "PT2.055S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000058
+    event:time [
+        tl:beginsAt "PT1M29.148S"^^xsd:duration ;
+        tl:duration "PT2.02S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000059
+    event:time [
+        tl:beginsAt "PT1M31.168S"^^xsd:duration ;
+        tl:duration "PT2.09S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000060
+    event:time [
+        tl:beginsAt "PT1M33.258S"^^xsd:duration ;
+        tl:duration "PT1.045S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000061
+    event:time [
+        tl:beginsAt "PT1M34.303S"^^xsd:duration ;
+        tl:duration "PT1.068S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C:9(*3)" .
+
+:chord_000062
+    event:time [
+        tl:beginsAt "PT1M35.371S"^^xsd:duration ;
+        tl:duration "PT1.045S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000063
+    event:time [
+        tl:beginsAt "PT1M36.416S"^^xsd:duration ;
+        tl:duration "PT1.033S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C:9(*3)" .
+
+:chord_000064
+    event:time [
+        tl:beginsAt "PT1M37.449S"^^xsd:duration ;
+        tl:duration "PT1.033S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000065
+    event:time [
+        tl:beginsAt "PT1M38.482S"^^xsd:duration ;
+        tl:duration "PT1.022S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C:9(*3)" .
+
+:chord_000066
+    event:time [
+        tl:beginsAt "PT1M39.504S"^^xsd:duration ;
+        tl:duration "PT2.09S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000067
+    event:time [
+        tl:beginsAt "PT1M41.594S"^^xsd:duration ;
+        tl:duration "PT1.033S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C" .
+
+:chord_000068
+    event:time [
+        tl:beginsAt "PT1M42.627S"^^xsd:duration ;
+        tl:duration "PT1.045S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "G" .
+
+:chord_000069
+    event:time [
+        tl:beginsAt "PT1M43.672S"^^xsd:duration ;
+        tl:duration "PT1.033S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C" .
+
+:chord_000070
+    event:time [
+        tl:beginsAt "PT1M44.705S"^^xsd:duration ;
+        tl:duration "PT0.987S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "G" .
+
+:chord_000071
+    event:time [
+        tl:beginsAt "PT1M45.692S"^^xsd:duration ;
+        tl:duration "PT1.045S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C" .
+
+:chord_000072
+    event:time [
+        tl:beginsAt "PT1M46.737S"^^xsd:duration ;
+        tl:duration "PT1.01S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "G" .
+
+:chord_000073
+    event:time [
+        tl:beginsAt "PT1M47.747S"^^xsd:duration ;
+        tl:duration "PT2.055S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C" .
+
+:chord_000074
+    event:time [
+        tl:beginsAt "PT1M49.802S"^^xsd:duration ;
+        tl:duration "PT1.08S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000075
+    event:time [
+        tl:beginsAt "PT1M50.882S"^^xsd:duration ;
+        tl:duration "PT1.068S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C:aug" .
+
+:chord_000076
+    event:time [
+        tl:beginsAt "PT1M51.95S"^^xsd:duration ;
+        tl:duration "PT1.045S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000077
+    event:time [
+        tl:beginsAt "PT1M52.995S"^^xsd:duration ;
+        tl:duration "PT1.068S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000078
+    event:time [
+        tl:beginsAt "PT1M54.063S"^^xsd:duration ;
+        tl:duration "PT2.078S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000079
+    event:time [
+        tl:beginsAt "PT1M56.141S"^^xsd:duration ;
+        tl:duration "PT2.078S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000080
+    event:time [
+        tl:beginsAt "PT1M58.219S"^^xsd:duration ;
+        tl:duration "PT2.136S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000081
+    event:time [
+        tl:beginsAt "PT2M0.355S"^^xsd:duration ;
+        tl:duration "PT2.113S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6/b3" .
+
+:chord_000082
+    event:time [
+        tl:beginsAt "PT2M2.468S"^^xsd:duration ;
+        tl:duration "PT2.09S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7/b3" .
+
+:chord_000083
+    event:time [
+        tl:beginsAt "PT2M4.558S"^^xsd:duration ;
+        tl:duration "PT2.02S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6/b3" .
+
+:chord_000084
+    event:time [
+        tl:beginsAt "PT2M6.578S"^^xsd:duration ;
+        tl:duration "PT1.103S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F" .
+
+:chord_000085
+    event:time [
+        tl:beginsAt "PT2M7.681S"^^xsd:duration ;
+        tl:duration "PT1.057S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C:aug" .
+
+:chord_000086
+    event:time [
+        tl:beginsAt "PT2M8.738S"^^xsd:duration ;
+        tl:duration "PT1.033S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000087
+    event:time [
+        tl:beginsAt "PT2M9.771S"^^xsd:duration ;
+        tl:duration "PT1.091S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6/5" .
+
+:chord_000088
+    event:time [
+        tl:beginsAt "PT2M10.862S"^^xsd:duration ;
+        tl:duration "PT2.101S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000089
+    event:time [
+        tl:beginsAt "PT2M12.964S"^^xsd:duration ;
+        tl:duration "PT2.067S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000090
+    event:time [
+        tl:beginsAt "PT2M15.03S"^^xsd:duration ;
+        tl:duration "PT2.067S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000091
+    event:time [
+        tl:beginsAt "PT2M17.097S"^^xsd:duration ;
+        tl:duration "PT2.09S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000092
+    event:time [
+        tl:beginsAt "PT2M19.187S"^^xsd:duration ;
+        tl:duration "PT1.997S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000093
+    event:time [
+        tl:beginsAt "PT2M21.184S"^^xsd:duration ;
+        tl:duration "PT2.067S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000094
+    event:time [
+        tl:beginsAt "PT2M23.25S"^^xsd:duration ;
+        tl:duration "PT2.125S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000095
+    event:time [
+        tl:beginsAt "PT2M25.375S"^^xsd:duration ;
+        tl:duration "PT2.02S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000096
+    event:time [
+        tl:beginsAt "PT2M27.395S"^^xsd:duration ;
+        tl:duration "PT2.043S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000097
+    event:time [
+        tl:beginsAt "PT2M29.438S"^^xsd:duration ;
+        tl:duration "PT2.067S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min6" .
+
+:chord_000098
+    event:time [
+        tl:beginsAt "PT2M31.505S"^^xsd:duration ;
+        tl:duration "PT2.02S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F:min7" .
+
+:chord_000099
+    event:time [
+        tl:beginsAt "PT2M33.525S"^^xsd:duration ;
+        tl:duration "PT3.105S"^^xsd:duration ;
+        tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "N" .
+
+:maker_8e4a11abad20
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_53ac654855ec
+    dc:title "Sgt. Pepper's Lonely Hearts Club Band" ;
+    mo:release_type mo:album ;
+    mo:track :track_42a30ed49eb0 ;
+    a mo:Record ;
+    foaf:maker :maker_8e4a11abad20 .
+
+:timeline_8e31d3e2a3c5
+    a tl:Timeline .
+
+:track_42a30ed49eb0
+    dc:title "Fixing A Hole" ;
+    mo:available_as <file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/05_-_Fixing_A_Hole.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_8e4a11abad20 .
+
+<file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/05_-_Fixing_A_Hole.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_8e31d3e2a3c5 ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+

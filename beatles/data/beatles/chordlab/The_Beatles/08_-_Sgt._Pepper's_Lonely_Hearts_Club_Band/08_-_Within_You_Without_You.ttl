@@ -1,0 +1,209 @@
+@base <#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <> .
+@prefix af: <http://purl.org/ontology/af/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ov: <http://open.vocab.org/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<>
+    ov:confidence "0.95" ;
+    ov:versionnumber "2.0" ;
+    dc:created "2009-10-20" ;
+    a foaf:Document .
+
+:chord_000001
+    event:time [
+        tl:beginsAt "PT0S"^^xsd:duration ;
+        tl:duration "PT1.206S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "N" .
+
+:chord_000002
+    event:time [
+        tl:beginsAt "PT1.206S"^^xsd:duration ;
+        tl:duration "PT30.263S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C#" .
+
+:chord_000003
+    event:time [
+        tl:beginsAt "PT31.469S"^^xsd:duration ;
+        tl:duration "PT28.922S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C#" .
+
+:chord_000004
+    event:time [
+        tl:beginsAt "PT1M0.392S"^^xsd:duration ;
+        tl:duration "PT3.748S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F#/5" .
+
+:chord_000005
+    event:time [
+        tl:beginsAt "PT1M4.14S"^^xsd:duration ;
+        tl:duration "PT54.786S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C#" .
+
+:chord_000006
+    event:time [
+        tl:beginsAt "PT1M58.926S"^^xsd:duration ;
+        tl:duration "PT8.08S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F#/5" .
+
+:chord_000007
+    event:time [
+        tl:beginsAt "PT2M7.006S"^^xsd:duration ;
+        tl:duration "PT3.81S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C#" .
+
+:chord_000008
+    event:time [
+        tl:beginsAt "PT2M10.816S"^^xsd:duration ;
+        tl:duration "PT4.748S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F#/5" .
+
+:chord_000009
+    event:time [
+        tl:beginsAt "PT2M15.564S"^^xsd:duration ;
+        tl:duration "PT0.498S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C#:sus4" .
+
+:chord_000010
+    event:time [
+        tl:beginsAt "PT2M16.063S"^^xsd:duration ;
+        tl:duration "PT2M17.422S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C#" .
+
+:chord_000011
+    event:time [
+        tl:beginsAt "PT4M33.485S"^^xsd:duration ;
+        tl:duration "PT7.755S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F#/5" .
+
+:chord_000012
+    event:time [
+        tl:beginsAt "PT4M41.24S"^^xsd:duration ;
+        tl:duration "PT3.722S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C#" .
+
+:chord_000013
+    event:time [
+        tl:beginsAt "PT4M44.962S"^^xsd:duration ;
+        tl:duration "PT4.632S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "F#/5" .
+
+:chord_000014
+    event:time [
+        tl:beginsAt "PT4M49.594S"^^xsd:duration ;
+        tl:duration "PT0.435S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C#:sus4" .
+
+:chord_000015
+    event:time [
+        tl:beginsAt "PT4M50.029S"^^xsd:duration ;
+        tl:duration "PT14.437S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "C#" .
+
+:chord_000016
+    event:time [
+        tl:beginsAt "PT5M4.466S"^^xsd:duration ;
+        tl:duration "PT0.618S"^^xsd:duration ;
+        tl:onTimeLine :timeline_960a5474a37a ;
+        a tl:Interval
+    ] ;
+    a af:ChordSegment ;
+    rdfs:label "N" .
+
+:maker_389d2774850d
+    a mo:MusicArtist ;
+    foaf:name "The Beatles" .
+
+:record_3fd217dcce3a
+    dc:title "Sgt. Pepper's Lonely Hearts Club Band" ;
+    mo:release_type mo:album ;
+    mo:track :track_2fb9c9d9c330 ;
+    a mo:Record ;
+    foaf:maker :maker_389d2774850d .
+
+:timeline_960a5474a37a
+    a tl:Timeline .
+
+:track_2fb9c9d9c330
+    dc:title "Within You Without You" ;
+    mo:available_as <file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/08_-_Within_You_Without_You.wav> ;
+    a mo:Track ;
+    foaf:maker :maker_389d2774850d .
+
+<file:The%20Beatles/Sgt.%20Pepper's%20Lonely%20Hearts%20Club%20Band/08_-_Within_You_Without_You.wav>
+    mo:encodes [
+        mo:time [
+            tl:onTimeLine :timeline_960a5474a37a ;
+            a tl:Interval
+        ] ;
+        a mo:Signal
+    ] ;
+    a mo:AudioFile .
+
