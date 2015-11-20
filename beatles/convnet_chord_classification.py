@@ -214,3 +214,21 @@ plot_labels(labels_pcs - labels_pred_full, 'exact_diff', exact=True)
 
 # plot_labels(labels_pred_full[:100], resample=False)
 # plot_labels(labels_pcs[:100] - labels_pred_full[:100], resample=False)
+
+# in case of input features with original time order we can apply median filter:
+# medfilt(labels_pred_full, (15, 1))
+
+def plot_labels_true_pred_diff():
+    def plot2d(x):
+        plt.imshow(scipy.signal.resample(x.T, 200, axis=1), cmap='gray', interpolation='none')
+    plt.figure(figsize=(20, 6))
+    ax = plt.subplot(3,1,1)
+    plot2d(labels_pcs)
+    ax.set_title('true')
+    ax = plt.subplot(3,1,2)
+    plot2d(labels_pred_full)
+    ax.set_title('predicted')
+    ax = plt.subplot(3,1,3)
+    plot2d(labels_pred_full - labels_pcs)
+    ax.set_title('difference')
+    plt.tight_layout()
