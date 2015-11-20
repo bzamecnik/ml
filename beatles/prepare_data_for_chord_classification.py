@@ -100,6 +100,21 @@ def prepare_chomagram_and_labels(
     os.makedirs(os.path.dirname(chromagram_file), exist_ok=True)
     np.savez_compressed(chromagram_file, X=X_chromagram, times=x_times)
 
+def transform_all():
+    # takes an hour - could be optimized...
+    import timeit
+
+    block_size = 4096
+    hop_size = 2048
+    bin_range = (-48, 67)
+    bin_division = 1
+
+    with open('data/beatles/isophonic-songs.txt') as file:
+        for line in file.readlines():
+            band, album, song_title = line.rstrip('\n').split('/')
+            print(album, song_title)
+            prepare_chomagram_and_labels(album, song_title, block_size, hop_size, bin_range, bin_division)
+
 def parse_args():
     import argparse
 
