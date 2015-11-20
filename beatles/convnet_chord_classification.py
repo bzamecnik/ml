@@ -47,8 +47,12 @@ labels_pcs = df_labels[df_labels.columns[1:]].as_matrix()
 
 ### Features
 
-scaler = MinMaxScaler()
-X = scaler.fit_transform(features).astype('float32')
+# scaler = MinMaxScaler()
+# X = scaler.fit_transform(features).astype('float32')
+
+# let's rescale the features manually so that the're the same in all songs
+# the range (in dB) is -120 to X.shape[1] (= 115)
+X = (features.astype('float32') - 120) / (features.shape[1] - 120)
 
 ### Labels
 
