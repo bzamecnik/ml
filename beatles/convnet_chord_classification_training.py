@@ -147,16 +147,16 @@ training_hist = model.fit(
     verbose=1)
 
 def report_training_curve(training_hist):
-    losses = training_hist.history['loss']
-    print('last loss:', losses[-1])
-    pd.DataFrame({'training_loss': losses}).to_csv(model_dir+'/'+model_id+'_training_losses.tsv', index=None)
+    history = training_hist.history
+    pd.DataFrame(history).to_csv(model_dir+'/'+model_id+'_training_history.tsv', header=True)
     plt.figure()
-    plt.plot(losses)
+    for label in history:
+        plt.plot(history[label], label=label)
     plt.xlabel('epochs')
-    plt.ylabel('training loss')
-    plt.title('%s - training curve' % model_id)
-    plt.suptitle('last loss: %s' % losses[-1])
-    plt.savefig(model_dir+'/'+model_id+'_training_losses.png')
+    plt.title('%s - learning curves' % model_id)
+    plt.suptitle('validation loss: %s' % history['val_loss'][-1])
+    plt.legend()
+    plt.savefig(model_dir+'/'+model_id+'_learning_curves.png')
 
 report_training_curve(training_hist)
 
