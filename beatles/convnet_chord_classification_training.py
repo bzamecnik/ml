@@ -8,6 +8,9 @@
 
 import numpy as np
 import pandas as pd
+import matplotlib as mpl
+# do not use Qt/X that require $DISPLAY
+mpl.use('Agg')
 import matplotlib.pyplot as plt
 import arrow
 import os
