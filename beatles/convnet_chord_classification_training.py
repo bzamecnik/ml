@@ -160,18 +160,19 @@ def report_training_curve(training_hist):
 
 report_training_curve(training_hist)
 
-def model_report_multilabel(model_predict, X_train, Y_train, X_valid, Y_valid):
+def model_report_multilabel(model, X_train, Y_train, X_valid, Y_valid):
     def report_dataset(X, y_true, title):
-        y_pred = model_predict(X)
+        y_proba = model.predict_proba(X, batch_size=batch_size)
+        # multi-label classes with default threshold
+        y_pred = y_proba >= 0.5
         print(title + ' accuracy (exatch match):', accuracy_score(y_true, y_pred))
         print(title + ' hamming score (non-exatch match):', 1 - hamming_loss(y_true, y_pred))
-        y_proba = model.predict_proba(X, batch_size=batch_size)
         print(title + 'AUC:', roc_auc_score(y_true.flatten(), y_proba.flatten()))
 
     report_dataset(X_train, Y_train, 'training')
     report_dataset(X_valid, Y_valid, 'validation')
 
-model_report_multilabel(model.predict_classes, X_conv_train, Y_train, X_conv_valid, Y_valid)
+model_report_multilabel(model, X_conv_train, Y_train, X_conv_valid, Y_valid)
 
 # visualization
 
