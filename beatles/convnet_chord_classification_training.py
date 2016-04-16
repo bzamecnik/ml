@@ -64,9 +64,6 @@ X_conv_test = conv_reshape(X_test)
 
 ## Model training and evaluation
 
-model_dir = 'data/beatles/models'
-os.makedirs(model_dir, exist_ok=True)
-
 def new_model_id():
     return 'model_%s' % arrow.get().format('YYYY-MM-DD-HH-mm-ss')
 
@@ -101,6 +98,9 @@ def report_model_parameters(model):
 
 model_id = new_model_id()
 print('model id:', model_id)
+
+model_dir = 'data/beatles/models/' + model_id
+os.makedirs(model_dir, exist_ok=True)
 
 model = Sequential()
 
