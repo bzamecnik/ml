@@ -104,23 +104,32 @@ os.makedirs(model_dir, exist_ok=True)
 
 model = Sequential()
 
-model.add(Convolution1D(10, 3, input_shape=(X_train.shape[1], 1)))
-model.add(BatchNormalization())
+model.add(Convolution1D(32, 3, input_shape=(X_train.shape[1], 1)))
+# model.add(BatchNormalization())
 model.add(Activation('relu'))
-
-model.add(Convolution1D(10, 3))
-model.add(BatchNormalization())
+model.add(Convolution1D(32, 3))
 model.add(Activation('relu'))
 
 model.add(MaxPooling1D(2, 2))
 
+model.add(Dropout(0.25))
+
+model.add(Convolution1D(64, 3))
+# model.add(BatchNormalization())
+model.add(Activation('relu'))
+model.add(Convolution1D(64, 3))
+model.add(Activation('relu'))
+
+model.add(MaxPooling1D(2, 2))
+
+model.add(Dropout(0.25))
+
 model.add(Flatten())
 
-model.add(Dense(20))
+model.add(Dense(256))
 model.add(Activation('relu'))
 
-model.add(Dense(20))
-model.add(Activation('relu'))
+model.add(Dropout(0.5))
 
 model.add(Dense(12))
 model.add(Activation('sigmoid'))
