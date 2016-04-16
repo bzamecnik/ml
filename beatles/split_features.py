@@ -1,9 +1,10 @@
 '''
 This script allows to split the particular features (chromagram) and labels
-according to previously computed song-level splits.
+according to previously computed song-level splits (given by an index).
 
-All features (X) and labels (Y) in each split are concatenated and stored as
-single files.
+All features (X) and labels (Y) in each split are concatenated. All splits are
+stored in a single compressed numpy file. It contains X and Y arrays for each
+split: X_train, Y_train, X_valid, Y_valid, X_test, Y_test.
 
 The reason is to prepare input data for the machine learning phase that is most
 convenient.
@@ -43,11 +44,18 @@ target_dir = 'data/beatles/ml_dataset/chromagram_block=4096_hop=2048_bins=-48,67
 def merge_split(split):
     print('--- split: ', split, '---')
     X, Y = load_songs(df_index[df_index['split'] == split])
-    target_file = target_dir + split + '.npz'
+
+def split_songs_and_save_to_single_file():
+    splits = {}
+    for split in ('train', 'valid', 'test'):
+        print('--- split: ', split, '---')
+        X, Y = load_songs(df_index[df_index['split'] == split])
+        splits['X_' + split] = X
+        splits['Y_' + split] = Y
+    target_file = target_dir + 'dataset.npz'
     print('saving to:', target_file)
-    np.savez_compressed(target_file, X=X, Y=Y)
+    os.makedirs(target_dir, exist_ok=True)
+    np.savez_compressed(target_file, **splits)
 
-os.makedirs(target_dir, exist_ok=True)
-
-for split in ('train', 'valid', 'test'):
-    merge_split(split)
+if __name__ == '__main__':
+    split_songs_and_save_to_single_file()
