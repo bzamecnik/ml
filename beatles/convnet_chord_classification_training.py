@@ -17,7 +17,7 @@ import os
 import scipy.signal
 import scipy.misc
 
-from sklearn.metrics import hamming_loss, accuracy_score
+from sklearn.metrics import hamming_loss, accuracy_score, roc_auc_score
 
 from keras.models import Sequential
 from keras.layers.core import Dense, Activation, Flatten, Dropout
@@ -165,6 +165,8 @@ def model_report_multilabel(model_predict, X_train, Y_train, X_valid, Y_valid):
         y_pred = model_predict(X)
         print(title + ' accuracy (exatch match):', accuracy_score(y_true, y_pred))
         print(title + ' hamming score (non-exatch match):', 1 - hamming_loss(y_true, y_pred))
+        y_proba = model.predict_proba(X, batch_size=batch_size)
+        print(title + 'AUC:', roc_auc_score(y_true.flatten(), y_proba.flatten()))
 
     report_dataset(X_train, Y_train, 'training')
     report_dataset(X_valid, Y_valid, 'validation')
