@@ -135,7 +135,8 @@ save_model_arch(model_id, model)
 print('training the model')
 checkpointer = ModelCheckpoint(filepath=weights_file(model_id), verbose=1, save_best_only=True)
 
-training_hist = model.fit(X_conv_train, Y_train, nb_epoch=10, callbacks=[checkpointer])
+training_hist = model.fit(X_conv_train, Y_train, nb_epoch=10, callbacks=[checkpointer],
+                         verbose=1, validation_data=(X_conv_valid, Y_valid))
 
 def report_training_curve(training_hist):
     losses = training_hist.history['loss']
