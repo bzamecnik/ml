@@ -141,6 +141,7 @@ training_hist = model.fit(X_conv_train, Y_train, nb_epoch=10, batch_size=512, ca
 def report_training_curve(training_hist):
     losses = training_hist.history['loss']
     print('last loss:', losses[-1])
+    pd.DataFrame({'training_loss': losses}).to_csv(model_dir+'/'+model_id+'_training_losses.tsv', index=None)
     plt.figure()
     plt.plot(losses)
     plt.xlabel('epochs')
@@ -148,7 +149,6 @@ def report_training_curve(training_hist):
     plt.title('%s - training curve' % model_id)
     plt.suptitle('last loss: %s' % losses[-1])
     plt.savefig(model_dir+'/'+model_id+'_training_losses.png')
-    pd.DataFrame({'training_loss': losses}).to_csv(model_dir+'/'+model_id+'_training_losses.tsv', index=None)
 
 report_training_curve(training_hist)
 
