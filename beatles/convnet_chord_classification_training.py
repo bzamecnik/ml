@@ -72,8 +72,8 @@ def save_model_arch(model_id, model):
     print('architecture:', arch_file)
     open(arch_file, 'w').write(model.to_yaml())
 
-def weights_file(model_id):
-    return '%s/%s_weights.h5' % (model_dir, model_id)
+def weights_file(model_id, suffix=''):
+    return '%s/%s_weights%s.h5' % (model_dir, model_id, suffix)
 
 def report_model_parameters(model):
     print('number of parameters:', model.count_params())
@@ -142,7 +142,7 @@ model.compile(class_mode='binary', loss='binary_crossentropy', optimizer='adam')
 save_model_arch(model_id, model)
 
 print('training the model')
-checkpointer = ModelCheckpoint(filepath=weights_file(model_id), verbose=1, save_best_only=True)
+checkpointer = ModelCheckpoint(filepath=weights_file(model_id, '_checkpoint'), verbose=1, save_best_only=True)
 
 epoch_count = 10
 batch_size = 512
@@ -154,6 +154,10 @@ training_hist = model.fit(
     batch_size=batch_size,
     callbacks=[checkpointer],
     verbose=1)
+
+# There's a problem with checkpointer that it produces weight with one more layer
+# and the weights cannot be easily imported.
+model.save_weights(weights_file(model_id, ''))
 
 def report_training_curve(training_hist):
     history = training_hist.history
