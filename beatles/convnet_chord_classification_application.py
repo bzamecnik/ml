@@ -29,8 +29,8 @@ from reassignment import chromagram
 
 ## Load model
 
-model_id = 'model_2015-11-02-22-54-47'
-model_dir = '/Users/bzamecnik/Documents/machine-learning/ml-playground/beatles/data/beatles/models'
+model_id = 'model_2016-04-16-20-52-03'
+model_dir = 'data/beatles/models/' + model_id
 model_arch = model_dir + '/' + model_id + '_arch.yaml'
 model_weights = model_dir + '/' + model_id + '_weights.h5'
 
@@ -41,37 +41,36 @@ model.load_weights(model_weights)
 
 ## Load data
 
-song = "The_Beatles/05_-_Help!/13_-_Yesterday"
-# song = "The_Beatles/03_-_A_Hard_Day's_Night/05_-_And_I_Love_Her"
+song = "The_Beatles/03_-_A_Hard_Day's_Night/05_-_And_I_Love_Her"
 
 audio_file = 'data/beatles/audio-cd/' + song + '.wav'
 
 ### Chromagram features
 
-labels_file = 'data/beatles/chord-pcs/4096_2048/'+song+'.pcs'
-features_file = 'data/beatles/chromagram/block=4096_hop=2048_bins=-48,67_div=1/'+song+'.npz'
+# labels_file = 'data/beatles/chord-pcs/4096_2048/'+song+'.pcs'
+# features_file = 'data/beatles/chromagram/block=4096_hop=2048_bins=-48,67_div=1/'+song+'.npz'
 
-data = np.load(features_file)
+# data = np.load(features_file)
 
-features = data['X']
-times = data['times']
+# features = data['X']
+# times = data['times']
 
 ### Chord labels
 
-df_labels = pd.read_csv(labels_file, sep='\t')
-labels_pcs = df_labels[df_labels.columns[1:]].as_matrix()
+# df_labels = pd.read_csv(labels_file, sep='\t')
+# labels_pcs = df_labels[df_labels.columns[1:]].as_matrix()
 
-# block_size = 4096
-# hop_size = 2048
-#
-# print('loading audio:', audio_file)
-# song, fs = load_wav(audio_file)
-# print('splitting audio to blocks')
-# x, times = split_to_blocks(song, block_size, hop_size)
-# w = create_window(block_size)
-# print('computing chromagram')
-# X_chromagram = chromagram(x, w, fs, to_log=True)
-# features = X_chromagram
+block_size = 4096
+hop_size = 2048
+
+print('loading audio:', audio_file)
+x, fs = load_wav(audio_file)
+print('splitting audio to blocks')
+x_blocks, times = split_to_blocks(x, block_size, hop_size)
+w = create_window(block_size)
+print('computing chromagram')
+X_chromagram = chromagram(x_blocks, w, fs, to_log=True)
+features = X_chromagram
 
 ## Data preprocessing
 
@@ -89,25 +88,25 @@ def conv_reshape(X):
 X_conv = conv_reshape(X)
 
 # visualization
-
-def plot_labels(l, title, fifths=False, resample=True, exact=False):
-    if fifths:
-        l = l[:,np.arange(12)*7 % 12]
-    l = l.T
-
-    # file = model_dir+'/'+model_id+'_'+title+'.png'
-
-    if exact:
-        pass
-        # scipy.misc.imsave(file, l)
-    else:
-        if resample:
-            l = scipy.signal.resample(l, 200, axis=1)
-        plt.figure(figsize=(20, 2))
-        plt.imshow(l, cmap='gray', interpolation='none')
-        plt.tight_layout()
-        plt.show()
-        # plt.savefig(file)
+#
+# def plot_labels(l, title, fifths=False, resample=True, exact=False):
+#     if fifths:
+#         l = l[:,np.arange(12)*7 % 12]
+#     l = l.T
+#
+#     # file = model_dir+'/'+model_id+'_'+title+'.png'
+#
+#     if exact:
+#         pass
+#         # scipy.misc.imsave(file, l)
+#     else:
+#         if resample:
+#             l = scipy.signal.resample(l, 200, axis=1)
+#         plt.figure(figsize=(20, 2))
+#         plt.imshow(l, cmap='gray', interpolation='none')
+#         plt.tight_layout()
+#         plt.show()
+#         # plt.savefig(file)
 
 # predicted labels
 # labels_pred_full = model.predict_classes(X_conv)
@@ -117,25 +116,29 @@ def plot_labels(l, title, fifths=False, resample=True, exact=False):
 # in case of input features with original time order we can apply median filter:
 # medfilt(labels_pred_full, (15, 1))
 
-labels_pred_full = model.predict_classes(conv_reshape(X))
+model.compile(class_mode='binary', loss='binary_crossentropy', optimizer='adam')
 
-print(' accuracy (exatch match):', accuracy_score(labels_pcs, labels_pred_full))
-print(' hamming score (non-exatch match):', 1 - hamming_loss(labels_pcs, labels_pred_full))
+y_pred = (model.predict(X_conv) >= 0.5).astype(np.int32)
 
-def plot_labels_true_pred_diff():
-    def plot2d(x):
-        plt.imshow(scipy.signal.resample(x.T, 200, axis=1), cmap='gray', interpolation='none')
-    plt.figure(figsize=(20, 6))
-    ax = plt.subplot(3,1,1)
-    plot2d(labels_pcs)
-    ax.set_title('true')
-    ax = plt.subplot(3,1,2)
-    plot2d(labels_pred_full)
-    ax.set_title('predicted')
-    ax = plt.subplot(3,1,3)
-    plot2d(labels_pred_full - labels_pcs)
-    ax.set_title('difference')
-    plt.tight_layout()
-    plt.show()
+pred_file = 'data/beatles/chord-pcs-predicted/%d_%d/%s/%s.tsv' % (block_size, hop_size, model_id, song)
+pred_dir = os.path.dirname(pred_file)
+os.makedirs(pred_dir, exist_ok=True)
+np.savetxt(pred_file, y_pred, delimiter='\t', fmt='%d')
 
-plot_labels_true_pred_diff()
+# def plot_labels_true_pred_diff():
+#     def plot2d(x):
+#         plt.imshow(scipy.signal.resample(x.T, 200, axis=1), cmap='gray', interpolation='none')
+#     plt.figure(figsize=(20, 6))
+#     ax = plt.subplot(3,1,1)
+#     plot2d(labels_pcs)
+#     ax.set_title('true')
+#     ax = plt.subplot(3,1,2)
+#     plot2d(labels_pred_full)
+#     ax.set_title('predicted')
+#     ax = plt.subplot(3,1,3)
+#     plot2d(labels_pred_full - labels_pcs)
+#     ax.set_title('difference')
+#     plt.tight_layout()
+#     plt.show()
+#
+# plot_labels_true_pred_diff()
