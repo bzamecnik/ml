@@ -2,46 +2,38 @@
 #
 # The task is to classify chords (or more precisely pitch class sets) based on chromagram features.
 #
-# We use a single Beatles song with just two chord and silence.
+# We use a the whole Beatles dataset (ie. many songs).
 #
 # The task is in fact multilabel classification, since each pitch class is generally independent.
 
 import numpy as np
 import pandas as pd
+import matplotlib as mpl
+# do not use Qt/X that require $DISPLAY
+mpl.use('Agg')
 import matplotlib.pyplot as plt
 import arrow
 import os
 import scipy.signal
 import scipy.misc
 
-from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
-from sklearn.cross_validation import train_test_split
-from sklearn.metrics import hamming_loss, accuracy_score
+from sklearn.metrics import hamming_loss, accuracy_score, roc_auc_score
 
 from keras.models import Sequential
 from keras.layers.core import Dense, Activation, Flatten, Dropout
 from keras.layers.convolutional import Convolution1D, MaxPooling1D
 from keras.layers.normalization import BatchNormalization
+from keras.callbacks import ModelCheckpoint
 
 ## Data loading
 
-# song = "The_Beatles/01_-_Please_Please_Me/08_-_Love_Me_Do"
-song = "The_Beatles/03_-_A_Hard_Day's_Night/05_-_And_I_Love_Her"
+dataset_file = 'data/beatles/ml_dataset/chromagram_block=4096_hop=2048_bins=-48,67_div=1/dataset.npz'
+dataset = np.load(dataset_file)
 
-labels_file = 'data/beatles/chord-pcs/4096_2048/'+song+'.pcs'
-features_file = 'data/beatles/chromagram/block=4096_hop=2048_bins=-48,67_div=1/'+song+'.npz'
-
-### Chromagram features
-
-data = np.load(features_file)
-
-features = data['X']
-times = data['times']
-
-### Chord labels
-
-df_labels = pd.read_csv(labels_file, sep='\t')
-labels_pcs = df_labels[df_labels.columns[1:]].as_matrix()
+X_train, Y_train, X_valid, Y_valid, X_test, Y_test = \
+    dataset['X_train'], dataset['Y_train'], \
+    dataset['X_valid'], dataset['Y_valid'], \
+    dataset['X_test'], dataset['Y_test']
 
 ## Data preprocessing
 
@@ -52,27 +44,14 @@ labels_pcs = df_labels[df_labels.columns[1:]].as_matrix()
 
 # let's rescale the features manually so that the're the same in all songs
 # the range (in dB) is -120 to X.shape[1] (= 115)
-X = (features.astype('float32') - 120) / (features.shape[1] - 120)
+def normalize(X):
+    return (X.astype('float32') - 120) / (X.shape[1] - 120)
 
-### Labels
+X_train = normalize(X_train)
+X_valid = normalize(X_valid)
+X_test = normalize(X_test)
 
-label_dict = dict((c,i) for (i, c) in enumerate(sorted(df_labels['label'].drop_duplicates())))
-label_classes = df_labels['label'].apply(lambda l: label_dict[l]).as_matrix().reshape(-1, 1)
-n_classes = len(label_dict)
-label_ohe = OneHotEncoder(n_values=n_classes)
-labels_ohe = label_ohe.fit_transform(label_classes).toarray().astype(np.int32)
-labels_ohe
-
-### Splitting datasets - training, validation, test
-
-ix_train, ix_test = train_test_split(np.arange(len(X)), test_size=0.2, random_state=42)
-ix_train, ix_valid = train_test_split(ix_train, test_size=0.2/(1-0.2), random_state=42)
-X_train, X_valid, X_test = X[ix_train], X[ix_valid], X[ix_test]
-y_train, y_valid, y_test = labels_pcs[ix_train], labels_pcs[ix_valid], labels_pcs[ix_test]
-y_ohe_train, y_ohe_valid, y_ohe_test = labels_ohe[ix_train], labels_ohe[ix_valid], labels_ohe[ix_test]
-y_cls_train, y_cls_valid, y_cls_test = label_classes[ix_train], label_classes[ix_valid], label_classes[ix_test]
-
-for d in [X_train, X_valid, X_test, y_train, y_valid, y_test]:
+for d in [X_train, X_valid, X_test, Y_train, Y_valid, Y_test]:
     print(d.shape)
 
 # reshape for 1D convolution
@@ -81,22 +60,20 @@ def conv_reshape(X):
 
 X_conv_train = conv_reshape(X_train)
 X_conv_valid = conv_reshape(X_valid)
+X_conv_test = conv_reshape(X_test)
 
 ## Model training and evaluation
-
-model_dir = 'data/beatles/models'
-os.makedirs(model_dir, exist_ok=True)
 
 def new_model_id():
     return 'model_%s' % arrow.get().format('YYYY-MM-DD-HH-mm-ss')
 
-def save_model(model_id, model):
+def save_model_arch(model_id, model):
     arch_file = '%s/%s_arch.yaml' % (model_dir, model_id)
-    weights_file = '%s/%s_weights.h5' % (model_dir, model_id)
     print('architecture:', arch_file)
-    print('weights:', weights_file)
     open(arch_file, 'w').write(model.to_yaml())
-    model.save_weights(weights_file)
+
+def weights_file(model_id):
+    return '%s/%s_weights.h5' % (model_dir, model_id)
 
 def report_model_parameters(model):
     print('number of parameters:', model.count_params())
@@ -122,9 +99,12 @@ def report_model_parameters(model):
 model_id = new_model_id()
 print('model id:', model_id)
 
+model_dir = 'data/beatles/models/' + model_id
+os.makedirs(model_dir, exist_ok=True)
+
 model = Sequential()
 
-model.add(Convolution1D(10, 3, input_shape=(features.shape[1], 1)))
+model.add(Convolution1D(10, 3, input_shape=(X_train.shape[1], 1)))
 model.add(BatchNormalization())
 model.add(Activation('relu'))
 
@@ -150,35 +130,48 @@ report_model_parameters(model)
 print('compiling the model')
 model.compile(class_mode='binary', loss='binary_crossentropy', optimizer='adam')
 
-print('training the model')
-training_hist = model.fit(X_conv_train, y_train, nb_epoch=100)
+save_model_arch(model_id, model)
 
-save_model(model_id, model)
+print('training the model')
+checkpointer = ModelCheckpoint(filepath=weights_file(model_id), verbose=1, save_best_only=True)
+
+epoch_count = 10
+batch_size = 512
+
+training_hist = model.fit(
+    X_conv_train, Y_train,
+    validation_data=(X_conv_valid, Y_valid),
+    nb_epoch=epoch_count,
+    batch_size=batch_size,
+    callbacks=[checkpointer],
+    verbose=1)
 
 def report_training_curve(training_hist):
-    losses = training_hist.history['loss']
-    print('last loss:', losses[-1])
+    history = training_hist.history
+    pd.DataFrame(history).to_csv(model_dir+'/'+model_id+'_training_history.tsv', header=True)
     plt.figure()
-    plt.plot(losses)
+    for label in history:
+        plt.plot(history[label], label=label)
     plt.xlabel('epochs')
-    plt.ylabel('training loss')
-    plt.title('%s - training curve' % model_id)
-    plt.suptitle('last loss: %s' % losses[-1])
-    plt.savefig(model_dir+'/'+model_id+'_training_losses.png')
-    pd.DataFrame({'training_loss': losses}).to_csv(model_dir+'/'+model_id+'_training_losses.tsv', index=None)
+    plt.title('%s - learning curves' % model_id)
+    plt.suptitle('validation loss: %s' % history['val_loss'][-1])
+    plt.legend()
+    plt.savefig(model_dir+'/'+model_id+'_learning_curves.png')
 
 report_training_curve(training_hist)
 
-def model_report_multilabel(model_predict, X_train, y_train, X_valid, y_valid):
+def model_report_multilabel(model_predict, X_train, Y_train, X_valid, Y_valid):
     def report_dataset(X, y_true, title):
         y_pred = model_predict(X)
         print(title + ' accuracy (exatch match):', accuracy_score(y_true, y_pred))
         print(title + ' hamming score (non-exatch match):', 1 - hamming_loss(y_true, y_pred))
+        y_proba = model.predict_proba(X, batch_size=batch_size)
+        print(title + 'AUC:', roc_auc_score(y_true.flatten(), y_proba.flatten()))
 
-    report_dataset(X_train, y_train, 'training')
-    report_dataset(X_valid, y_valid, 'validation')
+    report_dataset(X_train, Y_train, 'training')
+    report_dataset(X_valid, Y_valid, 'validation')
 
-model_report_multilabel(model.predict_classes, X_conv_train, y_train, X_conv_valid, y_valid)
+model_report_multilabel(model.predict_classes, X_conv_train, Y_train, X_conv_valid, Y_valid)
 
 # visualization
 
@@ -199,18 +192,18 @@ def plot_labels(l, title, fifths=False, resample=True, exact=False):
         plt.tight_layout()
         plt.savefig(file)
 
-# true labels
-plot_labels(labels_pcs, 'true')
-plot_labels(labels_pcs, 'exact_true', exact=True)
-
-# predicted labels
-labels_pred_full = model.predict_classes(conv_reshape(X))
-plot_labels(labels_pred_full, 'pred')
-plot_labels(labels_pred_full, 'exact_pred', exact=True)
-
-# difference
-plot_labels(labels_pcs - labels_pred_full, 'diff')
-plot_labels(labels_pcs - labels_pred_full, 'exact_diff', exact=True)
+# # true labels
+# plot_labels(labels_pcs, 'true')
+# plot_labels(labels_pcs, 'exact_true', exact=True)
+#
+# # predicted labels
+# labels_pred_full = model.predict_classes(conv_reshape(X))
+# plot_labels(labels_pred_full, 'pred')
+# plot_labels(labels_pred_full, 'exact_pred', exact=True)
+#
+# # difference
+# plot_labels(labels_pcs - labels_pred_full, 'diff')
+# plot_labels(labels_pcs - labels_pred_full, 'exact_diff', exact=True)
 
 # plot_labels(labels_pred_full[:100], resample=False)
 # plot_labels(labels_pcs[:100] - labels_pred_full[:100], resample=False)
