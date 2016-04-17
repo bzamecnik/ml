@@ -54,3 +54,10 @@ docs/_build/
 target/
 
 .ipynb_checkpoints
+
+
+### -- general rules --
+
+# editor backup files
+*~
+
