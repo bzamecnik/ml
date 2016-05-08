@@ -1,5 +1,16 @@
 # Beatles annotations - musical dataset exploration
 
+## Initializing Git Submodules
+
+There's a git submodule for audio feature extraction.
+
+```
+git submodule init
+git submodule update
+```
+
+## About the dataset
+
 http://isophonics.net/content/reference-annotations-beatles
 
 Manually annotates songs of Beatles
