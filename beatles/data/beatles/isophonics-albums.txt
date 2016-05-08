@@ -1,0 +1,13 @@
+chordlab/The_Beatles/01_-_Please_Please_Me
+chordlab/The_Beatles/02_-_With_the_Beatles
+chordlab/The_Beatles/03_-_A_Hard_Day's_Night
+chordlab/The_Beatles/04_-_Beatles_for_Sale
+chordlab/The_Beatles/05_-_Help!
+chordlab/The_Beatles/06_-_Rubber_Soul
+chordlab/The_Beatles/07_-_Revolver
+chordlab/The_Beatles/08_-_Sgt._Pepper's_Lonely_Hearts_Club_Band
+chordlab/The_Beatles/09_-_Magical_Mystery_Tour
+chordlab/The_Beatles/10CD1_-_The_Beatles
+chordlab/The_Beatles/10CD2_-_The_Beatles
+chordlab/The_Beatles/11_-_Abbey_Road
+chordlab/The_Beatles/12_-_Let_It_Be
