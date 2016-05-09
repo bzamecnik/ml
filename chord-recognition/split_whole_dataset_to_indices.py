@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 from sklearn.cross_validation import train_test_split
 
-songs_file = 'data/beatles/isophonic-songs.txt'
+songs_file = '../data/beatles/isophonic-songs.txt'
 
 df = pd.read_csv(songs_file, sep='\t', header=None, names=['path'])
 songs = np.array([p.split('/') for p in df['path']])
@@ -36,8 +36,8 @@ for name in split_incides:
 
 df['order'] = np.hstack([split_incides['train'], split_incides['valid'], split_incides['test']])
 
-df.to_csv('data/beatles/songs-dataset-split.tsv', sep='\t', index=None)
+df.to_csv('../data/beatles/songs-dataset-split.tsv', sep='\t', index=None)
 
-with open('data/beatles/dataset-split-indexes.tsv', 'w') as file:
+with open('../data/beatles/dataset-split-indexes.tsv', 'w') as file:
     for name in split_incides:
         print(name + '\t' + ','.join([str(i) for i in split_incides[name]]), file=file)

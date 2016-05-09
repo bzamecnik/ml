@@ -27,7 +27,7 @@ from keras.callbacks import ModelCheckpoint
 
 ## Data loading
 
-dataset_file = 'data/beatles/ml_dataset/chromagram_block=4096_hop=2048_bins=-48,67_div=1/dataset.npz'
+dataset_file = '../data/beatles/ml_dataset/chromagram_block=4096_hop=2048_bins=-48,67_div=1/dataset.npz'
 dataset = np.load(dataset_file)
 
 X_train, Y_train, X_valid, Y_valid, X_test, Y_test = \
@@ -99,7 +99,7 @@ def report_model_parameters(model):
 model_id = new_model_id()
 print('model id:', model_id)
 
-model_dir = 'data/beatles/models/' + model_id
+model_dir = '../data/beatles/models/' + model_id
 os.makedirs(model_dir, exist_ok=True)
 
 model = Sequential()

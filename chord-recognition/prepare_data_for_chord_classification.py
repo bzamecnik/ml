@@ -7,7 +7,7 @@ import sys
 import math
 import os
 
-sys.path.append('music-processing-experiments')
+sys.path.append('../music-processing-experiments')
 
 from analysis import split_to_blocks
 from files import load_wav
@@ -24,7 +24,7 @@ def prepare_chomagram_and_labels(
     bin_division):
 
     song = 'The_Beatles/'+album+'/'+song_title
-    data_dir = 'data/beatles'
+    data_dir = '../data/beatles'
     audio_file = data_dir + '/audio-cd/' + song + '.wav'
     chord_file = data_dir  + '/chordlab/' + song + '.lab.pcs.tsv'
     audio_file, chord_file
@@ -109,7 +109,7 @@ def transform_all():
     bin_range = (-48, 67)
     bin_division = 1
 
-    with open('data/beatles/isophonic-songs.txt') as file:
+    with open('../data/beatles/isophonic-songs.txt') as file:
         for line in file.readlines():
             band, album, song_title = line.rstrip('\n').split('/')
             print(album, song_title)

@@ -51,9 +51,9 @@ def split_songs_and_save_to_single_file(index_file, labels_dir, features_dir, ta
     np.savez_compressed(target_file, **splits)
 
 if __name__ == '__main__':
-    index_file = 'data/beatles/songs-dataset-split.tsv'
-    labels_dir = 'data/beatles/chord-pcs/4096_2048/'
-    features_dir = 'data/beatles/chromagram/block=4096_hop=2048_bins=-48,67_div=1/'
-    target_file = 'data/beatles/ml_dataset/chromagram_block=4096_hop=2048_bins=-48,67_div=1/dataset.npz'
+    index_file = '../data/beatles/songs-dataset-split.tsv'
+    labels_dir = '../data/beatles/chord-pcs/4096_2048/'
+    features_dir = '../data/beatles/chromagram/block=4096_hop=2048_bins=-48,67_div=1/'
+    target_file = '../data/beatles/ml_dataset/chromagram_block=4096_hop=2048_bins=-48,67_div=1/dataset.npz'
 
     split_songs_and_save_to_single_file(index_file, labels_dir, features_dir, target_file)
