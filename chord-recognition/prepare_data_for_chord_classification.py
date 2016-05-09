@@ -7,7 +7,7 @@ import sys
 import math
 import os
 
-sys.path.append('../music-processing-experiments')
+sys.path.append('../tools/music-processing-experiments')
 
 from analysis import split_to_blocks
 from files import load_wav

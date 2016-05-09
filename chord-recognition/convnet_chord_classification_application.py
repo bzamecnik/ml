@@ -21,7 +21,7 @@ from sklearn.metrics import hamming_loss, accuracy_score
 from keras.models import model_from_yaml
 
 import sys
-sys.path.append('../music-processing-experiments')
+sys.path.append('../tools/music-processing-experiments')
 from spectrogram import create_window
 from files import load_wav
 from analysis import split_to_blocks
