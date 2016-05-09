@@ -30,7 +30,7 @@ from reassignment import chromagram
 ## Load model
 
 model_id = 'model_2016-04-16-20-52-03'
-model_dir = 'data/beatles/models/' + model_id
+model_dir = '../data/beatles/models/' + model_id
 model_arch = model_dir + '/' + model_id + '_arch.yaml'
 model_weights = model_dir + '/' + model_id + '_weights.h5'
 
@@ -43,12 +43,12 @@ model.load_weights(model_weights)
 
 song = "The_Beatles/03_-_A_Hard_Day's_Night/05_-_And_I_Love_Her"
 
-audio_file = 'data/beatles/audio-cd/' + song + '.wav'
+audio_file = '../data/beatles/audio-cd/' + song + '.wav'
 
 ### Chromagram features
 
-# labels_file = 'data/beatles/chord-pcs/4096_2048/'+song+'.pcs'
-# features_file = 'data/beatles/chromagram/block=4096_hop=2048_bins=-48,67_div=1/'+song+'.npz'
+# labels_file = '../data/beatles/chord-pcs/4096_2048/'+song+'.pcs'
+# features_file = '../data/beatles/chromagram/block=4096_hop=2048_bins=-48,67_div=1/'+song+'.npz'
 
 # data = np.load(features_file)
 
@@ -120,7 +120,7 @@ model.compile(class_mode='binary', loss='binary_crossentropy', optimizer='adam')
 
 y_pred = (model.predict(X_conv) >= 0.5).astype(np.int32)
 
-pred_file = 'data/beatles/chord-pcs-predicted/%d_%d/%s/%s.tsv' % (block_size, hop_size, model_id, song)
+pred_file = '../data/beatles/chord-pcs-predicted/%d_%d/%s/%s.tsv' % (block_size, hop_size, model_id, song)
 pred_dir = os.path.dirname(pred_file)
 os.makedirs(pred_dir, exist_ok=True)
 np.savetxt(pred_file, y_pred, delimiter='\t', fmt='%d')

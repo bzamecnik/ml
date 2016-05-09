@@ -19,7 +19,7 @@ from sklearn.metrics import hamming_loss, accuracy_score, roc_auc_score
 
 # In[2]:
 
-dataset = np.load('data/beatles/ml_dataset/chromagram_block=4096_hop=2048_bins=-48,67_div=1/dataset.npz')
+dataset = np.load('../data/beatles/ml_dataset/chromagram_block=4096_hop=2048_bins=-48,67_div=1/dataset.npz')
 
 X_train_orig, Y_train_orig, X_valid_orig, Y_valid_orig, X_test_orig, Y_test_orig =     dataset['X_train'], dataset['Y_train'],     dataset['X_valid'], dataset['Y_valid'],     dataset['X_test'], dataset['Y_test']
 
