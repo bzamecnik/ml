@@ -27,7 +27,7 @@ df['song'] = songs[:, 2]
 def split_dataset(index):
     index = list(index)
     ix_train, ix_test = train_test_split(index, test_size=0.2, random_state=42)
-    ix_train, ix_valid = train_test_split(ix_train, test_size=0.2 / (1 - 0.2))
+    ix_train, ix_valid = train_test_split(ix_train, test_size=0.2 / (1 - 0.2), random_state=42)
     return {'train': ix_train, 'valid': ix_valid, 'test': ix_test}
 
 split_incides = split_dataset(df.index)
