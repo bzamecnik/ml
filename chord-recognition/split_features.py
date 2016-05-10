@@ -10,9 +10,10 @@ The reason is to prepare input data for the machine learning phase that is most
 convenient.
 '''
 
+from collections import OrderedDict
 import numpy as np
-import pandas as pd
 import os
+import pandas as pd
 
 def load_index(file_name):
     df_index = pd.read_csv(file_name, sep='\t')
@@ -51,9 +52,15 @@ def split_songs_and_save_to_single_file(index_file, labels_dir, features_dir, ta
     np.savez_compressed(target_file, **splits)
 
 if __name__ == '__main__':
-    index_file = '../data/beatles/songs-dataset-split.tsv'
-    labels_dir = '../data/beatles/chord-pcs/4096_2048/'
-    features_dir = '../data/beatles/chromagram/block=4096_hop=2048_bins=-48,67_div=1/'
-    target_file = '../data/beatles/ml_dataset/chromagram_block=4096_hop=2048_bins=-48,67_div=1/dataset.npz'
+    params = OrderedDict([
+        ('block', '4096'), ('hop', '2048'), ('bins', '-48,67'), ('div', '1')
+    ])
+    feature_param_path = '_'.join('%s=%s' % (k, v) for (k, v) in params.items())
+
+    data_dir = '../data/beatles'
+    index_file = data_dir + '/songs-dataset-split.tsv'
+    labels_dir = data_dir + '/chord-pcs/%s_%s/' % (params['block'], params['hop'])
+    features_dir = '%s/chromagram/%s/' % (data_dir, feature_param_path)
+    target_file = '%s/ml_dataset/%s/dataset.npz' % (data_dir, feature_param_path)
 
     split_songs_and_save_to_single_file(index_file, labels_dir, features_dir, target_file)
