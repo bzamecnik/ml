@@ -18,19 +18,21 @@ data_dir = '../data/beatles'
 
 songs_file = data_dir + '/isophonic-songs.txt'
 
+random_state = 42
+
 df = pd.read_csv(songs_file, sep='\t', header=None, names=['path'])
 songs = np.array([p.split('/') for p in df['path']])
 df['artist'] = songs[:, 0]
 df['album'] = songs[:, 1]
 df['song'] = songs[:, 2]
 
-def split_dataset(index):
+def split_dataset(index, random_state):
     index = list(index)
-    ix_train, ix_test = train_test_split(index, test_size=0.2, random_state=42)
-    ix_train, ix_valid = train_test_split(ix_train, test_size=0.2 / (1 - 0.2), random_state=42)
+    ix_train, ix_test = train_test_split(index, test_size=0.2, random_state=random_state)
+    ix_train, ix_valid = train_test_split(ix_train, test_size=0.2 / (1 - 0.2), random_state=random_state)
     return {'train': ix_train, 'valid': ix_valid, 'test': ix_test}
 
-split_incides = split_dataset(df.index)
+split_incides = split_dataset(df.index, random_state)
 
 df['split'] = ''
 for name in split_incides:
