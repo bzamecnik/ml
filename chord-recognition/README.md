@@ -79,3 +79,32 @@ The classification is formulated as multi-label classification problem. The outp
 - median filtering (?)
 - joining together adjacent frames with the same predicted labels
 - converting binary vector labels to symbolic chord labels
+
+## Installation & Dependencies
+
+```
+conda create -n tensorflow python=3.4
+source activate tensorflow
+
+pip install Keras
+# Theano or TensorFlow
+# TensorFlow 0.7.1 on Linux 64 needs Python 3.4 (not 3.5)
+pip install --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow-0.7.1-cp34-none-linux_x86_64.whl
+conda install pillow scipy scikit-learn pandas h5py matplotlib seaborn
+pip install arrow
+
+cat '{"floatx": "float32", "backend": "tensorflow", "epsilon": 1e-07}' > \
+  ~/.keras/keras.json
+```
+
+### Troubleshooting
+
+- `import scipy.misc` gives Segmentation fault
+  - install scipy via conda instead of pip
+- `import scipy.misc` - no module found
+  - PIL is missing
+  - first install pillow, then scipy (possibly reinstall it)
+- tensorflow 0.8.0 crashes saving PNG images from matplotlib
+  - https://github.com/tensorflow/tensorflow/issues/1927
+  - 0.7.1 works ok
+- Theano worked but now waits on some lock indefinitely :/
