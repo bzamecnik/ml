@@ -27,7 +27,7 @@ from keras.callbacks import ModelCheckpoint
 
 ## Data loading
 
-dataset_file = '../data/beatles/ml_dataset/chromagram_block=4096_hop=2048_bins=-48,67_div=1/dataset.npz'
+dataset_file = '../data/beatles/ml_dataset/block=4096_hop=2048_bins=-48,67_div=1/dataset_2016-05-15.npz'
 dataset = np.load(dataset_file)
 
 X_train, Y_train, X_valid, Y_valid, X_test, Y_test = \
