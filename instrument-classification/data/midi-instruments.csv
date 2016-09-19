@@ -1,0 +1,129 @@
+id,name,desc,family_name,family_desc,tonal,harmonic
+1,acoustic_grand_piano,Acoustic Grand Piano,piano,Piano,True,True
+2,bright_acoustic_piano,Bright Acoustic Piano,piano,Piano,True,True
+3,electric_grand_piano,Electric Grand Piano,piano,Piano,True,True
+4,honky_tonk_piano,Honky-tonk Piano,piano,Piano,True,True
+5,electric_piano_1,Electric Piano 1,piano,Piano,True,True
+6,electric_piano_2,Electric Piano 2,piano,Piano,True,True
+7,harpsichord,Harpsichord,piano,Piano,True,True
+8,clavi,Clavi,piano,Piano,True,True
+9,celesta,Celesta,chromatic_percussion,Chromatic Percussion,True,False
+10,glockenspiel,Glockenspiel,chromatic_percussion,Chromatic Percussion,True,False
+11,music_box,Music Box,chromatic_percussion,Chromatic Percussion,True,False
+12,vibraphone,Vibraphone,chromatic_percussion,Chromatic Percussion,True,False
+13,marimba,Marimba,chromatic_percussion,Chromatic Percussion,True,False
+14,xylophone,Xylophone,chromatic_percussion,Chromatic Percussion,True,False
+15,tubular_bells,Tubular Bells,chromatic_percussion,Chromatic Percussion,True,False
+16,dulcimer,Dulcimer,chromatic_percussion,Chromatic Percussion,True,False
+17,drawbar_organ,Drawbar Organ,organ,Organ,True,True
+18,percussive_organ,Percussive Organ,organ,Organ,True,True
+19,rock_organ,Rock Organ,organ,Organ,True,True
+20,church_organ,Church Organ,organ,Organ,True,True
+21,reed_organ,Reed Organ,organ,Organ,True,True
+22,accordion,Accordion,organ,Organ,True,True
+23,harmonica,Harmonica,organ,Organ,True,True
+24,tango_accordion,Tango Accordion,organ,Organ,True,True
+25,acoustic_guitar_nylon,Acoustic Guitar (nylon),guitar,Guitar,True,True
+26,acoustic_guitar_steel,Acoustic Guitar (steel),guitar,Guitar,True,True
+27,electric_guitar_jazz,Electric Guitar (jazz),guitar,Guitar,True,True
+28,electric_guitar_clean,Electric Guitar (clean),guitar,Guitar,True,True
+29,electric_guitar_muted,Electric Guitar (muted),guitar,Guitar,True,True
+30,overdriven_guitar,Overdriven Guitar,guitar,Guitar,True,True
+31,distortion_guitar,Distortion Guitar,guitar,Guitar,True,True
+32,guitar_harmonics,Guitar harmonics,guitar,Guitar,True,True
+33,acoustic_bass,Acoustic Bass,bass,Bass,True,True
+34,electric_bass_finger,Electric Bass (finger),bass,Bass,True,True
+35,electric_bass_pick,Electric Bass (pick),bass,Bass,True,True
+36,fretless_bass,Fretless Bass,bass,Bass,True,True
+37,slap_bass_1,Slap Bass 1,bass,Bass,True,True
+38,slap_bass_2,Slap Bass 2,bass,Bass,True,True
+39,synth_bass_1,Synth Bass 1,bass,Bass,True,True
+40,synth_bass_2,Synth Bass 2,bass,Bass,True,True
+41,violin,Violin,strings,Strings,True,True
+42,viola,Viola,strings,Strings,True,True
+43,cello,Cello,strings,Strings,True,True
+44,contrabass,Contrabass,strings,Strings,True,True
+45,tremolo_strings,Tremolo Strings,strings,Strings,True,True
+46,pizzicato_strings,Pizzicato Strings,strings,Strings,True,True
+47,orchestral_harp,Orchestral Harp,strings,Strings,True,True
+48,timpani,Timpani,strings,Strings,True,True
+49,string_ensemble_1,String Ensemble 1,ensemble,Ensemble,True,True
+50,string_ensemble_2,String Ensemble 2,ensemble,Ensemble,True,True
+51,synthstrings_1,SynthStrings 1,ensemble,Ensemble,True,True
+52,synthstrings_2,SynthStrings 2,ensemble,Ensemble,True,True
+53,choir_aahs,Choir Aahs,ensemble,Ensemble,True,True
+54,voice_oohs,Voice Oohs,ensemble,Ensemble,True,True
+55,synth_voice,Synth Voice,ensemble,Ensemble,True,True
+56,orchestra_hit,Orchestra Hit,ensemble,Ensemble,True,True
+57,trumpet,Trumpet,brass,Brass,True,True
+58,trombone,Trombone,brass,Brass,True,True
+59,tuba,Tuba,brass,Brass,True,True
+60,muted_trumpet,Muted Trumpet,brass,Brass,True,True
+61,french_horn,French Horn,brass,Brass,True,True
+62,brass_section,Brass Section,brass,Brass,True,True
+63,synthbrass_1,SynthBrass 1,brass,Brass,True,True
+64,synthbrass_2,SynthBrass 2,brass,Brass,True,True
+65,soprano_sax,Soprano Sax,reed,Reed,True,True
+66,alto_sax,Alto Sax,reed,Reed,True,True
+67,tenor_sax,Tenor Sax,reed,Reed,True,True
+68,baritone_sax,Baritone Sax,reed,Reed,True,True
+69,oboe,Oboe,reed,Reed,True,True
+70,english_horn,English Horn,reed,Reed,True,True
+71,bassoon,Bassoon,reed,Reed,True,True
+72,clarinet,Clarinet,reed,Reed,True,True
+73,piccolo,Piccolo,pipe,Pipe,True,True
+74,flute,Flute,pipe,Pipe,True,True
+75,recorder,Recorder,pipe,Pipe,True,True
+76,pan_flute,Pan Flute,pipe,Pipe,True,True
+77,blown_bottle,Blown Bottle,pipe,Pipe,True,True
+78,shakuhachi,Shakuhachi,pipe,Pipe,True,True
+79,whistle,Whistle,pipe,Pipe,True,True
+80,ocarina,Ocarina,pipe,Pipe,True,True
+81,lead_1_square,Lead 1 (square),synth_lead,Synth Lead,True,True
+82,lead_2_sawtooth,Lead 2 (sawtooth),synth_lead,Synth Lead,True,True
+83,lead_3_calliope,Lead 3 (calliope),synth_lead,Synth Lead,True,True
+84,lead_4_chiff,Lead 4 (chiff),synth_lead,Synth Lead,True,True
+85,lead_5_charang,Lead 5 (charang),synth_lead,Synth Lead,True,True
+86,lead_6_voice,Lead 6 (voice),synth_lead,Synth Lead,True,True
+87,lead_7_fifths,Lead 7 (fifths),synth_lead,Synth Lead,True,True
+88,lead_8_bass_lead,Lead 8 (bass + lead),synth_lead,Synth Lead,True,True
+89,pad_1_new_age,Pad 1 (new age),synth_pad,Synth Pad,True,True
+90,pad_2_warm,Pad 2 (warm),synth_pad,Synth Pad,True,True
+91,pad_3_polysynth,Pad 3 (polysynth),synth_pad,Synth Pad,True,True
+92,pad_4_choir,Pad 4 (choir),synth_pad,Synth Pad,True,True
+93,pad_5_bowed,Pad 5 (bowed),synth_pad,Synth Pad,True,True
+94,pad_6_metallic,Pad 6 (metallic),synth_pad,Synth Pad,True,True
+95,pad_7_halo,Pad 7 (halo),synth_pad,Synth Pad,True,True
+96,pad_8_sweep,Pad 8 (sweep),synth_pad,Synth Pad,True,True
+97,fx_1_rain,FX 1 (rain),synth_effects,Synth Effects,False,False
+98,fx_2_soundtrack,FX 2 (soundtrack),synth_effects,Synth Effects,False,False
+99,fx_3_crystal,FX 3 (crystal),synth_effects,Synth Effects,False,False
+100,fx_4_atmosphere,FX 4 (atmosphere),synth_effects,Synth Effects,False,False
+101,fx_5_brightness,FX 5 (brightness),synth_effects,Synth Effects,False,False
+102,fx_6_goblins,FX 6 (goblins),synth_effects,Synth Effects,False,False
+103,fx_7_echoes,FX 7 (echoes),synth_effects,Synth Effects,False,False
+104,fx_8_sci_fi,FX 8 (sci-fi),synth_effects,Synth Effects,False,False
+105,sitar,Sitar,ethnic,Ethnic,True,True
+106,banjo,Banjo,ethnic,Ethnic,True,True
+107,shamisen,Shamisen,ethnic,Ethnic,True,True
+108,koto,Koto,ethnic,Ethnic,True,True
+109,kalimba,Kalimba,ethnic,Ethnic,True,True
+110,bag_pipe,Bag pipe,ethnic,Ethnic,True,True
+111,fiddle,Fiddle,ethnic,Ethnic,True,True
+112,shanai,Shanai,ethnic,Ethnic,True,True
+113,tinkle_bell,Tinkle Bell,percussive,Percussive,False,False
+114,agogo,Agogo,percussive,Percussive,False,False
+115,steel_drums,Steel Drums,percussive,Percussive,False,False
+116,woodblock,Woodblock,percussive,Percussive,False,False
+117,taiko_drum,Taiko Drum,percussive,Percussive,False,False
+118,melodic_tom,Melodic Tom,percussive,Percussive,False,False
+119,synth_drum,Synth Drum,percussive,Percussive,False,False
+120,reverse_cymbal,Reverse Cymbal,percussive,Percussive,False,False
+121,guitar_fret_noise,Guitar Fret Noise,sound_effects,Sound Effects,False,False
+122,breath_noise,Breath Noise,sound_effects,Sound Effects,False,False
+123,seashore,Seashore,sound_effects,Sound Effects,False,False
+124,bird_tweet,Bird Tweet,sound_effects,Sound Effects,False,False
+125,telephone_ring,Telephone Ring,sound_effects,Sound Effects,False,False
+126,helicopter,Helicopter,sound_effects,Sound Effects,False,False
+127,applause,Applause,sound_effects,Sound Effects,False,False
+128,gunshot,Gunshot,sound_effects,Sound Effects,False,False
