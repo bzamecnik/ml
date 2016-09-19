@@ -25,6 +25,22 @@ We'll use [FluidSynth](http://www.fluidsynth.org) for synthesizing audio from MI
 
 - [GeneralUser GS](http://www.schristiancollins.com/generaluser.php)
 
-Installation on OS X:
+### Installation on OS X
 
 `./install_fluidsynth_with_soundfonts_osx.sh`
+
+### Usage
+
+We can synthesize MIDI files using sound fonts to audio files in various formats (eg. WAV, FLAC, etc.). The output format is determined by the file extension.
+
+Either use fluidsynth direcly:
+
+```
+fluidsynth -ni sound_font.sf2 input.mid -F output.wav
+```
+
+Or use a wrapper with a simpler interface:
+
+```
+./midi_to_audio.sh input.mid output.flac
+```
