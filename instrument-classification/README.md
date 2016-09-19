@@ -8,7 +8,7 @@ We first limit ourselves to fixed-length samples of single harmonic tone played 
 
 - `data/midi-instruments.csv`
   - "General MIDI Level 1 Instrument Patch Map"
-  - source: https://www.midi.org/specifications/item/gm-level-1-sound-set
+  - source: [MIDI specification](https://www.midi.org/specifications/item/gm-level-1-sound-set)
   - 128 MIDI instruments, 16 families and tonal and harmonic boolean attributes
   - columns:
     - id - numeric instrument identifier (1-128)
@@ -18,3 +18,13 @@ We first limit ourselves to fixed-length samples of single harmonic tone played 
     - family_desc - human readable instrument family name
     - tonal - indicates a tonal instrument (True/False)
     - harmonic - indicates a harmonic instrument (True/False)
+
+## MIDI to audio synthesis
+
+We'll use [FluidSynth](http://www.fluidsynth.org) for synthesizing audio from MIDI and some sound fonts:
+
+- [GeneralUser GS](http://www.schristiancollins.com/generaluser.php)
+
+Installation on OS X:
+
+`./install_fluidsynth_with_soundfonts_osx.sh`
