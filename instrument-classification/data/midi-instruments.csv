@@ -30,7 +30,7 @@ id,name,desc,family_name,family_desc,tonal,harmonic,min_pitch,max_pitch
 28,electric_guitar_muted,Electric Guitar (muted),guitar,Guitar,True,True,40,88
 29,overdriven_guitar,Overdriven Guitar,guitar,Guitar,True,True,40,88
 30,distortion_guitar,Distortion Guitar,guitar,Guitar,True,True,40,88
-31,guitar_harmonics,Guitar harmonics,guitar,Guitar,True,True,40,88
+31,guitar_harmonics,Guitar harmonics,guitar,Guitar,True,True,40,85
 32,acoustic_bass,Acoustic Bass,bass,Bass,True,True,28,67
 33,electric_bass_finger,Electric Bass (finger),bass,Bass,True,True,28,67
 34,electric_bass_pick,Electric Bass (pick),bass,Bass,True,True,28,67
