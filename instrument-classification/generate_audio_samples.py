@@ -98,7 +98,7 @@ def random_params(n, note_range=(32, 84), volume_range=(0.5, 1.0), duration=1.0,
     return df
 
 def generate_random_samples(args):
-    params_df = random_params(args.count)
+    params_df = random_params(args.count, args.seed)
     params_df.to_csv(args.params_csv)
     generate_notes(params_df, args.midi_dir, args.audio_dir, args.audio_format)
 
