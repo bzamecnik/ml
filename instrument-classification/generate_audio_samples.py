@@ -15,6 +15,7 @@ import os
 import pandas as pd
 
 from fluidsynth import FluidSynth
+from instruments import midi_instruments
 
 def make_instrument(id):
     i = Instrument()
@@ -70,7 +71,7 @@ def generate_notes(note_params_df, midi_dir, audio_dir, audio_format='flac'):
         write_midi(stream, midi_file)
         fs.midi_to_audio(midi_file, audio_file)
 
-def random_params(n, note_range=(32, 84), volume_range=(0.5, 1.0), duration=1.0, tempo=120, seed=None):
+def random_params(n, note_range=None, volume_range=(0.5, 1.0), duration=1.0, tempo=120, seed=None):
     """
     Generate note parameters randomly as a DataFrame.
 
@@ -80,6 +81,15 @@ def random_params(n, note_range=(32, 84), volume_range=(0.5, 1.0), duration=1.0,
     if seed is not None:
         np.random.seed(seed)
 
+    instruments = midi_instruments()
+
+    def instrument_range(i):
+        instr = instruments.ix[i]
+        instr_range = np.array([instr['min_pitch'], instr['max_pitch']])
+        if note_range is not None:
+            instr_range = np.clip(instr_range, *note_range)
+        return instr_range
+
     allowed_instruments = np.hstack([
             np.arange(0, 8), # piano
             np.arange(16, 32), # organ, guitar
@@ -87,9 +97,13 @@ def random_params(n, note_range=(32, 84), volume_range=(0.5, 1.0), duration=1.0,
             np.arange(56, 80), # brass, reed, pipe
         ])
 
+    def random_note_for_instrument(instr):
+        instr_range = instrument_range(instr)
+        return np.random.random_integers(low=instr_range[0], high=instr_range[1], size=1)[0]
+
     df = pd.DataFrame()
-    df['midi_number'] = np.random.random_integers(low=note_range[0], high=note_range[1], size=n)
     df['midi_instrument'] = np.random.choice(allowed_instruments, size=n)
+    df['midi_number'] = df['midi_instrument'].apply(random_note_for_instrument)
     df['volume'] = np.random.uniform(low=volume_range[0], high=volume_range[1], size=n)
     # TODO: allow varying duration while maintaining constant audio length
     df['duration'] = duration
@@ -98,7 +112,7 @@ def random_params(n, note_range=(32, 84), volume_range=(0.5, 1.0), duration=1.0,
     return df
 
 def generate_random_samples(args):
-    params_df = random_params(args.count, args.seed)
+    params_df = random_params(args.count, seed=args.seed)
     params_df.to_csv(args.params_csv)
     generate_notes(params_df, args.midi_dir, args.audio_dir, args.audio_format)
 
