@@ -2,7 +2,7 @@
 This generates a single-tone audio clip for instrument classification.
 """
 
-import music21
+import argparse
 from music21.chord import Chord
 from music21.duration import Duration
 from music21.instrument import Instrument
@@ -10,6 +10,11 @@ from music21.note import Note
 from music21.stream import Stream
 from music21.tempo import MetronomeMark
 from music21.volume import Volume
+import numpy as np
+import os
+import pandas as pd
+
+from fluidsynth import FluidSynth
 
 def make_instrument(id):
     i = Instrument()
@@ -20,7 +25,10 @@ def chord_with_volume(chord, volume):
     chord.volume = Volume(velocityScalar=volume)
     return chord
 
-def generate_single_note(midi_number, midi_instrument, volume, duration, tempo):
+def write_midi(stream, output_file):
+    stream.write('midi', output_file)
+
+def generate_single_note(midi_number, midi_instrument=0, volume=1.0, duration=1.0, tempo=120):
     """
     Generates a stream containing a single note with given parameters.
     midi_number - MIDI note number, 0 to 127
@@ -33,23 +41,77 @@ def generate_single_note(midi_number, midi_instrument, volume, duration, tempo):
     """
     return Stream([
         MetronomeMark(number=tempo),
-        make_instrument(midi_instrument),
+        make_instrument(int(midi_instrument)),
         chord_with_volume(Chord([
-            Note(midi=midi_number, duration=Duration(duration))
+            Note(midi=int(midi_number), duration=Duration(duration))
         ]), volume)
     ])
 
-def write_midi(stream, output_file):
-    stream.write('midi', output_file)
+def generate_notes(note_params_df, midi_dir, audio_dir, audio_format='flac'):
+    """
+    Generates a batch of single note samples from the given table of parameters.
+
+    `note_params_df` - a Pandas Dataframe with columns:
+    `midi_number, midi_instrument, volume, duration, tempo`. Their meaning is the same as in generate_single_note.
+    `output_dir` - output directory for the MIDI files
+
+    Each sample goes to a single MIDI file named by the numeric index. Also each synthesized audio sample goes to a
+    """
+    for d in [midi_dir, audio_dir]:
+        os.makedirs(d, exist_ok=True)
+    fs = FluidSynth()
+    for i, row in note_params_df.iterrows():
+        midi_file = '{0}/{1:06d}.midi'.format(midi_dir, i)
+        audio_file = '{0}/{1:06d}.{2}'.format(audio_dir, i, audio_format)
+
+        print(row, midi_file, audio_file)
+
+        stream = generate_single_note(**row)
+        write_midi(stream, midi_file)
+        fs.midi_to_audio(midi_file, audio_file)
+
+def random_params(n, note_range=(32, 84), volume_range=(0.5, 1.0), duration=1.0, tempo=120, seed=None):
+    """
+    Generate note parameters randomly as a DataFrame.
+
+    n - number of samples
+    """
+
+    if seed is not None:
+        np.random.seed(seed)
+
+    allowed_instruments = np.hstack([
+            np.arange(0, 8), # piano
+            np.arange(16, 32), # organ, guitar
+            np.arange(40, 48), # strings
+            np.arange(56, 80), # brass, reed, pipe
+        ])
+
+    df = pd.DataFrame()
+    df['midi_number'] = np.random.random_integers(low=note_range[0], high=note_range[1], size=n)
+    df['midi_instrument'] = np.random.choice(allowed_instruments, size=n)
+    df['volume'] = np.random.uniform(low=volume_range[0], high=volume_range[1], size=n)
+    # TODO: allow varying duration while maintaining constant audio length
+    df['duration'] = duration
+    df['tempo'] = tempo
+
+    return df
+
+def generate_random_samples(args):
+    params_df = random_params(args.count)
+    params_df.to_csv(args.params_csv)
+    generate_notes(params_df, args.midi_dir, args.audio_dir, args.audio_format)
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Generate random audio samples.')
+    parser.add_argument('-c', '--count', type=int, help='number of samples')
+    parser.add_argument('-s', '--seed', type=int, help='random seed')
+    parser.add_argument('-p', '--params-csv', type=str, help='CSV file to store the table of parameters')
+    parser.add_argument('-m', '--midi-dir', type=str, help='output directory for MIDI files')
+    parser.add_argument('-a', '--audio-dir', type=str, help='output directory for audio files')
+    parser.add_argument('-f', '--audio-format', type=str, default='flac', help='audio format (flac, wav)')
+
+    return parser.parse_args()
 
 if __name__ == '__main__':
-    # example
-    stream = generate_single_note(midi_number=60, midi_instrument=2, volume=1.0, duration=0.5, tempo=120)
-    write_midi(stream, 'data/working/example-parametric-note/01.midi')
-
-# TODO:
-# - create a better API
-# - make a random generator of the parameters
-# - produce audio samples in batch
-#   - either one file per samples (many runs of FS - may be slow)
-#   - or make a big MIDI (then audio) and then split (synthesize in one run)
+    generate_random_samples(parse_args())
