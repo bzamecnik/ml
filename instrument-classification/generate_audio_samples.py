@@ -113,19 +113,24 @@ def random_params(n, note_range=None, volume_range=(0.5, 1.0), duration=1.0, tem
 
 def generate_random_samples(args):
     params_df = random_params(args.count, seed=args.seed)
-    params_df.to_csv(args.params_csv)
-    generate_notes(params_df, args.midi_dir, args.audio_dir, args.audio_format)
+    os.makedirs(args.output_dir, exist_ok=True)
+    params_df.to_csv(args.output_dir + '/parameters.csv')
+    midi_dir = args.output_dir + '/midi'
+    audio_dir = args.output_dir + '/' + args.audio_format
+    generate_notes(params_df, midi_dir, audio_dir, args.audio_format)
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Generate random audio samples.')
     parser.add_argument('-c', '--count', type=int, help='number of samples')
     parser.add_argument('-s', '--seed', type=int, help='random seed')
-    parser.add_argument('-p', '--params-csv', type=str, help='CSV file to store the table of parameters')
-    parser.add_argument('-m', '--midi-dir', type=str, help='output directory for MIDI files')
-    parser.add_argument('-a', '--audio-dir', type=str, help='output directory for audio files')
+    parser.add_argument('-o', '--output-dir', type=str, help='output directory')
     parser.add_argument('-f', '--audio-format', type=str, default='flac', help='audio format (flac, wav)')
 
     return parser.parse_args()
 
 if __name__ == '__main__':
     generate_random_samples(parse_args())
+
+# TODO: split into two parts with separate responsibilities:
+# - randomly generate the parameters to a CSV file
+# - synthesize sounds from a given CSV file
