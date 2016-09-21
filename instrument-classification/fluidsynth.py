@@ -25,7 +25,8 @@ from os.path import expanduser
 import subprocess
 
 class FluidSynth():
-    def __init__(self, sound_font):
+    def __init__(self, sound_font=None, sample_rate=44100):
+        self.sample_rate = sample_rate
         if sound_font is not None:
             self.sound_font = sound_font
         else:
@@ -36,22 +37,23 @@ class FluidSynth():
                 raise RuntimeError('Default sound font is not defined, you have to specify it explicitly') from ex
 
     def midi_to_audio(self, midi_file, audio_file):
-        subprocess.call(['fluidsynth', '-ni', self.sound_font, midi_file, '-F', audio_file])
+        subprocess.call(['fluidsynth', '-ni', self.sound_font, midi_file, '-F', audio_file, '-r', str(self.sample_rate)])
 
     def play_midi(self, midi_file):
-        subprocess.call(['fluidsynth', '-i', self.sound_font, midi_file])
+        subprocess.call(['fluidsynth', '-i', self.sound_font, midi_file, '-r', str(self.sample_rate)])
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Convert MIDI to audio via FluidSynth')
     parser.add_argument('midi_file', metavar='MIDI', type=str)
     parser.add_argument('audio_file', metavar='AUDIO', type=str, nargs='?')
     parser.add_argument('-s', '--sound-font', type=str)
+    parser.add_argument('-r', '--sample-rate', type=int, nargs='?', default=44100)
     return parser.parse_args()
 
 if __name__ == '__main__':
     args = parse_args()
-    fs = FluidSynth(args.sound_font)
+    fs = FluidSynth(args.sound_font, args.sample_rate)
     if args.audio_file:
         fs.midi_to_audio(args.midi_file, args.audio_file)
     else:
-        fs.play_midi(args.midi_file)
+        fs.play_midi(args.midi_file, args.sample_rate)
