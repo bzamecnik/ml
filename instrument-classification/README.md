@@ -42,5 +42,26 @@ fluidsynth -ni sound_font.sf2 input.mid -F output.wav
 Or use a wrapper with a simpler interface:
 
 ```
-./midi_to_audio.sh input.mid output.flac
+# convert MIDI to WAV (with a default sound font)
+python fluidsynth.py input.mid output.wav
+# convert MIDI to FLAC
+python fluidsynth.py input.mid output.flac
+
+# playback MIDI
+python fluidsynth.py input.mid
+
+# convert MIDI to audio with a specific sound font
+python fluidsynth.py -s sounf_font.sf2 input.mid output.flac
 ```
+
+The default sound font for `fluidsynth.py` is stored in `~/.fluidsynth/default_sound_font`.
+
+## Generating Datasets
+
+### generate_chords.py
+
+Just an example of how to generate a MIDI file with a sequence of chords using the `music21` library.
+
+### generate_audio_samples.py
+
+A script to generate a single-note audio sample to MIDI where several parameters (like pitch, volume, duration, instrument) can be specified.
