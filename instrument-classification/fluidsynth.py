@@ -16,17 +16,24 @@ $ python fluidsynth.py -s sound_font.sf2 input.mid output.flac
 Usage in Python:
 
 FluidSynth('sound_font.sf2').midi_to_audio('input.mid', 'output.wav')
+
+If no sound font is specified explicitly the path of a default one is searched in the `~/.fluidsynth/default_sound_font` file.
 """
 
 import argparse
 from os.path import expanduser
 import subprocess
 
-default_sound_font = expanduser("~/Library/Audio/Sounds/Banks/fluid_r3_gm.sf2")
-
 class FluidSynth():
-    def __init__(self, sound_font=default_sound_font):
-        self.sound_font = sound_font
+    def __init__(self, sound_font):
+        if sound_font is not None:
+            self.sound_font = sound_font
+        else:
+            try:
+                with(open(expanduser('~/.fluidsynth/default_sound_font'))) as f:
+                    self.sound_font = f.readline().strip()
+            except Exception as ex:
+                raise RuntimeError('Default sound font is not defined, you have to specify it explicitly') from ex
 
     def midi_to_audio(self, midi_file, audio_file):
         subprocess.call(['fluidsynth', '-ni', self.sound_font, midi_file, '-F', audio_file])

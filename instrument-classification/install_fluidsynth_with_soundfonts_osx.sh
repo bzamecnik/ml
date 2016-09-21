@@ -25,6 +25,10 @@ else
   echo "Fluid R3 GM is up-to-date."
 fi
 
+# let's store this sound font as default
+mkdir -p ~/.fluidsynth
+echo ${TARGET_FILE} > ~/.fluidsynth/default_sound_font
+
 # TARGET_FILE="$HOME/Library/Audio/Sounds/Banks/generaluser_gs_v1.47.sf2"
 # ARCHIVE_FILE="/tmp/GeneralUser_GS_1.47.zip"
 # EXTRACTED_DIR="/tmp/general_user_gs"
