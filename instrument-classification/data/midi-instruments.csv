@@ -27,7 +27,7 @@ id,name,desc,family_name,family_desc,tonal,harmonic,min_pitch,max_pitch
 25,acoustic_guitar_steel,Acoustic Guitar (steel),guitar,Guitar,True,True,40,88
 26,electric_guitar_jazz,Electric Guitar (jazz),guitar,Guitar,True,True,40,88
 27,electric_guitar_clean,Electric Guitar (clean),guitar,Guitar,True,True,40,88
-28,electric_guitar_muted,Electric Guitar (muted),guitar,Guitar,True,True,40,88
+28,electric_guitar_muted,Electric Guitar (muted),guitar,Guitar,True,True,40,84
 29,overdriven_guitar,Overdriven Guitar,guitar,Guitar,True,True,40,88
 30,distortion_guitar,Distortion Guitar,guitar,Guitar,True,True,40,88
 31,guitar_harmonics,Guitar harmonics,guitar,Guitar,True,True,40,85
@@ -42,13 +42,13 @@ id,name,desc,family_name,family_desc,tonal,harmonic,min_pitch,max_pitch
 40,violin,Violin,strings,Strings,True,True,55,103
 41,viola,Viola,strings,Strings,True,True,48,91
 42,cello,Cello,strings,Strings,True,True,36,76
-43,contrabass,Contrabass,strings,Strings,True,True,28,67
-44,tremolo_strings,Tremolo Strings,strings,Strings,True,True,55,103
-45,pizzicato_strings,Pizzicato Strings,strings,Strings,True,True,55,103
+43,contrabass,Contrabass,strings,Strings,True,True,28,56
+44,tremolo_strings,Tremolo Strings,strings,Strings,True,True,55,96
+45,pizzicato_strings,Pizzicato Strings,strings,Strings,True,True,55,95
 46,orchestral_harp,Orchestral Harp,strings,Strings,True,True,24,103
 47,timpani,Timpani,strings,Strings,True,True,40,55
-48,string_ensemble_1,String Ensemble 1,ensemble,Ensemble,True,True,55,103
-49,string_ensemble_2,String Ensemble 2,ensemble,Ensemble,True,True,55,103
+48,string_ensemble_1,String Ensemble 1,ensemble,Ensemble,True,True,55,96
+49,string_ensemble_2,String Ensemble 2,ensemble,Ensemble,True,True,55,96
 50,synthstrings_1,SynthStrings 1,ensemble,Ensemble,True,True,55,103
 51,synthstrings_2,SynthStrings 2,ensemble,Ensemble,True,True,55,103
 52,choir_aahs,Choir Aahs,ensemble,Ensemble,True,True,40,84
