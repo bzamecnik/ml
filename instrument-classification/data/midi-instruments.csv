@@ -73,7 +73,7 @@ id,name,desc,family_name,family_desc,tonal,harmonic,min_pitch,max_pitch
 71,clarinet,Clarinet,reed,Reed,True,True,50,94
 72,piccolo,Piccolo,pipe,Pipe,True,True,74,102
 73,flute,Flute,pipe,Pipe,True,True,60,96
-74,recorder,Recorder,pipe,Pipe,True,True,60,98
+74,recorder,Recorder,pipe,Pipe,True,True,60,96
 75,pan_flute,Pan Flute,pipe,Pipe,True,True,40,104
 76,blown_bottle,Blown Bottle,pipe,Pipe,True,True,32,96
 77,shakuhachi,Shakuhachi,pipe,Pipe,True,True,56,104
