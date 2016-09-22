@@ -49,7 +49,7 @@ def generate_single_note(midi_number, midi_instrument=0, volume=1.0, duration=1.
         ]), volume)
     ])
 
-def generate_separete_notes(note_params_df, midi_dir, audio_dir, audio_format='flac'):
+def generate_separete_notes(note_params_df, output_dir, audio_format='flac'):
     """
     Generates a batch of single note samples from the given table of parameters.
 
@@ -59,12 +59,12 @@ def generate_separete_notes(note_params_df, midi_dir, audio_dir, audio_format='f
 
     Each sample goes to a single MIDI file named by the numeric index. Also each synthesized audio sample goes to a
     """
-    for d in [midi_dir, audio_dir]:
-        os.makedirs(d, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
+    
     fs = FluidSynth()
     for i, row in note_params_df.iterrows():
-        midi_file = '{0}/{1:06d}.midi'.format(midi_dir, i)
-        audio_file = '{0}/{1:06d}.{2}'.format(audio_dir, i, audio_format)
+        midi_file = '{0}/{1:06d}.midi'.format(output_dir, i)
+        audio_file = '{0}/{1:06d}.{2}'.format(output_dir, i, audio_format)
 
         print(row, midi_file, audio_file)
 
@@ -112,7 +112,7 @@ def random_params(n, note_range=None, volume_range=(0.5, 1.0), duration=1.0, tem
 
     return df
 
-def generate_notes_in_batch(note_params_df, midi_dir, audio_dir, audio_format='flac'):
+def generate_notes_in_batch(note_params_df, output_dir, audio_format='flac', sample_rate=44100):
     """
     Generates a batch of single note samples from the given table of parameters.
 
@@ -122,10 +122,8 @@ def generate_notes_in_batch(note_params_df, midi_dir, audio_dir, audio_format='f
 
     Each sample goes to a single MIDI file named by the numeric index. Also each synthesized audio sample goes to a
     """
-    for d in [midi_dir, audio_dir]:
-        os.makedirs(d, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
 
-    sample_rate = 44100
     fs = FluidSynth(sample_rate=sample_rate)
 
     stream = Stream()
@@ -139,10 +137,10 @@ def generate_notes_in_batch(note_params_df, midi_dir, audio_dir, audio_format='f
         ]), row['volume']))
         stream.append(Rest(duration=Duration(2 * duration)))
 
-    midi_file = '{0}/all_samples.midi'.format(midi_dir)
-    audio_file_stereo = '{0}/all_samples_stereo.{1}'.format(audio_dir, audio_format)
-    audio_file = '{0}/all_samples.{1}'.format(audio_dir, audio_format)
-    audio_index_file = '{0}/all_samples_index.csv'.format(audio_dir)
+    midi_file = '{0}/all_samples.midi'.format(output_dir)
+    audio_file_stereo = '{0}/all_samples_stereo.{1}'.format(output_dir, audio_format)
+    audio_file = '{0}/all_samples.{1}'.format(output_dir, audio_format)
+    audio_index_file = '{0}/all_samples_index.csv'.format(output_dir)
 
     # TODO: We currently assume some fixed duration and tempo (1.0, 120)!!!
     # The parts should be split according to an index.
@@ -159,7 +157,7 @@ def generate_notes_in_batch(note_params_df, midi_dir, audio_dir, audio_format='f
     x, sample_rate = sf.read(audio_file)
 
     parts = split_audio_to_parts(x, sample_rate, audio_index)
-    store_parts_to_files(parts, sample_rate, audio_dir, audio_format)
+    store_parts_to_files(parts, sample_rate, output_dir, audio_format)
 
 def convert_to_mono(stereo_file, mono_file):
     x, sample_rate = sf.read(stereo_file)
@@ -205,10 +203,8 @@ def generate_random_samples(args):
     params_df = random_params(args.count, seed=args.seed)
     os.makedirs(args.output_dir, exist_ok=True)
     params_df.to_csv(args.output_dir + '/parameters.csv')
-    midi_dir = args.output_dir + '/midi'
-    audio_dir = args.output_dir + '/' + args.audio_format
-    # generate_separete_notes(params_df, midi_dir, audio_dir, args.audio_format)
-    generate_notes_in_batch(params_df, midi_dir, audio_dir, args.audio_format)
+    # generate_separete_notes(params_df, output_dir, args.audio_format)
+    generate_notes_in_batch(params_df, args.output_dir, args.audio_format)
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Generate random audio samples.')
