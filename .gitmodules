@@ -1,0 +1,3 @@
+[submodule "tools/music-processing-experiments"]
+	path = tools/music-processing-experiments
+	url = git@github.com:bzamecnik/music-processing-experiments.git
