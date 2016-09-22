@@ -125,7 +125,8 @@ def generate_notes_in_batch(note_params_df, midi_dir, audio_dir, audio_format='f
     for d in [midi_dir, audio_dir]:
         os.makedirs(d, exist_ok=True)
 
-    fs = FluidSynth()
+    sample_rate = 44100
+    fs = FluidSynth(sample_rate=sample_rate)
 
     stream = Stream()
 
@@ -143,6 +144,11 @@ def generate_notes_in_batch(note_params_df, midi_dir, audio_dir, audio_format='f
     audio_file = '{0}/all_samples.{1}'.format(audio_dir, audio_format)
     audio_index_file = '{0}/all_samples_index.csv'.format(audio_dir)
 
+    # TODO: We currently assume some fixed duration and tempo (1.0, 120)!!!
+    # The parts should be split according to an index.
+    audio_index = make_audio_index(note_params_df, 3.0, 0.5, sample_rate)
+    audio_index.to_csv(audio_index_file)
+
     write_midi(stream, midi_file)
 
     fs.midi_to_audio(midi_file, audio_file_stereo)
@@ -151,11 +157,6 @@ def generate_notes_in_batch(note_params_df, midi_dir, audio_dir, audio_format='f
     os.remove(audio_file_stereo)
 
     x, sample_rate = sf.read(audio_file)
-
-    # TODO: We currently assume some fixed duration and tempo (1.0, 120)!!!
-    # The parts should be split according to an index.
-    audio_index = make_audio_index(note_params_df, 3.0, 0.5, sample_rate)
-    audio_index.to_csv(audio_index_file)
 
     parts = split_audio_to_parts(x, sample_rate, audio_index)
     store_parts_to_files(parts, sample_rate, audio_dir, audio_format)
