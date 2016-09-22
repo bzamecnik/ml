@@ -141,9 +141,7 @@ def generate_notes_in_batch(note_params_df, midi_dir, audio_dir, audio_format='f
     midi_file = '{0}/all_samples.midi'.format(midi_dir)
     audio_file_stereo = '{0}/all_samples_stereo.{1}'.format(audio_dir, audio_format)
     audio_file = '{0}/all_samples.{1}'.format(audio_dir, audio_format)
-    audio_index_file = '{0}/batch_index.csv'.format(audio_dir)
-
-    # store_audio_index(audio_index_file)
+    audio_index_file = '{0}/all_samples_index.csv'.format(audio_dir)
 
     write_midi(stream, midi_file)
 
@@ -153,9 +151,13 @@ def generate_notes_in_batch(note_params_df, midi_dir, audio_dir, audio_format='f
     os.remove(audio_file_stereo)
 
     x, sample_rate = sf.read(audio_file)
+
     # TODO: We currently assume some fixed duration and tempo (1.0, 120)!!!
     # The parts should be split according to an index.
-    parts = split_audio_to_parts(x, sample_rate, len(note_params_df), 3.0, 0.5)
+    audio_index = make_audio_index(note_params_df, 3.0, 0.5, sample_rate)
+    audio_index.to_csv(audio_index_file)
+
+    parts = split_audio_to_parts(x, sample_rate, audio_index)
     store_parts_to_files(parts, sample_rate, audio_dir, audio_format)
 
 def convert_to_mono(stereo_file, mono_file):
@@ -163,16 +165,30 @@ def convert_to_mono(stereo_file, mono_file):
     x_mono = x.mean(axis=1) # convert to mono
     sf.write(mono_file, x_mono, sample_rate)
 
-def split_audio_to_parts(x, sample_rate, n_parts, part_duration, margin_duration):
-    for i in range(n_parts):
-        # let's have larger margin to prevent spilling the content
-        # 1 second margin, 1 second note, 1 second margin
-        part_samples = int(part_duration * sample_rate)
-        # then cut the margin down a bit
-        margin_samples = int(margin_duration * sample_rate)
-        start = i * part_samples + margin_samples
-        end = (i + 1) * part_samples - margin_samples
-        x_part = x[start:end]
+def make_audio_index(note_params_df, part_duration, margin_duration, sample_rate):
+    sample_count = len(note_params_df)
+    index = np.arange(sample_count)
+
+    # let's have larger margin to prevent spilling the content
+    # 1 second margin, 1 second note, 1 second margin
+    # then cut the margin down a bit
+
+    part_samples = int(part_duration * sample_rate)
+    margin_samples = int(margin_duration * sample_rate)
+
+    audio_index = pd.DataFrame()
+
+    audio_index['start_samples'] = index * part_samples + margin_samples
+    audio_index['start_time'] = audio_index['start_samples'] / sample_rate
+
+    audio_index['end_samples'] = (index + 1) * part_samples - margin_samples
+    audio_index['end_time'] = audio_index['end_samples'] / sample_rate
+
+    return audio_index
+
+def split_audio_to_parts(x, sample_rate, audio_index):
+    for i, row in audio_index.iterrows():
+        x_part = x[row['start_samples']:row['end_samples']]
         yield x_part
 
 def store_parts_to_files(parts, sample_rate, output_dir, audio_format):
