@@ -60,7 +60,7 @@ def generate_separete_notes(note_params_df, output_dir, audio_format='flac'):
     Each sample goes to a single MIDI file named by the numeric index. Also each synthesized audio sample goes to a
     """
     os.makedirs(output_dir, exist_ok=True)
-    
+
     fs = FluidSynth()
     for i, row in note_params_df.iterrows():
         midi_file = '{0}/{1:06d}.midi'.format(output_dir, i)
@@ -205,6 +205,23 @@ def generate_random_samples(args):
     params_df.to_csv(args.output_dir + '/parameters.csv')
     # generate_separete_notes(params_df, output_dir, args.audio_format)
     generate_notes_in_batch(params_df, args.output_dir, args.audio_format)
+
+class SingleToneDataset():
+    """
+    Represents the generated dataset, useful for loading the data for analysis and model training.
+    """
+    def __init__(self, path):
+        self.path = path
+        self.params_file = path + '/parameters.csv'
+        self.params = pd.read_csv(self.params_file, index_col=0)
+        self.audio_index_file = path + '/all_samples_index.csv'
+        self.audio_index = pd.read_csv(self.audio_index_file, index_col=0)
+        self.audio_file = path + '/all_samples.flac'
+        audio, self.sample_rate = sf.read(self.audio_file)
+        self.samples = np.array(list(split_audio_to_parts(audio, self.sample_rate, self.audio_index)))
+
+    def __repr__(self):
+        return '<SingleToneDataset at {} of shape {}>'.format(self.path, self.samples.shape)
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Generate random audio samples.')

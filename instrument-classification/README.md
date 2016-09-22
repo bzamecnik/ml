@@ -65,3 +65,18 @@ Just an example of how to generate a MIDI file with a sequence of chords using t
 ### generate_audio_samples.py
 
 A script to generate a single-note audio sample to MIDI where several parameters (like pitch, volume, duration, instrument) can be specified.
+
+Genrate a dataset:
+
+```
+# time spent: 2m24.281s:
+time python generate_audio_samples.py -c 2000 -s 42 -o data/working/random-notes-2000 -f flac
+```
+
+Then load it (2000 samples of 2 seconds length at 44110 Hz sampling rate):
+
+```
+>>> dataset = SingleToneDataset('data/working/random-notes-2000')
+>>> dataset.samples.shape
+(2000, 88200)
+```
