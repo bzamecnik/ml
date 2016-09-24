@@ -1,6 +1,6 @@
-# Audio Machine Learning projects
+# Machine learning projects
 
-Experiments with applying machine learning on audio.
+Machine learning projects, often on audio datasets.
 
 - Author: Bohumír Zámečník ([@bzamecnik](http://twitter.com/bzamecnik))
 - License: MIT (see the LICENSE file)
@@ -9,6 +9,9 @@ Experiments with applying machine learning on audio.
 
 - [Audio chord classification](chord-recognition/)
 - [Music instrument classification](instrument-classification/)
+- [Beatles dataset exploration](beatles/)
+- [some older toy projects](ml-playground/)
+  - [Boston House Prices dataset exploration](ml-playground/boston_dataset_exploration/)
 
 ## Initializing Git Submodules
 
