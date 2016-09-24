@@ -187,7 +187,7 @@ def make_audio_index(note_params_df, part_duration, margin_duration, sample_rate
 
 def split_audio_to_parts(x, sample_rate, audio_index):
     for i, row in audio_index.iterrows():
-        x_part = x[row['start_samples']:row['end_samples']]
+        x_part = x[int(row['start_samples']):int(row['end_samples'])]
         yield x_part
 
 def store_parts_to_files(parts, sample_rate, output_dir, audio_format):
