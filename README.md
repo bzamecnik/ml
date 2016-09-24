@@ -1,6 +1,6 @@
 # Audio Machine Learning projects
 
-In this repository you can find some projects related to applying machine learning techniques on audio data.
+Experiments with applying machine learning on audio.
 
 - Author: Bohumír Zámečník ([@bzamecnik](http://twitter.com/bzamecnik))
 - License: MIT (see the LICENSE file)
@@ -8,6 +8,7 @@ In this repository you can find some projects related to applying machine learni
 ## Projects
 
 - [Audio chord classification](chord-recognition/)
+- [Music instrument classification](instrument-classification/)
 
 ## Initializing Git Submodules
 
