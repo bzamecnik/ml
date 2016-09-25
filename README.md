@@ -1,13 +1,23 @@
-Machine Learning Playground
-===========================
+# Machine learning projects
 
-Welcome to the ML playground - a set of small training projects to learn machine learning and visualization.
+Machine learning projects, often on audio datasets.
 
-For articles on machine learning have a look at the [neural.cz](http://neural.cz/) blog.
-
-- Author: [Bohumír Zámečník](http://bohumirzamecnik.cz).
-- License: MIT (see the LICENSE file).
+- Author: Bohumír Zámečník ([@bzamecnik](http://twitter.com/bzamecnik))
+- License: MIT (see the LICENSE file)
 
 ## Projects
 
-- `boston_dataset_exploration` - a basic data analysis of the Boston housing prices dataset
+- [Audio chord classification](chord-recognition/)
+- [Music instrument classification](instrument-classification/)
+- [Beatles dataset exploration](beatles/)
+- [some older toy projects](ml-playground/)
+  - [Boston House Prices dataset exploration](ml-playground/boston_dataset_exploration/)
+
+## Initializing Git Submodules
+
+There's a git submodule for audio feature extraction.
+
+```
+git submodule init
+git submodule update
+```
