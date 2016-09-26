@@ -31,6 +31,8 @@ from instruments import midi_instruments
 jsonpickle_numpy.register_handlers()
 
 def prepare_inputs(input_dir, output_dir):
+    os.makedirs(output_dir, exist_ok=True)
+
     ## Load features
 
     chromagrams = np.load(input_dir + 'chromagrams.npz')['arr_0']
@@ -61,6 +63,8 @@ def prepare_inputs(input_dir, output_dir):
 
     instr_family_le = LabelEncoder()
     parameters['family_id'] = instr_family_le.fit_transform(parameters['family_name'])
+
+    parameters.to_csv(output_dir + '/parameters_with_targets.csv')
 
     instr_family_oh = OneHotEncoder(sparse=False)
     y = instr_family_oh.fit_transform(parameters['family_id'].reshape(-1, 1))
@@ -109,7 +113,6 @@ def prepare_inputs(input_dir, output_dir):
 
     print('X_train.shape:', X_train.shape)
 
-    os.makedirs(output_dir, exist_ok=True)
     np.savez_compressed(
         '{}/features_targets_split_seed_{}.npz'.format(output_dir, split_seed),
         X_train, X_valid, X_test,
