@@ -169,7 +169,7 @@ def train_model(model, data, output_dir, batch_size=32, epoch_count=30):
         batch_size=batch_size, nb_epoch=epoch_count,
         verbose=1)
 
-    model.save_weights(output_dir + '/model_weights.yaml')
+    model.save_weights(output_dir + '/model_weights.h5') # HDF5
 
     return model, training_hist
 
