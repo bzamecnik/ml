@@ -49,6 +49,7 @@ X_chromagram = chromagram(x_blocks, w, fs, to_log=True)
 
 # let's rescale the features manually so that the're the same in all songs
 # the range (in dB) is -120 to X.shape[1] (= 115)
+# TODO: there's a bug: should be + 120 on both places!!!
 def normalize(X):
     return (X.astype('float32') - 120) / (X.shape[1] - 120)
 

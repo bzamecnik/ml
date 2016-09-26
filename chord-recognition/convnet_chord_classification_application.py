@@ -79,6 +79,7 @@ features = X_chromagram
 print('scaling the input features')
 # scaler = MinMaxScaler()
 # X = scaler.fit_transform(features).astype('float32')
+# TODO: there's a bug: should be + 120 on both places!!!
 X = (features.astype('float32') - 120) / (features.shape[1] - 120)
 
 # reshape for 1D convolution
