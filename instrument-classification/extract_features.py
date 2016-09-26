@@ -13,8 +13,6 @@ import sys
 sys.path.append('../tools/music-processing-experiments/')
 
 from analysis import split_to_blocks
-from files import load_wav
-from time_intervals import block_labels
 from spectrogram import create_window
 from reassignment import chromagram
 
