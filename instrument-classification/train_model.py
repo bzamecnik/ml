@@ -135,18 +135,18 @@ def create_model(input_shape, class_count):
     model.add(Convolution2D(32, 3, 3))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    # model.add(Dropout(0.5))
+    model.add(Dropout(0.25))
     model.add(Convolution2D(32, 3, 3))
     model.add(Activation('relu'))
     model.add(Convolution2D(32, 3, 3))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    # model.add(Dropout(0.5))
+    model.add(Dropout(0.25))
 
     model.add(Flatten())
     model.add(Dense(64))
     model.add(Activation('relu'))
-    # model.add(Dropout(0.5))
+    model.add(Dropout(0.25))
     model.add(Dense(class_count))
     model.add(Activation('softmax'))
 
@@ -265,7 +265,7 @@ if __name__ == '__main__':
     model, training_hist = train_model(model,
         (X_train, y_train, X_valid, y_valid),
         'data/working/single-notes-2000/model',
-        epoch_count=10)
+        epoch_count=20)
 
     evaluate_model(model, (X_train, X_valid, X_test,
         y_train, y_valid, y_test), training_hist, decode_targets, 'data/working/single-notes-2000/evaluation')
