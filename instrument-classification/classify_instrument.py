@@ -16,13 +16,7 @@ import jsonpickle.ext.numpy as jsonpickle_numpy
 jsonpickle_numpy.register_handlers()
 import soundfile as sf
 
-import sys
-
-sys.path.append('../tools/music-processing-experiments/')
-
-from analysis import split_to_blocks
-from spectrogram import create_window
-from reassignment import chromagram
+from preprocessing import ChromagramTransformer
 
 
 def load_model(arch_file, weights_file):
@@ -41,28 +35,25 @@ def load_model_from_dir(model_dir):
     """
     return load_model(model_dir + '/model_arch.yaml', model_dir + '/model_weights.h5')
 
-def load_features(audio_file, scaler):
-    def compute_chromagram(x, sample_rate,
-        block_size=4096, hop_size=2048, bin_range=[-48, 67], bin_division=1):
-        window = create_window(block_size)
-        x_blocks, x_times = split_to_blocks(x, block_size, hop_size, sample_rate)
-        return chromagram(x_blocks, window, sample_rate, to_log=True,
-            bin_range=bin_range, bin_division=bin_division)
-
-    x_chromagram = compute_chromagram(*sf.read(audio_file))
+def load_features(audio_file, ch, scaler):
+    x, fs = sf.read(audio_file)
+    x_chromagram = ch.transform(x)
     x_features = scaler.transform(x_chromagram.reshape(1, -1)).reshape(1, x_chromagram.shape[0], x_chromagram.shape[1], 1)
     return x_features
 
 def predict(model, x_features):
     return model.predict_classes(x_features, verbose=0)[0]
 
-def classify_instrument(audio_file, model_dir, preproc_file):
+def classify_instrument(audio_file, model_dir, preproc_file, chromagram_transformer):
     model = load_model_from_dir(model_dir)
 
     with open(preproc_file, 'r') as f:
         instr_family_le, instr_family_oh, scaler = jsonpickle.decode(f.read())
 
-    x_features = load_features(audio_file, scaler)
+    with open(chromagram_transformer, 'r') as f:
+        ch = ChromagramTransformer(**jsonpickle.decode(f.read()))
+
+    x_features = load_features(audio_file, ch, scaler)
     instrument_class = predict(model, x_features)
     instrument_label = instr_family_le.inverse_transform(instrument_class)
     return instrument_label
@@ -73,10 +64,12 @@ def parse_args():
         help='audio file (WAV, FLAC)')
     parser.add_argument('-m', '--model-dir', type=str,
         help='directory with model architecture and weights')
-    parser.add_argument('-p', '--preproc_transformers', type=str,
+    parser.add_argument('-p', '--preproc-transformers', type=str,
         help='file with preprocessing transformer parameters')
+    parser.add_argument('-c', '--chromagram-transformer', type=str,
+        help='file with chromagram transformer parameters')
     return parser.parse_args()
 
 if __name__ == '__main__':
     args = parse_args()
-    print(classify_instrument(args.audio_file, args.model_dir, args.preproc_transformers))
+    print(classify_instrument(args.audio_file, args.model_dir, args.preproc_transformers, args.chromagram_transformer))
