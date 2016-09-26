@@ -1,4 +1,9 @@
+jsonpickle
+keras
+matplotlib
 music21
 numpy
 pandas
+sklearn
 soundfile
+tensorflow
