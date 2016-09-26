@@ -116,7 +116,7 @@ def prepare_inputs(input_dir, output_dir):
         y_train, y_valid, y_test)
 
     with open(output_dir + '/preproc_transformers.json', 'w') as f:
-        json = jsonpickle.encode({instr_family_le, instr_family_oh, scaler})
+        json = jsonpickle.encode((instr_family_le, instr_family_oh, scaler))
         f.write(json)
 
     return (X_train, X_valid, X_test,
