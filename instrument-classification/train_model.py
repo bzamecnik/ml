@@ -244,7 +244,7 @@ def evaluate_model(model, data, training_hist, decode_targets, output_dir):
             float_format='%.3f')
 
     evaluation_metrics()
-    plot_learning_curve(training_hist)
+    plot_learning_curves(training_hist)
     auc()
     cm = compute_confusion_matrix()
     plot_confusion_matrix(cm, instr_family_le.classes_)
