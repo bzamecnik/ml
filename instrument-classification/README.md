@@ -80,3 +80,13 @@ Then load it (2000 samples of 2 seconds length at 44110 Hz sampling rate):
 >>> dataset.samples.shape
 (2000, 88200)
 ```
+
+### train_model.py
+
+Trains a model on the `single-notes-2000` dataset.
+
+### classify_instrument.py
+
+Evaluates a trained model on a single audio file and predicts the instrument family from the audio.
+
+`classify_instrument.sh` - a wrapper with a path to a model fixed
