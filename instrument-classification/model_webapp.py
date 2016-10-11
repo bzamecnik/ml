@@ -35,7 +35,7 @@ def classify():
     return render_template('home.html',
         audio_file=audio_file.filename,
         predicted_label=label,
-        class_probabilities=class_probabilities.to_html())
+        class_probabilities=class_probabilities)
 
 if __name__ == '__main__':
     # app.run(debug=True)

@@ -1,34 +1,121 @@
-<h1>Classify instrument group from an audio clip</h1>
+<!doctype html>
 
-<h2>Input</h2>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
 
-<p>
-  The clip has to be exactly 1 second long.
-</p>
+  <title>Music instrument classification</title>
+  <meta name="description" content="Music instrument classification">
+  <meta name="author" content="Bohumír Zámečník">
 
-<p>
-  Format: WAV/MP3/FLAC (anything that soundfile can read).
-</p>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<form action="/api/classify/instrument" method="POST" enctype="multipart/form-data">
-Audio file: <input type="file" name="audio_file">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<input type="submit">
-</form>
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
 
-{% if predicted_label %}
+  <style>
+    /* navbar */
+    body {
+      padding-top: 50px;
+    }
+  </style>
 
-<h2>Results</h2>
+</head>
+<body>
 
-<dl>
-  <dt> Audio file: </dt>
-  <dd> {{ audio_file }} </dd>
-  <dt> Predicted label: </dt>
-  <dd> {{ predicted_label }} </dd>
-  <dt> Class probabilities: </dt>
-  <dd>
-    {{class_probabilities | safe}}
-  </dd>
-</dl>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Instrument classifer</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="https://github.com/bzamecnik/ml/tree/master/instrument-classification">GitHub</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
 
-{% endif %}
+  <div class="container">
+
+  <h1>Classify instrument group from an audio clip</h1>
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <h3>Input</h3>
+
+      <form action="/api/classify/instrument" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="audio_file">Audio file</label>
+          <input type="file" name="audio_file" class="form-control" id="audio_file">
+          <div class="help-block">
+            <p>Format: WAV/MP3/FLAC (anything that soundfile can read).</p>
+            </p>The clip has to be exactly 1 second long.</p>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-primary" value="Upload">
+        </div>
+      </form>
+
+      {% if predicted_label %}
+
+      <p> Audio file: <code>{{ audio_file }}</code> </p>
+
+      <h3>Predicted label: <span class="label label-success">{{ predicted_label }}</span></h3>
+
+    </div>
+    <div class="col-md-6">
+
+      <h3> Class probabilities: </h3>
+
+      <table class="table table-condensed">
+        <tr>
+          {% for col in class_probabilities_df.columns %}
+            <th>
+              {{ col}}
+            </th>
+          {% endfor %}
+        </tr>
+      {% for i, row in class_probabilities_df.iterrows() %}
+        <tr>
+          <td>
+            {{ row['label'] }}
+          </td>
+          <td>
+            {{ (100 * row['probability']) |round(5) }} %
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{row['probability']}}" aria-valuemin="0" aria-valuemax="1" style="width: {{100 * row['probability']}}%">
+              </div>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </table>
+
+      {% endif %}
+
+    </div>
+  </div>
+
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
