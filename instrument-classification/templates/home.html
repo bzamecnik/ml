@@ -71,7 +71,7 @@
           <input type="file" name="audio_file" class="form-control" id="audio_file">
           <div class="help-block">
             <p>Format: WAV/MP3/FLAC (anything that the soundfile library can read).</p>
-          </p>The clip has to be exactly 1 second long, 44000 Hz sample rate, mono.</p>
+          </p>The clip has to be exactly 2 seconds long, 44000 Hz sample rate, mono.</p>
           </div>
 
         </div>
@@ -96,14 +96,14 @@
 
       <table class="table table-condensed">
         <tr>
-          {% for col in class_probabilities_df.columns %}
+          {% for col in class_probabilities.columns %}
             <th>
               {{ col}}
             </th>
           {% endfor %}
           <th></th>
         </tr>
-      {% for i, row in class_probabilities_df.iterrows() %}
+      {% for i, row in class_probabilities.iterrows() %}
         <tr>
           <td class="fit">
             {{ row['label'] }}
