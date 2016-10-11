@@ -1,0 +1,13 @@
+<form action="/api/classify/instrument" method="POST" enctype="multipart/form-data">
+Audio file: <input type="file" name="audio_file">
+
+<input type="submit">
+</form>
+
+<dl>
+  <dt> Audio file: </dt>
+  <dd> {{ audio_file }} </dd>
+  <dt> Class: </dt>
+  <dd> {{ instrument_class }} </dd>
+
+</p>
