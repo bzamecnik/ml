@@ -55,6 +55,9 @@ class InstrumentClassifier():
 
     def load_features(self, audio_file):
         x, fs = sf.read(audio_file)
+        # stereo to mono
+        if len(x.shape) > 1 and x.shape[1] > 1:
+            x = x.mean(axis=1)
         x_chromagram = self.ch.transform(x)
         x_features = self.scaler.transform(x_chromagram.reshape(1, -1)) \
             .reshape(1, x_chromagram.shape[0], x_chromagram.shape[1], 1)
