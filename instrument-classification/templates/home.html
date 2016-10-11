@@ -23,6 +23,15 @@
     body {
       padding-top: 50px;
     }
+    /*
+    Make a cable colum shrink, so the rest can take up remaining space.
+    http://stackoverflow.com/questions/31184000/making-bootstrap-table-column-automatically-size-to-contents
+    */
+    .table td.fit,
+    .table th.fit {
+        white-space: nowrap;
+        width: 1%;
+    }
   </style>
 
 </head>
@@ -61,8 +70,8 @@
           <label for="audio_file">Audio file</label>
           <input type="file" name="audio_file" class="form-control" id="audio_file">
           <div class="help-block">
-            <p>Format: WAV/MP3/FLAC (anything that soundfile can read).</p>
-            </p>The clip has to be exactly 1 second long.</p>
+            <p>Format: WAV/MP3/FLAC (anything that the soundfile library can read).</p>
+          </p>The clip has to be exactly 1 second long, 44000 Hz sample rate, mono.</p>
           </div>
 
         </div>
@@ -73,9 +82,12 @@
 
       {% if predicted_label %}
 
-      <p> Audio file: <code>{{ audio_file }}</code> </p>
+      <div class="well well-lg">
 
-      <h3>Predicted label: <span class="label label-success">{{ predicted_label }}</span></h3>
+        <p> Audio file: <code>{{ audio_file }}</code> </p>
+
+        <h3>Predicted label: <span class="label label-success">{{ predicted_label }}</span></h3>
+      </div>
 
     </div>
     <div class="col-md-6">
@@ -89,18 +101,21 @@
               {{ col}}
             </th>
           {% endfor %}
+          <th></th>
         </tr>
       {% for i, row in class_probabilities_df.iterrows() %}
         <tr>
-          <td>
+          <td class="fit">
             {{ row['label'] }}
           </td>
           <td>
-            {{ (100 * row['probability']) |round(5) }} %
             <div class="progress">
-              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{row['probability']}}" aria-valuemin="0" aria-valuemax="1" style="width: {{100 * row['probability']}}%">
+              <div class="progress-bar {{ 'progress-bar-success' if row['label'] == predicted_label else 'progress-bar-primary'}}" role="progressbar" aria-valuenow="{{row['probability']}}" aria-valuemin="0" aria-valuemax="1" style="width: {{100 * row['probability']}}%">
               </div>
             </div>
+          </td>
+          <td class="fit text-right">
+            {{ (100 * row['probability']) |round(5) }} %
           </td>
         </tr>
       {% endfor %}
