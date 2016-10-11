@@ -27,14 +27,19 @@ def classify():
     if audio_file.filename == '':
         return redirect('/')
 
-    instrument_class = model.predict_class_label(audio_file)
+    class_probabilities = model.predict_probabilities(audio_file)
+    class_probabilities = class_probabilities.round(5)
+    label = model.class_label_from_probabilities(
+        class_probabilities)
 
     return render_template('home.html',
         audio_file=audio_file.filename,
-        instrument_class=instrument_class)
+        predicted_label=label,
+        class_probabilities=class_probabilities.to_html())
 
 if __name__ == '__main__':
     # app.run(debug=True)
+    app.debug = True
 
     # needed since Flask dev mode interacts badly with TensorFlow
     http_server = WSGIServer(('', 5000), app)

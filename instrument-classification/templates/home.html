@@ -1,13 +1,34 @@
+<h1>Classify instrument group from an audio clip</h1>
+
+<h2>Input</h2>
+
+<p>
+  The clip has to be exactly 1 second long.
+</p>
+
+<p>
+  Format: WAV/MP3/FLAC (anything that soundfile can read).
+</p>
+
 <form action="/api/classify/instrument" method="POST" enctype="multipart/form-data">
 Audio file: <input type="file" name="audio_file">
 
 <input type="submit">
 </form>
 
+{% if predicted_label %}
+
+<h2>Results</h2>
+
 <dl>
   <dt> Audio file: </dt>
   <dd> {{ audio_file }} </dd>
-  <dt> Class: </dt>
-  <dd> {{ instrument_class }} </dd>
+  <dt> Predicted label: </dt>
+  <dd> {{ predicted_label }} </dd>
+  <dt> Class probabilities: </dt>
+  <dd>
+    {{class_probabilities | safe}}
+  </dd>
+</dl>
 
-</p>
+{% endif %}

@@ -13,6 +13,8 @@ import keras
 import jsonpickle
 import jsonpickle.ext.numpy as jsonpickle_numpy
 jsonpickle_numpy.register_handlers()
+import numpy as np
+import pandas as pd
 import soundfile as sf
 
 from preprocessing import ChromagramTransformer
@@ -51,10 +53,10 @@ class InstrumentClassifier():
         with open(chromagram_transformer, 'r') as f:
             self.ch = ChromagramTransformer(**jsonpickle.decode(f.read()))
 
-    def load_features(self, audio_file, ch, scaler):
+    def load_features(self, audio_file):
         x, fs = sf.read(audio_file)
-        x_chromagram = ch.transform(x)
-        x_features = scaler.transform(x_chromagram.reshape(1, -1)) \
+        x_chromagram = self.ch.transform(x)
+        x_features = self.scaler.transform(x_chromagram.reshape(1, -1)) \
             .reshape(1, x_chromagram.shape[0], x_chromagram.shape[1], 1)
         return x_features
 
@@ -65,10 +67,18 @@ class InstrumentClassifier():
         return label
 
     def predict_probabilities(self, audio_file):
-        x_features = self.load_features(audio_file, self.ch, self.scaler)
-        print(self.model.predict_proba(x_features, verbose=0))
-        # TODO: return a map: tuples (class label, probability) sorted upward
-        # by probability
+        x_features = self.load_features(audio_file)
+        proba = self.model.predict_proba(x_features, verbose=0).flatten()
+        df = pd.DataFrame({
+            'probability': proba,
+            'class': np.arange(len(proba)),
+            'label': self.instr_family_le.classes_})
+        df.sort_values('probability', ascending=False, inplace=True)
+        df.set_index('class', inplace=True)
+        return df
+
+    def class_label_from_probabilities(self, probabilities):
+        return probabilities.iloc[0]['label']
 
 
 def parse_args():
