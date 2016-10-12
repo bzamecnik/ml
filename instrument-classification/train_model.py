@@ -79,19 +79,19 @@ def prepare_inputs(input_dir, output_dir, model_dir):
 
     ## Split the dataset
 
-    def split_dataset(index, random_state):
+    def split_dataset(index, random_state, test_ratio=0.2, valid_ratio=0.2):
         index = list(index)
-        ix_train, ix_test = train_test_split(index, test_size=0.2,
+        ix_train, ix_test = train_test_split(index, test_size=test_ratio,
             random_state=random_state)
         ix_train, ix_valid = train_test_split(ix_train,
-            test_size=0.2 / (1 - 0.2), random_state=random_state)
+            test_size=valid_ratio / (1 - test_ratio), random_state=random_state)
         return {'train': ix_train, 'valid': ix_valid, 'test': ix_test}
 
     split_seed = 42
-    split_incides = split_dataset(parameters.index, random_state=split_seed)
+    ix = split_dataset(parameters.index, random_state=split_seed)
 
     with open(output_dir + '/splits.json', 'w') as f:
-        json = jsonpickle.encode({'indices': split_incides, 'seed': split_seed})
+        json = jsonpickle.encode({'indices': ix, 'seed': split_seed})
         f.write(json)
 
     def splits_to_df(split_incides):
@@ -99,34 +99,21 @@ def prepare_inputs(input_dir, output_dir, model_dir):
         df.sort_values('index', inplace=True)
         return df
 
-    splits_to_df(split_incides).to_csv(output_dir + '/splits.csv', index=None)
+    splits_to_df(ix).to_csv(output_dir + '/splits.csv', index=None)
 
-    # X_splits = {key: x[split_incides[key]] for key in split_incides}
-    # y_splits = {key: y[split_incides[key]] for key in split_incides}
-
-    ix_train, ix_valid, ix_test = (split_incides['train'],
-        split_incides['valid'], split_incides['test'])
-
-    X_train, X_valid, X_test = x[ix_train], x[ix_valid], x[ix_test]
-    y_train, y_valid, y_test = y[ix_train], y[ix_valid], y[ix_test]
-
-    print('X_train.shape:', X_train.shape)
+    print('split sizes:')
+    for key, value in ix.items():
+        print(key, len(value))
 
     ## Scale the features
 
     scaler = MinMaxScaler()
-    scaler.fit(X_train.reshape(len(X_train), -1))
-    shape_X = X_train.shape[1:]
-    X_train, X_valid, X_test = [
-        scaler.transform(X.reshape(len(X), -1)).reshape(-1, *shape_X)
-        for X in (X_train, X_valid, X_test)]
-
-    print('X_train.shape:', X_train.shape)
+    scaler.fit(x[ix['train']].reshape(len(ix['train']), -1))
+    x = scaler.transform(x.reshape(len(x), -1)).reshape(-1, *x.shape[1:])
 
     np.savez_compressed(
         '{}/features_targets_split_seed_{}.npz'.format(output_dir, split_seed),
-        X_train, X_valid, X_test,
-        y_train, y_valid, y_test)
+        x=x, y=y)
 
     with open(input_dir + '/chromagram_transformer.json', 'r') as f:
         chromagram_transformer = ChromagramTransformer(**jsonpickle.decode(f.read()))
@@ -136,10 +123,7 @@ def prepare_inputs(input_dir, output_dir, model_dir):
             chromagram_transformer))
         f.write(json)
 
-    return (X_train, X_valid, X_test,
-        y_train, y_valid, y_test,
-        instr_family_le, scaler,
-        input_shape, class_count)
+    return (x, y, ix, instr_family_le, scaler, input_shape, class_count)
 
 
 def create_model(input_shape, class_count):
@@ -172,17 +156,15 @@ def create_model(input_shape, class_count):
     return model
 
 
-def train_model(model, data, output_dir, batch_size=32, epoch_count=30):
-    X_train, y_train, X_valid, y_valid = data
-
+def train_model(model, x, y, ix, output_dir, batch_size=32, epoch_count=30):
     os.makedirs(output_dir, exist_ok=True)
 
     with open(output_dir + '/model_arch.yaml', 'w') as f:
         f.write(model.to_yaml())
 
     training_hist = model.fit(
-        X_train, y_train,
-        validation_data=(X_valid, y_valid),
+        x[ix['train']], y[ix['train']],
+        validation_data=(x[ix['valid']], y[ix['valid']]),
         batch_size=batch_size, nb_epoch=epoch_count,
         verbose=1)
 
@@ -191,24 +173,22 @@ def train_model(model, data, output_dir, batch_size=32, epoch_count=30):
     return model, training_hist
 
 
-def evaluate_model(model, data, training_hist, output_dir):
-    X_train, X_valid, X_test, y_train, y_valid, y_test = data
-
-    y_valid_pred = model.predict_classes(X_valid)
-    y_valid_pred_proba = model.predict_proba(X_valid)
+def evaluate_model(model, x, y, ix, training_hist, output_dir):
+    y_valid_pred = model.predict_classes(x[ix['valid']])
+    y_valid_pred_proba = model.predict_proba(x[ix['valid']])
 
     os.makedirs(output_dir, exist_ok=True)
 
     def evaluation_metrics():
+        splits = ['train', 'valid', 'test']
         metrics = pd.DataFrame([
-                model.evaluate(X_train, y_train, verbose=0),
-                model.evaluate(X_valid, y_valid, verbose=0),
-                model.evaluate(X_test, y_test, verbose=0)
+                model.evaluate(x[ix[split]], y[ix[split]], verbose=0)
+                for split in splits
             ],
             columns=model.metrics_names,
-            index=['train', 'valid', 'test'])
+            index=splits)
         metrics['error'] = 1.0 - metrics['acc']
-        metrics['count'] = [len(X_train), len(X_valid), len(X_test)]
+        metrics['count'] = [len(ix[split]) for split in splits]
         metrics['abs_error'] = (metrics['error'] * metrics['count']).astype(int)
         print(metrics)
         metrics.to_csv(output_dir + '/metrics.csv', float_format='%.3f')
@@ -224,13 +204,14 @@ def evaluate_model(model, data, training_hist, output_dir):
         plt.clf()
 
     def auc():
-        auc = roc_auc_score(y_valid, y_valid_pred_proba)
+        auc = roc_auc_score(y[ix['valid']], y_valid_pred_proba)
         print('AUC (valid):', auc)
         return auc
 
     def compute_confusion_matrix():
         print('confusion matrix (valid): rows = truth, columns = predictions')
-        cm = confusion_matrix(np_utils.categorical_probas_to_classes(y_valid), y_valid_pred)
+        y_valid_true = np_utils.categorical_probas_to_classes(y[ix['valid']])
+        cm = confusion_matrix(y_valid_true, y_valid_pred)
         cm_df = pd.DataFrame(cm,
             columns=instr_family_le.classes_,
             index=instr_family_le.classes_)
@@ -270,19 +251,16 @@ def evaluate_model(model, data, training_hist, output_dir):
 if __name__ == '__main__':
     model_dir = 'data/working/single-notes-2000/model'
 
-    (X_train, X_valid, X_test,
-        y_train, y_valid, y_test,
-        instr_family_le, scaler,
-        input_shape, class_count) = prepare_inputs(
+    x, y, ix, instr_family_le, scaler, input_shape, class_count = \
+        prepare_inputs(
             'data/prepared/single-notes-2000',
             'data/working/single-notes-2000/ml-inputs',
             model_dir)
 
     model = create_model(input_shape, class_count)
     model, training_hist = train_model(model,
-        (X_train, y_train, X_valid, y_valid),
+        x, y, ix,
         model_dir,
         epoch_count=20)
 
-    evaluate_model(model, (X_train, X_valid, X_test,
-        y_train, y_valid, y_test), training_hist, 'data/working/single-notes-2000/evaluation')
+    evaluate_model(model, x, y, ix, training_hist, 'data/working/single-notes-2000/evaluation')

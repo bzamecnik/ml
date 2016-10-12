@@ -15,7 +15,7 @@ jsonpickle_numpy.register_handlers()
 
 data_dir = 'data/working/single-notes-2000/'
 data = np.load(data_dir + '/ml-inputs/features_targets_split_seed_42.npz')
-X_train, X_valid, X_test, y_train, y_valid, y_test = [data[k] for k in sorted(data.keys())]
+x, y = data['x'], data['y']
 
 classifier = InstrumentClassifier('data/working/single-notes-2000/model')
 model = classifier.model
@@ -26,25 +26,18 @@ parameters_with_targets = pd.read_csv(data_dir + '/ml-inputs/parameters_with_tar
 splits = pd.read_csv(data_dir + '/ml-inputs/splits.csv', index_col=0)
 
 with open(data_dir + '/ml-inputs/splits.json', 'r') as f:
-    split_indices = jsonpickle.decode(f.read())['indices']
+    ix = jsonpickle.decode(f.read())['indices']
 
 data_points = parameters_with_targets.join(splits)
 
 
-y_train_pred, y_valid_pred, y_test_pred = [model.predict_classes(X) for X in (X_train, X_valid, X_test)]
+df_pred = pd.DataFrame({'class_pred': model.predict_classes(x)})
 
-df_pred = pd.DataFrame({'class_pred': np.hstack([y_train_pred, y_valid_pred, y_test_pred])},
-             index=np.hstack([split_indices['train'], split_indices['valid'], split_indices['test']]))
-df_pred.sort_index(inplace=True)
-
-df_pred_proba = pd.DataFrame(
-    np.vstack([model.predict_proba(X) for X in (X_train, X_valid, X_test)]),
-    columns=['proba_' + l for l in classifier.instr_family_le.classes_],
-    index=np.hstack([split_indices['train'], split_indices['valid'], split_indices['test']]))
-df_pred_proba.sort_index(inplace=True)
-df_pred_proba = df_pred_proba.round(5)
-
-df_pred = df_pred.join(df_pred_proba)
+df_pred = pd.DataFrame(
+    model.predict_proba(x),
+    columns=['proba_' + l for l in classifier.instr_family_le.classes_])
+df_pred['class_pred'] = model.predict_classes(x)
+df_pred = df_pred.round(5)
 
 data_points = data_points.join(df_pred)
 
