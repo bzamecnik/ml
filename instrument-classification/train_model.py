@@ -27,15 +27,17 @@ mpl.use('Agg')
 import matplotlib.pyplot as plt
 
 from instruments import midi_instruments
+from preprocessing import ChromagramTransformer
 
 jsonpickle_numpy.register_handlers()
 
-def prepare_inputs(input_dir, output_dir):
+def prepare_inputs(input_dir, output_dir, model_dir):
     os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(model_dir, exist_ok=True)
 
     ## Load features
 
-    chromagrams = np.load(input_dir + 'chromagrams.npz')['arr_0']
+    chromagrams = np.load(input_dir + '/chromagrams.npz')['arr_0']
     # axes: data point, block, chroma vector
     print('chromagrams.shape:', chromagrams.shape)
     print('chromagrams.size:', chromagrams.size)
@@ -51,7 +53,7 @@ def prepare_inputs(input_dir, output_dir):
 
     ## Load targets
 
-    parameters = pd.read_csv(input_dir + 'parameters.csv', index_col=0)
+    parameters = pd.read_csv(input_dir + '/parameters.csv', index_col=0)
     print('parameters.shape:', parameters.shape)
 
     instruments = midi_instruments()
@@ -129,8 +131,12 @@ def prepare_inputs(input_dir, output_dir):
         X_train, X_valid, X_test,
         y_train, y_valid, y_test)
 
-    with open(output_dir + '/preproc_transformers.json', 'w') as f:
-        json = jsonpickle.encode((instr_family_le, instr_family_oh, scaler))
+    with open(input_dir + '/chromagram_transformer.json', 'r') as f:
+        chromagram_transformer = ChromagramTransformer(**jsonpickle.decode(f.read()))
+
+    with open(model_dir + '/preproc_transformers.json', 'w') as f:
+        json = jsonpickle.encode((instr_family_le, instr_family_oh, scaler,
+            chromagram_transformer))
         f.write(json)
 
     return (X_train, X_valid, X_test,
@@ -265,17 +271,20 @@ def evaluate_model(model, data, training_hist, decode_targets, output_dir):
     per_class_metrics(cm)
 
 if __name__ == '__main__':
+    model_dir = 'data/working/single-notes-2000/model'
+
     (X_train, X_valid, X_test,
         y_train, y_valid, y_test,
         instr_family_le, instr_family_oh, scaler, decode_targets,
         input_shape, class_count) = prepare_inputs(
-            'data/prepared/single-notes-2000/',
-            'data/working/single-notes-2000/ml-inputs')
+            'data/prepared/single-notes-2000',
+            'data/working/single-notes-2000/ml-inputs',
+            model_dir)
 
     model = create_model(input_shape, class_count)
     model, training_hist = train_model(model,
         (X_train, y_train, X_valid, y_valid),
-        'data/working/single-notes-2000/model',
+        model_dir,
         epoch_count=20)
 
     evaluate_model(model, (X_train, X_valid, X_test,

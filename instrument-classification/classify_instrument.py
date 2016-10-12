@@ -12,19 +12,16 @@ import argparse
 import keras
 import jsonpickle
 import jsonpickle.ext.numpy as jsonpickle_numpy
-jsonpickle_numpy.register_handlers()
 import numpy as np
 import pandas as pd
 import soundfile as sf
 
-from preprocessing import ChromagramTransformer
+jsonpickle_numpy.register_handlers()
 
 
 class InstrumentClassifier():
-    def __init__(self, model_dir, preproc_transformers, chromagram_transformer):
+    def __init__(self, model_dir):
         self.model_dir = model_dir
-        self.preproc_transformers = preproc_transformers
-        self.chromagram_transformer = chromagram_transformer
 
         def load_model(arch_file, weights_file):
             """
@@ -46,12 +43,9 @@ class InstrumentClassifier():
 
         self.model = load_model_from_dir(model_dir)
 
-        with open(preproc_transformers, 'r') as f:
-            self.instr_family_le, self.instr_family_oh, self.scaler = \
+        with open(model_dir + '/preproc_transformers.json', 'r') as f:
+            self.instr_family_le, self.instr_family_oh, self.scaler, self.ch = \
                 jsonpickle.decode(f.read())
-
-        with open(chromagram_transformer, 'r') as f:
-            self.ch = ChromagramTransformer(**jsonpickle.decode(f.read()))
 
     def load_features(self, audio_file):
         def stereo_to_mono(x):
@@ -76,7 +70,7 @@ class InstrumentClassifier():
                 # cut the beginning
                 x = x[0:desired_length]
             return x
-            
+
         def adjust_input(x, fs):
             x = stereo_to_mono(x)
             x = cut_or_pad_to_length(x, 2.0, fs)
@@ -91,7 +85,7 @@ class InstrumentClassifier():
         return x_features
 
     def predict_class_label(self, audio_file):
-        x_features = self.load_features(audio_file, self.ch, self.scaler)
+        x_features = self.load_features(audio_file)
         instrument_class = self.model.predict_classes(x_features, verbose=0)[0]
         label = self.instr_family_le.inverse_transform(instrument_class)
         return label
@@ -117,15 +111,10 @@ def parse_args():
     parser.add_argument('audio_file', metavar='AUDIO_FILE', type=str,
         help='audio file (WAV, FLAC)')
     parser.add_argument('-m', '--model-dir', type=str,
-        help='directory with model architecture and weights')
-    parser.add_argument('-p', '--preproc-transformers', type=str,
-        help='file with preprocessing transformer parameters')
-    parser.add_argument('-c', '--chromagram-transformer', type=str,
-        help='file with chromagram transformer parameters')
+        help='directory with model architecture, weights and preprocessing transformers')
     return parser.parse_args()
 
 if __name__ == '__main__':
     args = parse_args()
-    model = InstrumentClassifier(args.model_dir, args.preproc_transformers,
-        args.chromagram_transformer)
+    model = InstrumentClassifier(args.model_dir)
     print(model.predict_class_label(args.audio_file))

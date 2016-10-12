@@ -6,10 +6,7 @@ from classify_instrument import InstrumentClassifier
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 1 * 2**20
 
-model = InstrumentClassifier(
-    model_dir='data/working/single-notes-2000/model',
-    preproc_transformers='data/working/single-notes-2000/ml-inputs/preproc_transformers.json',
-    chromagram_transformer='data/prepared/single-notes-2000/chromagram_transformer.json')
+model = InstrumentClassifier(model_dir='data/working/single-notes-2000/model')
 
 @app.route('/')
 def hello():

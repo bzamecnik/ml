@@ -2,13 +2,11 @@ import matplotlib as mpl
 # do not use Qt/X that require $DISPLAY, must be called before importing pyplot
 mpl.use('Agg')
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 import pandas as pd
 import numpy as np
 
 from classify_instrument import InstrumentClassifier
-from train_model import prepare_inputs
 
 import jsonpickle
 import jsonpickle.ext.numpy as jsonpickle_numpy
@@ -19,10 +17,7 @@ data_dir = 'data/working/single-notes-2000/'
 data = np.load(data_dir + '/ml-inputs/features_targets_split_seed_42.npz')
 X_train, X_valid, X_test, y_train, y_valid, y_test = [data[k] for k in sorted(data.keys())]
 
-classifier = InstrumentClassifier(
-    model_dir='data/working/single-notes-2000/model',
-    preproc_transformers='data/working/single-notes-2000/ml-inputs/preproc_transformers.json',
-    chromagram_transformer='data/prepared/single-notes-2000/chromagram_transformer.json')
+classifier = InstrumentClassifier('data/working/single-notes-2000/model')
 model = classifier.model
 
 parameters_with_targets = pd.read_csv(data_dir + '/ml-inputs/parameters_with_targets.csv', index_col=0)
