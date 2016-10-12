@@ -6,10 +6,11 @@ evaluates it.
 import os
 
 # preprocessing
+from keras.utils import np_utils
 import numpy as np
 import pandas as pd
 from sklearn.cross_validation import train_test_split
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder, MinMaxScaler
+from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 
 import jsonpickle
 import jsonpickle.ext.numpy as jsonpickle_numpy
@@ -68,17 +69,13 @@ def prepare_inputs(input_dir, output_dir, model_dir):
 
     parameters.to_csv(output_dir + '/parameters_with_targets.csv')
 
-    instr_family_oh = OneHotEncoder(sparse=False)
-    y = instr_family_oh.fit_transform(parameters['family_id'].reshape(-1, 1))
+    y = np_utils.to_categorical(parameters['family_id'])
 
     print('output shape: (samples, encoded targets):', y.shape)
     print('target labels:', instr_family_le.classes_,
         instr_family_le.transform(instr_family_le.classes_))
     class_count = len(instr_family_le.classes_)
     print('number of classes:', class_count)
-
-    def decode_targets(y_ohe):
-        return y_ohe.dot(instr_family_oh.active_features_).astype(int)
 
     ## Split the dataset
 
@@ -135,13 +132,13 @@ def prepare_inputs(input_dir, output_dir, model_dir):
         chromagram_transformer = ChromagramTransformer(**jsonpickle.decode(f.read()))
 
     with open(model_dir + '/preproc_transformers.json', 'w') as f:
-        json = jsonpickle.encode((instr_family_le, instr_family_oh, scaler,
+        json = jsonpickle.encode((instr_family_le, scaler,
             chromagram_transformer))
         f.write(json)
 
     return (X_train, X_valid, X_test,
         y_train, y_valid, y_test,
-        instr_family_le, instr_family_oh, scaler, decode_targets,
+        instr_family_le, scaler,
         input_shape, class_count)
 
 
@@ -194,7 +191,7 @@ def train_model(model, data, output_dir, batch_size=32, epoch_count=30):
     return model, training_hist
 
 
-def evaluate_model(model, data, training_hist, decode_targets, output_dir):
+def evaluate_model(model, data, training_hist, output_dir):
     X_train, X_valid, X_test, y_train, y_valid, y_test = data
 
     y_valid_pred = model.predict_classes(X_valid)
@@ -233,7 +230,7 @@ def evaluate_model(model, data, training_hist, decode_targets, output_dir):
 
     def compute_confusion_matrix():
         print('confusion matrix (valid): rows = truth, columns = predictions')
-        cm = confusion_matrix(decode_targets(y_valid), y_valid_pred)
+        cm = confusion_matrix(np_utils.categorical_probas_to_classes(y_valid), y_valid_pred)
         cm_df = pd.DataFrame(cm,
             columns=instr_family_le.classes_,
             index=instr_family_le.classes_)
@@ -275,7 +272,7 @@ if __name__ == '__main__':
 
     (X_train, X_valid, X_test,
         y_train, y_valid, y_test,
-        instr_family_le, instr_family_oh, scaler, decode_targets,
+        instr_family_le, scaler,
         input_shape, class_count) = prepare_inputs(
             'data/prepared/single-notes-2000',
             'data/working/single-notes-2000/ml-inputs',
@@ -288,4 +285,4 @@ if __name__ == '__main__':
         epoch_count=20)
 
     evaluate_model(model, (X_train, X_valid, X_test,
-        y_train, y_valid, y_test), training_hist, decode_targets, 'data/working/single-notes-2000/evaluation')
+        y_train, y_valid, y_test), training_hist, 'data/working/single-notes-2000/evaluation')

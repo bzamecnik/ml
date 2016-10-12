@@ -44,7 +44,7 @@ class InstrumentClassifier():
         self.model = load_model_from_dir(model_dir)
 
         with open(model_dir + '/preproc_transformers.json', 'r') as f:
-            self.instr_family_le, self.instr_family_oh, self.scaler, self.ch = \
+            self.instr_family_le, self.scaler, self.ch = \
                 jsonpickle.decode(f.read())
 
     def load_features(self, audio_file):
