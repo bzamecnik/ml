@@ -115,9 +115,14 @@ def parse_args():
         help='audio file (WAV, FLAC)')
     parser.add_argument('-m', '--model-dir', type=str,
         help='directory with model architecture, weights and preprocessing transformers')
+    parser.add_argument('-p', '--proba', action='store_true', default=False,
+        help='print probabilities, not just class')
     return parser.parse_args()
 
 if __name__ == '__main__':
     args = parse_args()
     model = InstrumentClassifier(args.model_dir)
-    print(model.predict_class_label(args.audio_file))
+    if args.proba:
+        print(model.predict_probabilities(args.audio_file))
+    else:
+        print(model.predict_class_label(args.audio_file))
