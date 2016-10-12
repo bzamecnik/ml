@@ -54,10 +54,37 @@ class InstrumentClassifier():
             self.ch = ChromagramTransformer(**jsonpickle.decode(f.read()))
 
     def load_features(self, audio_file):
+        def stereo_to_mono(x):
+            # stereo to mono
+            if len(x.shape) > 1 and x.shape[1] > 1:
+                print('Converting stereo to mono')
+                x = x.mean(axis=1)
+            return x
+
+        def cut_or_pad_to_length(x, duration, fs):
+            desired_length = int(round(duration * fs))
+            length = len(x)
+            diff = length - desired_length
+            if diff < 0:
+                print('Padding')
+                # put the short signal in the middle
+                pad_before = abs(diff)//2
+                pad_after = desired_length - pad_before
+                x = np.lib.pad(x, (pad_before, pad_after), 'constant')
+            elif diff > 1:
+                print('Cutting')
+                # cut the beginning
+                x = x[0:desired_length]
+            return x
+            
+        def adjust_input(x, fs):
+            x = stereo_to_mono(x)
+            x = cut_or_pad_to_length(x, 2.0, fs)
+            return x
+
         x, fs = sf.read(audio_file)
-        # stereo to mono
-        if len(x.shape) > 1 and x.shape[1] > 1:
-            x = x.mean(axis=1)
+        x = adjust_input(x, fs)
+
         x_chromagram = self.ch.transform(x)
         x_features = self.scaler.transform(x_chromagram.reshape(1, -1)) \
             .reshape(1, x_chromagram.shape[0], x_chromagram.shape[1], 1)
