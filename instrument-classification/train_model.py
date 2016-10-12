@@ -38,19 +38,10 @@ def prepare_inputs(input_dir, output_dir, model_dir):
 
     ## Load features
 
-    chromagrams = np.load(input_dir + '/chromagrams.npz')['arr_0']
+    x = np.load(input_dir + '/chromagrams.npz')['arr_0']
     # axes: data point, block, chroma vector
-    print('chromagrams.shape:', chromagrams.shape)
-    print('chromagrams.size:', chromagrams.size)
-
-    # Reshape for the convolution filtering - add one dimension of size 1
-    # that will be further used for multiple convolution filters.
-    # TODO: maybe this should done in the model
-    x = chromagrams.reshape(chromagrams.shape + (1,))
     print('x.shape:', x.shape)
-
-    input_shape = x.shape[1:]
-    print('input shape (rows, cols, filters):', input_shape)
+    print('x.size:', x.size)
 
     ## Load targets
 
@@ -109,7 +100,20 @@ def prepare_inputs(input_dir, output_dir, model_dir):
 
     scaler = MinMaxScaler()
     scaler.fit(x[ix['train']].reshape(len(ix['train']), -1))
+    # NOTE: The reshapes are necessary since the trainsformer expects 1D values
+    # and we have 2D values.
     x = scaler.transform(x.reshape(len(x), -1)).reshape(-1, *x.shape[1:])
+
+    ## Reshape for the convolution filtering
+    #
+    # Add one dimension of size 1
+    # that will be further used for multiple convolution filters.
+    # TODO: maybe this should done in the model
+    x = x.reshape(x.shape + (1,))
+    print('x.shape (for convolution):', x.shape)
+
+    input_shape = x.shape[1:]
+    print('input shape (rows, cols, filters):', input_shape)
 
     np.savez_compressed(
         '{}/features_targets_split_seed_{}.npz'.format(output_dir, split_seed),
