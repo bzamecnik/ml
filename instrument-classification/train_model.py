@@ -91,6 +91,17 @@ def prepare_inputs(input_dir, output_dir):
     split_seed = 42
     split_incides = split_dataset(parameters.index, random_state=split_seed)
 
+    with open(output_dir + '/splits.json', 'w') as f:
+        json = jsonpickle.encode({'indices': split_incides, 'seed': split_seed})
+        f.write(json)
+
+    def splits_to_df(split_incides):
+        df = pd.DataFrame([(v, key) for (key, values) in split_incides.items() for v in values], columns=['index', 'split'])
+        df.sort_values('index', inplace=True)
+        return df
+
+    splits_to_df(split_incides).to_csv(output_dir + '/splits.csv', index=None)
+
     # X_splits = {key: x[split_incides[key]] for key in split_incides}
     # y_splits = {key: y[split_incides[key]] for key in split_incides}
 
