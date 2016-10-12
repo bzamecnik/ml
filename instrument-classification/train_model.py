@@ -28,7 +28,7 @@ mpl.use('Agg')
 import matplotlib.pyplot as plt
 
 from instruments import midi_instruments
-from preprocessing import ChromagramTransformer
+from preprocessing import ChromagramTransformer, ConvolutionReshaper
 
 jsonpickle_numpy.register_handlers()
 
@@ -105,11 +105,8 @@ def prepare_inputs(input_dir, output_dir, model_dir):
     x = scaler.transform(x.reshape(len(x), -1)).reshape(-1, *x.shape[1:])
 
     ## Reshape for the convolution filtering
-    #
-    # Add one dimension of size 1
-    # that will be further used for multiple convolution filters.
-    # TODO: maybe this should done in the model
-    x = x.reshape(x.shape + (1,))
+
+    x = ConvolutionReshaper().transform(x)
     print('x.shape (for convolution):', x.shape)
 
     input_shape = x.shape[1:]

@@ -1,6 +1,6 @@
-import sys
-
+import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
+import sys
 
 # TODO: package the chromagram script
 sys.path.append('../tools/music-processing-experiments/')
@@ -40,6 +40,18 @@ class ChromagramTransformer(BaseEstimator, TransformerMixin):
         bin_count = X_blocks.shape[1]
         X_chromagram = (X_chromagram + 120) / (120 + bin_count)
         return X_chromagram
+
+    def fit(self, X, y=None, **fit_params):
+        return self
+
+
+class ConvolutionReshaper(BaseEstimator, TransformerMixin):
+    def transform(self, X, **transform_params):
+        """
+        Reshape for the convolution filtering. Add one dimension of size 1
+        at the and that will be further used for multiple convolution filters.
+        """
+        return np.expand_dims(X, axis=-1)
 
     def fit(self, X, y=None, **fit_params):
         return self

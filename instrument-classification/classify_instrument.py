@@ -16,6 +16,8 @@ import numpy as np
 import pandas as pd
 import soundfile as sf
 
+from preprocessing import ConvolutionReshaper
+
 jsonpickle_numpy.register_handlers()
 
 
@@ -81,7 +83,8 @@ class InstrumentClassifier():
 
         x_chromagram = self.ch.transform(x)
         x_features = self.scaler.transform(x_chromagram.reshape(1, -1)) \
-            .reshape(1, x_chromagram.shape[0], x_chromagram.shape[1], 1)
+            .reshape(1, *x_chromagram.shape)
+        x_features = ConvolutionReshaper().transform(x_features)
         return x_features
 
     def predict_class_label(self, audio_file):
