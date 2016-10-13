@@ -59,8 +59,7 @@ def train_model(model, x, y, ix, model_dir, evaluation_dir,
 
     model.save_weights(model_dir + '/model_weights.h5') # HDF5
 
-    pd.DataFrame(training_hist.history).to_csv(
-        evaluation_dir + '/learning_curves.csv', index=None)
+    store_learning_curves(training_hist, evaluation_dir)
 
     return model
 
@@ -108,6 +107,17 @@ def compute_final_metrics(model, x, y, ix, y_proba_pred, evaluation_dir):
 
     print(metrics)
     metrics.to_csv(evaluation_dir + '/final_metrics.csv', float_format='%.5f')
+
+
+def store_learning_curves(training_hist,  evaluation_dir):
+    df = pd.DataFrame(training_hist.history)
+    df.rename(columns={
+        'acc': 'train_acc', 'loss': 'train_loss',
+        'val_acc': 'valid_acc', 'val_loss': 'valid_loss'
+    }, inplace=True)
+    df['train_error'] = 1.0 - df['train_acc']
+    df['valid_error'] = 1.0 - df['valid_acc']
+    df.to_csv(evaluation_dir + '/learning_curves.csv', index=None)
 
 
 def prepare_dirs(dirs):
