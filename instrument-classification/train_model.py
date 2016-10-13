@@ -69,23 +69,25 @@ def train_model(model, x, y, ix, output_dir, batch_size=32, epoch_count=30):
 
 
 def predict(model, x, y, ix, output_dir):
-    class_count = y.shape[1]
+    """
+    Store predictions in a CSV file and predicted probabilities in an NPZ file.
+    """
 
-    proba_cols = ['proba_%s' % l for l in range(class_count)]
+    y_proba_pred = model.predict_proba(x)
+    np.savez_compressed(output_dir + '/predictions_proba.npz',
+        y_proba_pred=y_proba_pred)
 
-    df = pd.DataFrame(
-        model.predict_proba(x),
-        columns=proba_cols)
-    df['y_pred'] = model.predict_classes(x)
+    df = pd.DataFrame({
+        'y_pred': model.predict_classes(x),
+        'y_true': np_utils.categorical_probas_to_classes(y)})
 
-    df['y_true'] = np_utils.categorical_probas_to_classes(y)
     df['accurate'] = df['y_true'] == df['y_pred']
 
     df['split'] = ''
     for key, indexes in ix.items():
         df.ix[indexes, 'split'] = key
 
-    df = df[['split', 'y_true', 'y_pred', 'accurate'] + proba_cols]
+    df = df[['split', 'y_true', 'y_pred', 'accurate']]
 
     df.to_csv(output_dir + '/predictions.csv', index=None)
 
