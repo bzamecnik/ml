@@ -54,8 +54,6 @@ def create_model(input_shape, class_count):
 
 
 def train_model(model, x, y, ix, output_dir, batch_size=32, epoch_count=30):
-    os.makedirs(output_dir, exist_ok=True)
-
     with open(output_dir + '/model_arch.yaml', 'w') as f:
         f.write(model.to_yaml())
 
@@ -70,11 +68,31 @@ def train_model(model, x, y, ix, output_dir, batch_size=32, epoch_count=30):
     return model, training_hist
 
 
+def predict(model, x, y, ix, output_dir):
+    class_count = y.shape[1]
+
+    proba_cols = ['proba_%s' % l for l in range(class_count)]
+
+    df = pd.DataFrame(
+        model.predict_proba(x),
+        columns=proba_cols)
+    df['y_pred'] = model.predict_classes(x)
+
+    df['y_true'] = np_utils.categorical_probas_to_classes(y)
+    df['accurate'] = df['y_true'] == df['y_pred']
+
+    df['split'] = ''
+    for key, indexes in ix.items():
+        df.ix[indexes, 'split'] = key
+
+    df = df[['split', 'y_true', 'y_pred', 'accurate'] + proba_cols]
+
+    df.to_csv(output_dir + '/predictions.csv', index=None)
+
+
 def evaluate_model(model, x, y, ix, instr_family_le, scaler, training_hist, output_dir):
     y_valid_pred = model.predict_classes(x[ix['valid']])
     y_valid_pred_proba = model.predict_proba(x[ix['valid']])
-
-    os.makedirs(output_dir, exist_ok=True)
 
     def evaluation_metrics():
         splits = ['train', 'valid', 'test']
@@ -145,10 +163,19 @@ def evaluate_model(model, x, y, ix, instr_family_le, scaler, training_hist, outp
     plot_confusion_matrix(cm, instr_family_le.classes_)
     per_class_metrics(cm)
 
+
+def prepare_dirs(dirs):
+    for d in dirs:
+        os.makedirs(d, exist_ok=True)
+
+
 if __name__ == '__main__':
     base_dir = 'data/working/single-notes-2000'
     data_dir = base_dir + '/ml-inputs'
     model_dir = base_dir + '/model'
+    evaluation_dir = base_dir + '/evaluation'
+
+    prepare_dirs([data_dir, model_dir, evaluation_dir])
 
     x, y, ix = load_data(data_dir)
     instr_family_le, scaler, _ = load_transformers(data_dir)
@@ -163,4 +190,7 @@ if __name__ == '__main__':
         data_dir + '/preproc_transformers.json',
         model_dir + '/preproc_transformers.json')
 
-    evaluate_model(model, x, y, ix, instr_family_le, scaler, training_hist, base_dir + '/evaluation')
+    predict(model, x, y, ix, evaluation_dir)
+
+    evaluate_model(model, x, y, ix, instr_family_le, scaler, training_hist,
+        evaluation_dir)
