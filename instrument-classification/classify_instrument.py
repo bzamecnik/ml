@@ -32,6 +32,8 @@ class InstrumentClassifier():
             with open(arch_file) as f:
                 model = keras.models.model_from_yaml(f.read())
             model.load_weights(weights_file)
+            model.compile(loss='categorical_crossentropy', optimizer='adam',
+                metrics=['accuracy'])
             return model
 
         def load_model_from_dir(model_dir):
