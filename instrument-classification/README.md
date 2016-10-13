@@ -97,6 +97,10 @@ Then load it (2000 samples of 2 seconds length at 44110 Hz sampling rate):
 
 ## Training an instrument family classifier
 
+### prepare_training_data.py
+
+Prepares data for training (splits, scaling, etc.).
+
 ### train_model.py
 
 Trains a model on the `single-notes-2000` dataset.
@@ -108,3 +112,7 @@ Currently there's a neural net with a few layers of convolution, then few dense 
 Evaluates a trained model on a single audio file and predicts the instrument family from the audio.
 
 `classify_instrument.sh` - a wrapper with a path to a model fixed
+
+### analyze_error_by_pitch.py
+
+How is the classification error distributed with respect to pitch?

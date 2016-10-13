@@ -14,7 +14,7 @@ jsonpickle_numpy.register_handlers()
 
 
 data_dir = 'data/working/single-notes-2000/'
-data = np.load(data_dir + '/ml-inputs/features_targets_split_seed_42.npz')
+data = np.load(data_dir + '/ml-inputs/features_targets.npz')
 x, y = data['x'], data['y']
 
 classifier = InstrumentClassifier('data/working/single-notes-2000/model')
