@@ -109,10 +109,14 @@ Currently there's a neural net with a few layers of convolution, then few dense 
 
 ### classify_instrument.py
 
-Evaluates a trained model on a single audio file and predicts the instrument family from the audio.
+Predicts instrument family from a single audio file using a trained model.
 
 `classify_instrument.sh` - a wrapper with a path to a model fixed
 
-### analyze_error_by_pitch.py
+### evaluate.py
 
-How is the classification error distributed with respect to pitch?
+Computes and plots various evaluation data from the training process.
+
+- learning curves - overfittering or underfitting?
+- confusion matrices - What are the errors between target classes?
+- How is the classification error distributed with respect to pitch?
