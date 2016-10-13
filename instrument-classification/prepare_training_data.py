@@ -110,13 +110,19 @@ def prepare_inputs(input_dir, output_dir, split_seed=42):
         f.write(json)
 
 
-def load_data(data_dir):
+def load_features_targets(data_dir):
     data = np.load(data_dir + '/features_targets.npz')
-    x, y = data['x'], data['y']
+    return data['x'], data['y']
 
+
+def load_indexes(data_dir):
     with open(data_dir + '/splits.json', 'r') as f:
-        ix = jsonpickle.decode(f.read())['indices']
+        return jsonpickle.decode(f.read())['indices']
 
+
+def load_data(data_dir):
+    x, y = load_features_targets(data_dir)
+    ix = load_indexes(data_dir)
     return x, y, ix
 
 

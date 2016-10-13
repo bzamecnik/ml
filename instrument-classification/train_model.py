@@ -6,6 +6,7 @@ import numpy as np
 import os
 import pandas as pd
 import shutil
+from sklearn.metrics import roc_auc_score
 
 from keras.models import Sequential
 from keras.layers.core import Activation, Dense, Dropout, Flatten
@@ -87,6 +88,27 @@ def predict(model, x, y, ix, output_dir):
 
     df.to_csv(output_dir + '/predictions.csv', index=None)
 
+    return y_proba_pred
+
+
+def compute_final_metrics(model, x, y, ix, y_proba_pred, evaluation_dir):
+    splits = ['train', 'valid', 'test']
+    metrics = pd.DataFrame([
+            model.evaluate(x[ix[split]], y[ix[split]], verbose=0)
+            for split in splits
+        ],
+        columns=model.metrics_names,
+        index=splits)
+    metrics['error'] = 1.0 - metrics['acc']
+    metrics['count'] = [len(ix[split]) for split in splits]
+    metrics['abs_error'] = (metrics['error'] * metrics['count']).astype(int)
+
+    metrics['auc'] = [roc_auc_score(y[ix[split]], y_proba_pred[ix[split]])
+        for split in splits]
+
+    print(metrics)
+    metrics.to_csv(evaluation_dir + '/final_metrics.csv', float_format='%.5f')
+
 
 def prepare_dirs(dirs):
     for d in dirs:
@@ -101,6 +123,10 @@ if __name__ == '__main__':
 
     prepare_dirs([data_dir, model_dir, evaluation_dir])
 
+    shutil.copy(
+        data_dir + '/preproc_transformers.json',
+        model_dir + '/preproc_transformers.json')
+
     x, y, ix = load_data(data_dir)
     instr_family_le, scaler, _ = load_transformers(data_dir)
 
@@ -110,8 +136,6 @@ if __name__ == '__main__':
         model_dir, evaluation_dir,
         epoch_count=20)
 
-    shutil.copy(
-        data_dir + '/preproc_transformers.json',
-        model_dir + '/preproc_transformers.json')
+    y_proba_pred = predict(model, x, y, ix, evaluation_dir)
 
-    predict(model, x, y, ix, evaluation_dir)
+    compute_final_metrics(model, x, y, ix, y_proba_pred, evaluation_dir)
