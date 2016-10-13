@@ -12,8 +12,8 @@ def plot_learning_curves_separate(df):
     fig.suptitle('Learning curves')
 
     for ax, metric, color in zip(axes, ['error', 'loss'], ['r', 'b']):
-        for split, line_style in zip(['train', 'valid'], ['--', '-']):
-            ax.plot(df['%s_%s' % (split,metric)], color + line_style, label=split)
+        for split, lw in zip(['train', 'valid'], [1, 2]):
+            ax.plot(df['%s_%s' % (split,metric)], color=color, lw=lw, label=split)
         ax.set_title(metric)
         ax.set_xlabel('epoch')
         ax.set_ylabel(metric)
