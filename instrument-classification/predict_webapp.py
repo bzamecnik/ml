@@ -1,7 +1,7 @@
 from flask import Flask, redirect, render_template, request
 from gevent.wsgi import WSGIServer
 
-from classify_instrument import InstrumentClassifier
+from predict import InstrumentClassifier
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 1 * 2**20

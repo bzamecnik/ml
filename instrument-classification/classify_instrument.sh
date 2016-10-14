@@ -9,7 +9,7 @@
 # It takes around 3 sec.
 
 AUDIO_FILE=$1
-python classify_instrument.py \
+python predict.py \
   ${AUDIO_FILE} \
   -m data/working/single-notes-2000/model \
   2>/dev/null
