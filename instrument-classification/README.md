@@ -101,13 +101,15 @@ Then load it (2000 samples of 2 seconds length at 44110 Hz sampling rate):
 
 Prepares data for training (splits, scaling, etc.).
 
-### train.py
+### Training - train.py
 
 Trains a model on the `single-notes-2000` dataset.
 
 Currently there's a neural net with a few layers of convolution, then few dense layers. Implemented in Keras.
 
-### evaluate.py
+### Evaluation
+
+#### evaluate.py
 
 Computes and plots various evaluation data from the training process.
 
@@ -117,7 +119,15 @@ Computes and plots various evaluation data from the training process.
 
 Normally this is called from within `train.py`, but you can call it again afterwards.
 
-### predict.py
+#### inspect_errors.py
+
+Listen to the misclassified audio samples.
+
+#### leaderboard.py
+
+See the best models so far and ranking of the latest models.
+
+### Prediction - predict.py
 
 Predicts instrument family from a single audio file using a trained model.
 
