@@ -2,6 +2,7 @@
 Evaluates the model.
 """
 
+import argparse
 import matplotlib as mpl
 # do not use Qt/X that require $DISPLAY, must be called before importing pyplot
 mpl.use('Agg')
@@ -13,7 +14,9 @@ from prepare_training_data import load_indexes, load_transformers
 import plots
 
 
-def evaluate_model(data_dir, model_dir, evaluation_dir):
+def evaluate_model(data_dir, model_dir):
+    evaluation_dir = model_dir + '/evaluation'
+
     ix = load_indexes(data_dir)
 
     predictions = pd.read_csv(evaluation_dir +  '/predictions.csv')
@@ -96,10 +99,13 @@ def evaluate_model(data_dir, model_dir, evaluation_dir):
 
     analyze_error_by_pitch()
 
-if __name__ == '__main__':
-    base_dir = 'data/working/single-notes-2000'
-    data_dir = base_dir + '/ml-inputs'
-    model_dir = base_dir + '/model'
-    evaluation_dir = base_dir + '/evaluation'
+def parse_args():
+    parser = argparse.ArgumentParser(description='Evaluates a model.')
+    parser.add_argument('-i', '--input-dir')
+    parser.add_argument('-m', '--model-dir')
 
-    evaluate_model(data_dir, model_dir, evaluation_dir)
+    return parser.parse_args()
+
+if __name__ == '__main__':
+    args = parse_args()
+    evaluate_model(args.input_dir, args.model_dir)
