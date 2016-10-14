@@ -1,64 +1,16 @@
 """
-Creates and trains an ML model and makes predictions on the data.
+Trains an ML model and makes predictions on the data.
 """
 
+from keras.utils import np_utils
 import numpy as np
 import os
 import pandas as pd
 import shutil
 from sklearn.metrics import roc_auc_score
 
-from keras.models import Sequential
-from keras.layers.core import Activation, Dense, Dropout, Flatten
-from keras.layers.convolutional import Convolution2D, MaxPooling2D
-from keras.layers.normalization import BatchNormalization
-from keras.utils import np_utils
-
 from prepare_training_data import load_data, load_transformers
-
-
-def create_model(input_shape, class_count):
-    model = Sequential()
-
-    model.add(Convolution2D(32, 3, 3, input_shape=input_shape))
-    model.add(Activation('relu'))
-    model.add(Convolution2D(32, 3, 3))
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Dropout(0.1))
-
-    model.add(Convolution2D(64, 3, 3))
-    model.add(Activation('relu'))
-    model.add(Convolution2D(64, 3, 3))
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Dropout(0.1))
-
-    model.add(Convolution2D(64, 3, 3))
-    model.add(Activation('relu'))
-    model.add(Convolution2D(64, 3, 3))
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Dropout(0.1))
-
-    model.add(Flatten())
-
-    model.add(Dense(64))
-    model.add(BatchNormalization())
-    model.add(Activation('relu'))
-    model.add(Dropout(0.5))
-
-    model.add(Dense(class_count))
-    model.add(BatchNormalization())
-    model.add(Activation('softmax'))
-
-    model.compile(loss='categorical_crossentropy', optimizer='adam',
-        metrics=['accuracy'])
-
-    model.summary()
-
-    return model
-
+from model_arch import create_model
 
 def train_model(model, x, y, ix, model_dir, evaluation_dir,
     batch_size=32, epoch_count=30):
@@ -139,6 +91,12 @@ def prepare_dirs(dirs):
         os.makedirs(d, exist_ok=True)
 
 
+def store_model_files(data_dir, model_dir):
+    shutil.copy(
+        data_dir + '/preproc_transformers.json',
+        model_dir + '/preproc_transformers.json')
+    shutil.copy('model_arch.py', model_dir + '/model_arch.py')
+
 if __name__ == '__main__':
     base_dir = 'data/working/single-notes-2000'
     data_dir = base_dir + '/ml-inputs'
@@ -147,14 +105,13 @@ if __name__ == '__main__':
 
     prepare_dirs([data_dir, model_dir, evaluation_dir])
 
-    shutil.copy(
-        data_dir + '/preproc_transformers.json',
-        model_dir + '/preproc_transformers.json')
+    store_model_files(data_dir, model_dir)
 
     x, y, ix = load_data(data_dir)
     instr_family_le, scaler, _ = load_transformers(data_dir)
 
     model = create_model(input_shape=x.shape[1:], class_count=y.shape[1])
+    model.summary()
     model = train_model(model,
         x, y, ix,
         model_dir, evaluation_dir,
