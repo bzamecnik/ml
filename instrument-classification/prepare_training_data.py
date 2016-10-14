@@ -135,4 +135,4 @@ def load_transformers(data_dir):
 if __name__ == '__main__':
     prepare_inputs(
         'data/prepared/single-notes-2000',
-        'data/working/single-notes-2000/ml-inputs')
+        'data/working/single-notes-2000/training-data')

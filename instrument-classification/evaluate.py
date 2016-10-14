@@ -19,7 +19,7 @@ def evaluate_model(data_dir, model_dir):
 
     ix = load_indexes(data_dir)
 
-    predictions = pd.read_csv(evaluation_dir +  '/predictions.csv')
+    predictions = pd.read_csv(model_dir + '/output-data/predictions.csv')
 
     instr_family_le, scaler, _ = load_transformers(model_dir)
 

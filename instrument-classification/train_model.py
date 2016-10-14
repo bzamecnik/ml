@@ -95,9 +95,9 @@ def prepare_dirs(dirs):
         os.makedirs(d, exist_ok=True)
 
 
-def store_model_files(data_dir, model_dir):
+def store_model_files(input_dir, model_dir):
     shutil.copy(
-        data_dir + '/preproc_transformers.json',
+        input_dir + '/preproc_transformers.json',
         model_dir + '/preproc_transformers.json')
     shutil.copy('model_arch.py', model_dir + '/model_arch.py')
 
@@ -114,26 +114,27 @@ if __name__ == '__main__':
     print('model id:', model_id)
 
     base_dir = 'data/working/single-notes-2000'
-    data_dir = base_dir + '/ml-inputs'
+    input_dir = base_dir + '/training-data'
     model_dir = base_dir + '/models/' + model_id
+    output_dir = model_dir + '/output-data'
     evaluation_dir = model_dir + '/evaluation'
 
-    prepare_dirs([data_dir, model_dir, evaluation_dir])
+    prepare_dirs([input_dir, model_dir, output_dir, evaluation_dir])
 
-    store_model_files(data_dir, model_dir)
+    store_model_files(input_dir, model_dir)
 
-    x, y, ix = load_data(data_dir)
-    instr_family_le, scaler, _ = load_transformers(data_dir)
+    x, y, ix = load_data(input_dir)
+    instr_family_le, scaler, _ = load_transformers(input_dir)
 
     model = create_model(input_shape=x.shape[1:], class_count=y.shape[1])
     model.summary()
     model = train_model(model,
         x, y, ix,
         model_dir, evaluation_dir,
-        epoch_count=50)
+        epoch_count=10)
 
-    y_proba_pred = predict(model, x, y, ix, evaluation_dir)
+    y_proba_pred = predict(model, x, y, ix, output_dir)
 
     compute_final_metrics(model, x, y, ix, y_proba_pred, evaluation_dir)
 
-    evaluate_model(data_dir, model_dir)
+    evaluate_model(input_dir, model_dir)
