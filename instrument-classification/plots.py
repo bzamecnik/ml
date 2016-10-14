@@ -20,6 +20,9 @@ def plot_learning_curves_separate(df):
         ax.grid(True)
         ax.legend()
 
+    # error
+    axes[0].set_ylim(0, 1)
+
     fig.tight_layout()
 
     return fig, axes
