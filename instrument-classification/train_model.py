@@ -11,6 +11,7 @@ from sklearn.metrics import roc_auc_score
 from keras.models import Sequential
 from keras.layers.core import Activation, Dense, Dropout, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
+from keras.layers.normalization import BatchNormalization
 from keras.utils import np_utils
 
 from prepare_training_data import load_data, load_transformers
@@ -18,24 +19,37 @@ from prepare_training_data import load_data, load_transformers
 
 def create_model(input_shape, class_count):
     model = Sequential()
+
     model.add(Convolution2D(32, 3, 3, input_shape=input_shape))
     model.add(Activation('relu'))
     model.add(Convolution2D(32, 3, 3))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Dropout(0.25))
-    model.add(Convolution2D(32, 3, 3))
+    model.add(Dropout(0.1))
+
+    model.add(Convolution2D(64, 3, 3))
     model.add(Activation('relu'))
-    model.add(Convolution2D(32, 3, 3))
+    model.add(Convolution2D(64, 3, 3))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Dropout(0.25))
+    model.add(Dropout(0.1))
+
+    model.add(Convolution2D(64, 3, 3))
+    model.add(Activation('relu'))
+    model.add(Convolution2D(64, 3, 3))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.1))
 
     model.add(Flatten())
+
     model.add(Dense(64))
+    model.add(BatchNormalization())
     model.add(Activation('relu'))
-    model.add(Dropout(0.25))
+    model.add(Dropout(0.5))
+
     model.add(Dense(class_count))
+    model.add(BatchNormalization())
     model.add(Activation('softmax'))
 
     model.compile(loss='categorical_crossentropy', optimizer='adam',
@@ -144,7 +158,7 @@ if __name__ == '__main__':
     model = train_model(model,
         x, y, ix,
         model_dir, evaluation_dir,
-        epoch_count=20)
+        epoch_count=50)
 
     y_proba_pred = predict(model, x, y, ix, evaluation_dir)
 
