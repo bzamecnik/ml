@@ -1,16 +1,20 @@
 """
-Trains an ML model and makes predictions on the data.
+Trains an ML model, makes predictions on the data and evaluates it.
 """
 
+import arrow
 from keras.utils import np_utils
 import numpy as np
 import os
 import pandas as pd
+import random
 import shutil
 from sklearn.metrics import roc_auc_score
 
-from prepare_training_data import load_data, load_transformers
+from evaluate import evaluate_model
 from model_arch import create_model
+from prepare_training_data import load_data, load_transformers
+
 
 def train_model(model, x, y, ix, model_dir, evaluation_dir,
     batch_size=32, epoch_count=30):
@@ -97,11 +101,22 @@ def store_model_files(data_dir, model_dir):
         model_dir + '/preproc_transformers.json')
     shutil.copy('model_arch.py', model_dir + '/model_arch.py')
 
+def generate_model_id():
+    """
+    Returns a model id based on timestamp with some random part to prevent potential collisions.
+    """
+    date_part = arrow.utcnow().format('YYYY-MM-DD_HH-mm-ss')
+    random_part = random.randint(0, 2<<31)
+    return '%s_%x' % (date_part, random_part)
+
 if __name__ == '__main__':
+    model_id = generate_model_id()
+    print('model id:', model_id)
+
     base_dir = 'data/working/single-notes-2000'
     data_dir = base_dir + '/ml-inputs'
-    model_dir = base_dir + '/model'
-    evaluation_dir = base_dir + '/evaluation'
+    model_dir = base_dir + '/models/' + model_id
+    evaluation_dir = model_dir + '/evaluation'
 
     prepare_dirs([data_dir, model_dir, evaluation_dir])
 
@@ -120,3 +135,5 @@ if __name__ == '__main__':
     y_proba_pred = predict(model, x, y, ix, evaluation_dir)
 
     compute_final_metrics(model, x, y, ix, y_proba_pred, evaluation_dir)
+
+    evaluate_model(data_dir, model_dir)
