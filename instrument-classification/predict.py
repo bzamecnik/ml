@@ -10,6 +10,7 @@ Ouput: instrument family [brass, guitar, organ, piano, pipe, reed, strings]
 
 import argparse
 import keras
+from keras.utils import np_utils
 import jsonpickle
 import jsonpickle.ext.numpy as jsonpickle_numpy
 import numpy as np
@@ -88,13 +89,13 @@ class InstrumentClassifier():
 
     def predict_class_label(self, audio_file):
         x_features = self.load_features(audio_file)
-        instrument_class = self.model.predict_classes(x_features, verbose=0)[0]
+        instrument_class = np_utils.probas_to_classes(self.model.predict(x_features, verbose=0))[0]
         label = self.instr_family_le.inverse_transform(instrument_class)
         return label
 
     def predict_probabilities(self, audio_file):
         x_features = self.load_features(audio_file)
-        proba = self.model.predict_proba(x_features, verbose=0).flatten()
+        proba = self.model.predict(x_features, verbose=0).flatten()
         df = pd.DataFrame({
             'probability': proba,
             'class': np.arange(len(proba)),

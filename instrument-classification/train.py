@@ -44,12 +44,12 @@ def predict(model, x, y, ix, output_dir):
     Store predictions in a CSV file and predicted probabilities in an NPZ file.
     """
 
-    y_proba_pred = model.predict_proba(x)
+    y_proba_pred = model.predict(x)
     np.savez_compressed(output_dir + '/predictions_proba.npz',
         y_proba_pred=y_proba_pred)
 
     df = pd.DataFrame({
-        'y_pred': model.predict_classes(x),
+        'y_pred': np_utils.probas_to_classes(y_proba_pred),
         'y_true': np_utils.categorical_probas_to_classes(y)})
 
     df['accurate'] = df['y_true'] == df['y_pred']
