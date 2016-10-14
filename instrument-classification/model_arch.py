@@ -1,5 +1,5 @@
 from keras.models import Sequential
-from keras.layers.core import Activation, Dense, Dropout, Flatten
+from keras.layers.core import Activation, Dense, Dropout, Flatten, Reshape
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.layers.normalization import BatchNormalization
 
@@ -7,7 +7,10 @@ from keras.layers.normalization import BatchNormalization
 def create_model(input_shape, class_count):
     model = Sequential()
 
-    model.add(Convolution2D(32, 3, 3, input_shape=input_shape))
+    # add one more dimension for convolution
+    model.add(Reshape(input_shape + (1, ), input_shape=input_shape))
+
+    model.add(Convolution2D(32, 3, 3))
     model.add(Activation('relu'))
     model.add(Convolution2D(32, 3, 3))
     model.add(Activation('relu'))

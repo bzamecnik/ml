@@ -43,15 +43,3 @@ class ChromagramTransformer(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y=None, **fit_params):
         return self
-
-
-class ConvolutionReshaper(BaseEstimator, TransformerMixin):
-    def transform(self, X, **transform_params):
-        """
-        Reshape for the convolution filtering. Add one dimension of size 1
-        at the and that will be further used for multiple convolution filters.
-        """
-        return np.expand_dims(X, axis=-1)
-
-    def fit(self, X, y=None, **fit_params):
-        return self

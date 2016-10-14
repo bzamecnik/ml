@@ -14,7 +14,7 @@ from sklearn.cross_validation import train_test_split
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 
 from instruments import midi_instruments
-from preprocessing import ChromagramTransformer, ConvolutionReshaper
+from preprocessing import ChromagramTransformer
 
 jsonpickle_numpy.register_handlers()
 
@@ -89,13 +89,8 @@ def prepare_inputs(input_dir, output_dir, split_seed=42):
     # and we have 2D values.
     x = scaler.transform(x.reshape(len(x), -1)).reshape(-1, *x.shape[1:])
 
-    ## Reshape for the convolution filtering
-
-    x = ConvolutionReshaper().transform(x)
-    print('x.shape (for convolution):', x.shape)
-
     input_shape = x.shape[1:]
-    print('input shape (rows, cols, filters):', input_shape)
+    print('input shape (rows, cols):', input_shape)
 
     np.savez_compressed(
         '{}/features_targets.npz'.format(output_dir, split_seed),
