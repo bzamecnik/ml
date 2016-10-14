@@ -11,15 +11,20 @@ import random
 import shutil
 from sklearn.metrics import roc_auc_score
 
+from capture import CaptureStdout
 from evaluate import evaluate_model
 from model_arch import create_model
 from prepare_training_data import load_data, load_transformers
-
 
 def train_model(model, x, y, ix, model_dir, evaluation_dir,
     batch_size=32, epoch_count=30):
     with open(model_dir + '/model_arch.yaml', 'w') as f:
         f.write(model.to_yaml())
+
+    with open(model_dir + '/model_summary.txt', 'w') as f:
+        with CaptureStdout() as output:
+            model.summary()
+        f.write(str(output))
 
     training_hist = model.fit(
         x[ix['train']], y[ix['train']],
