@@ -29,7 +29,7 @@ class LeaderBoard():
         self.df_valid = df_valid
 
     def best_model(self):
-        return self.df_valid['error'].argmin()
+        return self.df_valid['auc'].argmax()
 
     def print_report(self):
         print('Ranking on the validation split metrics.\n')
@@ -42,7 +42,7 @@ class LeaderBoard():
         print('\nRank of the last few models by error/AUC, total:', len(self.df_valid))
         print(self.df_valid[['rank_error', 'rank_auc', 'error', 'auc']].iloc[-5:])
 
-        print('\nBest model (by error):', self.best_model())
+        print('\nBest model (by AUC):', self.best_model())
 
 if __name__ == '__main__':
     leader_board = LeaderBoard('data/working/single-notes-2000/models')
