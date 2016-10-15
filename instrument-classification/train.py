@@ -137,7 +137,7 @@ if __name__ == '__main__':
     model = train_model(model,
         x, y, ix,
         model_dir, evaluation_dir,
-        epoch_count=10)
+        epoch_count=30)
 
     y_proba_pred = predict(model, x, y, ix, output_dir)
 
