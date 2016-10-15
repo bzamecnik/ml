@@ -3,7 +3,7 @@ Trains an ML model, makes predictions on the data and evaluates it.
 """
 
 import arrow
-from keras.callbacks import ModelCheckpoint
+from keras.callbacks import ModelCheckpoint, TensorBoard
 from keras.utils import np_utils
 import numpy as np
 import os
@@ -18,7 +18,7 @@ from model_arch import create_model
 from prepare_training_data import load_data, load_transformers
 
 def train_model(model, x, y, ix, model_dir, evaluation_dir,
-    batch_size=32, epoch_count=30):
+    batch_size=32, epoch_count=30, enable_tensorboard=False):
     with open(model_dir + '/model_arch.yaml', 'w') as f:
         f.write(model.to_yaml())
 
@@ -27,18 +27,24 @@ def train_model(model, x, y, ix, model_dir, evaluation_dir,
             model.summary()
         f.write(str(output))
 
+    callbacks = []
+
     # TODO: Better save the whole model with weights.
     # It can then be loaded at once, including compilation.
-    checkpointer = ModelCheckpoint(model_dir + '/model_weights.h5',
+    callbacks.append(ModelCheckpoint(model_dir + '/model_weights.h5',
         monitor='val_loss', verbose=1,
         save_best_only=True, save_weights_only=True,
-        mode='auto')
+        mode='auto'))
+
+    if enable_tensorboard:
+        callbacks.append(TensorBoard(log_dir=model_dir + '/tensorboard',
+            histogram_freq=1))
 
     training_hist = model.fit(
         x[ix['train']], y[ix['train']],
         validation_data=(x[ix['valid']], y[ix['valid']]),
         batch_size=batch_size, nb_epoch=epoch_count,
-        callbacks=[checkpointer],
+        callbacks=callbacks,
         verbose=1)
 
     store_learning_curves(training_hist, evaluation_dir)
