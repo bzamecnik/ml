@@ -73,7 +73,7 @@ def compute_final_metrics(model, x, y, ix, y_proba_pred, evaluation_dir):
         ],
         columns=model.metrics_names,
         index=splits)
-    df.index.name = 'split'
+    metrics.index.name = 'split'
     metrics['error'] = 1.0 - metrics['acc']
     metrics['count'] = [len(ix[split]) for split in splits]
     metrics['abs_error'] = (metrics['error'] * metrics['count']).astype(int)
