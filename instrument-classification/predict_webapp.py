@@ -2,11 +2,16 @@ from flask import Flask, redirect, render_template, request
 from gevent.wsgi import WSGIServer
 
 from predict import InstrumentClassifier
+from leaderboard import LeaderBoard
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 1 * 2**20
 
-model = InstrumentClassifier(model_dir='data/working/single-notes-2000/model')
+model_dir = 'data/working/single-notes-2000/models'
+model_id = LeaderBoard(model_dir).best_model()
+model = InstrumentClassifier(model_dir + '/' + model_id)
+
+print('Using model:', model_id)
 
 @app.route('/')
 def hello():
