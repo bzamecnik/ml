@@ -152,3 +152,7 @@ Predicts instrument family from a single audio file using a trained model.
 
 - `classify_instrument.sh` - a wrapper with a path to a model fixed
 - `predict_webapp.py` - a web interface for prediction
+
+### Results
+
+One of the best models so far has validation error of around 5% and AUC ~0.99. It is composed of 8 convolution layers, 1 softmax and has around 220k parameters. On a GPU training takes around 2 minutes.
