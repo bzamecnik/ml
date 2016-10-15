@@ -95,6 +95,25 @@ Then load it (2000 samples of 2 seconds length at 44110 Hz sampling rate):
 (2000, 88200)
 ```
 
+### extract_features.py
+
+Computes reassigned chromagrams (log-frequency log-amplitude spectrograms with bins aligned aligned to pitches) from the audio.
+
+The output for each audio clip is a matrix (time_frames, chroma_bins). Together they are in a matrix of shape (data_points, time_frames, chroma_bins).
+
+The 2 second clips have shape (44, 115).
+
+Params:
+- block_size: 4096
+- hop_size: 2048
+- bin range: [-48, 67]
+  - midi tones: [21, 136] (but midi number goes to 127)
+  - pitches: [A0, E10]
+- bin division: 1
+- base frequency: 440 Hz
+
+The bins are numbered from 0 = A4 = midi 69. One bin step is one semitone.
+
 ## Training an instrument family classifier
 
 ### prepare_training_data.py
