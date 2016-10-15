@@ -15,7 +15,7 @@ print('Using model:', model_id)
 
 @app.route('/')
 def hello():
-    return render_template('home.html')
+    return render_template('home.html', model_id=model_id)
 
 @app.route('/api/classify/instrument', methods=['POST'])
 def classify():
@@ -35,6 +35,7 @@ def classify():
         class_probabilities)
 
     return render_template('home.html',
+        model_id=model_id,
         audio_file=audio_file.filename,
         predicted_label=label,
         class_probabilities=class_probabilities)
