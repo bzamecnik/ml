@@ -3,6 +3,7 @@ Trains an ML model, makes predictions on the data and evaluates it.
 """
 
 import arrow
+from keras.callbacks import ModelCheckpoint
 from keras.utils import np_utils
 import numpy as np
 import os
@@ -26,13 +27,19 @@ def train_model(model, x, y, ix, model_dir, evaluation_dir,
             model.summary()
         f.write(str(output))
 
+    # TODO: Better save the whole model with weights.
+    # It can then be loaded at once, including compilation.
+    checkpointer = ModelCheckpoint(model_dir + '/model_weights.h5',
+        monitor='val_loss', verbose=1,
+        save_best_only=True, save_weights_only=True,
+        mode='auto')
+
     training_hist = model.fit(
         x[ix['train']], y[ix['train']],
         validation_data=(x[ix['valid']], y[ix['valid']]),
         batch_size=batch_size, nb_epoch=epoch_count,
+        callbacks=[checkpointer],
         verbose=1)
-
-    model.save_weights(model_dir + '/model_weights.h5') # HDF5
 
     store_learning_curves(training_hist, evaluation_dir)
 
