@@ -15,15 +15,18 @@ def load_df(file_name):
 files = sorted(glob.glob('data/working/single-notes-2000/models/*/evaluation/final_metrics.csv'))
 df = pd.concat([load_df(f) for f in files])
 
-df_valid = df[df['split'] == 'valid']
+df_valid = df[df['split'] == 'valid'][:]
 df_valid.set_index('model_id', inplace=True)
+
+df_valid['rank_error'] = df_valid['error'].rank().astype(int)
+df_valid['rank_auc'] = df_valid['auc'].fillna(0).rank(ascending=False).astype(int)
 
 print('Ranking on the validation split metrics.\n')
 print('Lowest error:')
-print(df_valid.sort_values('error', ascending=True)[:5])
+print(df_valid['error'].sort_values(ascending=True)[:5])
 
 print('\nHighest AUC:')
-print(df_valid.sort_values('auc', ascending=False)[:5])
+print(df_valid['auc'].sort_values(ascending=False)[:5])
 
-print('\nRank of the last few models by error, total:', len(df_valid))
-print(df_valid.rank()['error'].astype(int).iloc[-5:])
+print('\nRank of the last few models by error/AUC, total:', len(df_valid))
+print(df_valid[['rank_error', 'rank_auc', 'error', 'auc']].iloc[-5:])
