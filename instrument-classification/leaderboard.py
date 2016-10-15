@@ -12,7 +12,7 @@ def load_df(file_name):
     df = df[['model_id', 'split', 'loss', 'error', 'auc']]
     return df
 
-files = glob.glob('data/working/single-notes-2000/models/*/evaluation/final_metrics.csv')
+files = sorted(glob.glob('data/working/single-notes-2000/models/*/evaluation/final_metrics.csv'))
 df = pd.concat([load_df(f) for f in files])
 
 df_valid = df[df['split'] == 'valid']
