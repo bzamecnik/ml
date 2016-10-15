@@ -25,8 +25,9 @@ def create_model(input_shape, class_count):
             return x
         return create
 
-    x = convolution_block(filter_count=16, dropout=0.1)(x)
     x = convolution_block(filter_count=32, dropout=0.1)(x)
+    x = convolution_block(filter_count=64, dropout=0.1)(x)
+    x = convolution_block(filter_count=64, dropout=0.1)(x)
     x = convolution_block(filter_count=64, dropout=0.1)(x)
 
     x = Flatten()(x)
