@@ -1,5 +1,9 @@
 arrow
+Flask
 jsonpickle
+gevent
+gunicorn
+h5py
 keras
 matplotlib
 music21
