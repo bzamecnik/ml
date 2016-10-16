@@ -62,11 +62,12 @@ class InstrumentClassifier():
             desired_length = int(round(duration * fs))
             length = len(x)
             diff = length - desired_length
+            abs_diff = abs(diff)
             if diff < 0:
                 print('Padding')
                 # put the short signal in the middle
-                pad_before = abs(diff)//2
-                pad_after = desired_length - pad_before
+                pad_before = abs_diff // 2
+                pad_after = abs_diff - pad_before
                 x = np.lib.pad(x, (pad_before, pad_after), 'constant')
             elif diff > 1:
                 print('Cutting')
