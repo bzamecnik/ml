@@ -51,6 +51,7 @@
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="https://github.com/bzamecnik/ml/tree/master/instrument-classification">GitHub</a></li>
+          <li><a href="https://twitter.com/bzamecnik/">@bzamecnik</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -71,7 +72,7 @@
           <input type="file" name="audio_file" class="form-control" id="audio_file">
           <div class="help-block">
             <p>Format: WAV/MP3/FLAC (anything that the soundfile library can read).</p>
-          </p>The clip has to be exactly 2 seconds long, 44000 Hz sample rate, mono.</p>
+            </p>The clip has to be in 44000 Hz sample rate, first 2 seconds will be used.</p>
           </div>
 
         </div>
@@ -79,20 +80,20 @@
           <input type="submit" class="btn btn-primary" value="Upload">
         </div>
       </form>
-
-      {% if predicted_label %}
-
-      <div class="well well-lg">
-        <p> Model: <code>{{model_id}}</code> </p>
-        <p> Audio file: <code>{{ audio_file }}</code> </p>
-
-        <h3>Predicted label: <span class="label label-success">{{ predicted_label }}</span></h3>
-      </div>
-
     </div>
     <div class="col-md-6">
 
-      <h3> Class probabilities: </h3>
+      {% if predicted_label %}
+
+      <div class="well">
+        <p> Model: <code>{{model_id}}</code> </p>
+        <p> Audio file: <code>{{ audio_file }}</code> </p>
+        <h3>
+          <strong>Predicted label:
+            <span class="label label-success">{{ predicted_label }}</span>
+          </strong>
+        </p>
+      </div>
 
       <table class="table table-condensed">
         <tr>
