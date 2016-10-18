@@ -12,9 +12,10 @@ import os
 import pandas as pd
 from sklearn.cross_validation import train_test_split
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
+from tfr.preprocessing import ChromagramTransformer
 
 from instruments import midi_instruments
-from preprocessing import ChromagramTransformer
+
 
 jsonpickle_numpy.register_handlers()
 

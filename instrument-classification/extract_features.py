@@ -8,9 +8,10 @@ Output: A tensor with a chromagram for each sample
 import argparse
 import jsonpickle
 import numpy as np
+from tfr.preprocessing import ChromagramTransformer
 
 from generate_audio_samples import SingleToneDataset
-from preprocessing import ChromagramTransformer
+
 
 def extract_chromagrams(data_dir, block_size, hop_size, bin_range, bin_division):
     print('loading dataset from:', data_dir)

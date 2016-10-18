@@ -3,17 +3,13 @@
 
 import numpy as np
 import pandas as pd
-import sys
-import math
 import os
+from tfr.analysis import split_to_blocks
+from tfr.files import load_wav
+from tfr.spectrogram import create_window
+from tfr.reassignment import chromagram
 
-sys.path.append('../tools/music-processing-experiments')
-
-from analysis import split_to_blocks
-from files import load_wav
 from time_intervals import block_labels
-from spectrogram import create_window
-from reassignment import chromagram
 
 def prepare_chomagram_and_labels(
     album,

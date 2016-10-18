@@ -5,14 +5,10 @@ import os
 import pandas as pd
 import seaborn as sns
 from sklearn.metrics import hamming_loss, accuracy_score, roc_auc_score
-import sys
-
-sys.path.append('../tools/music-processing-experiments')
-
-from spectrogram import create_window
-from files import load_wav
-from analysis import split_to_blocks
-from reassignment import chromagram
+from tfr.spectrogram import create_window
+from tfr.files import load_wav
+from tfr.analysis import split_to_blocks
+from tfr.reassignment import chromagram
 
 data_dir = '../data'
 
