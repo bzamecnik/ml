@@ -4,6 +4,10 @@ The goal of this experiment is to train a model to classify musical instrument f
 
 We first limit ourselves to fixed-length samples of single harmonic tone played by synthesized [MIDI instruments](https://www.midi.org/specifications/item/gm-level-1-sound-set).
 
+## Try on Heroku
+
+- http://deep-instrument.herokuapp.com/
+
 ## Datasets:
 
 - `data/midi-instruments.csv`
@@ -156,3 +160,8 @@ Predicts instrument family from a single audio file using a trained model.
 ### Results
 
 One of the best models so far has validation error of around 5% and AUC ~0.99. It is composed of 8 convolution layers, 1 softmax and has around 220k parameters. On a GPU training takes around 2 minutes.
+
+## Deployed demo app
+
+- running app: http://deep-instrument.herokuapp.com/
+- repo: https://github.com/bzamecnik/deep-instrument-heroku
