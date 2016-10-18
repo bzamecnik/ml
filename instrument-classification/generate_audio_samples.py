@@ -49,7 +49,7 @@ def generate_single_note(midi_number, midi_instrument=0, volume=1.0, duration=1.
         ]), volume)
     ])
 
-def generate_separete_notes(note_params_df, output_dir, audio_format='flac'):
+def generate_separate_notes(note_params_df, output_dir, audio_format='flac'):
     """
     Generates a batch of single note samples from the given table of parameters.
 
@@ -203,7 +203,7 @@ def generate_random_samples(args):
     params_df = random_params(args.count, seed=args.seed)
     os.makedirs(args.output_dir, exist_ok=True)
     params_df.to_csv(args.output_dir + '/parameters.csv')
-    # generate_separete_notes(params_df, output_dir, args.audio_format)
+    # generate_separate_notes(params_df, output_dir, args.audio_format)
     generate_notes_in_batch(params_df, args.output_dir, args.audio_format)
 
 class SingleToneDataset():
