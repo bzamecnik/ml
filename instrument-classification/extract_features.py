@@ -8,20 +8,23 @@ Output: A tensor with a chromagram for each sample
 import argparse
 import jsonpickle
 import numpy as np
+import os
 from tfr.preprocessing import ChromagramTransformer
 
 from generate_audio_samples import SingleToneDataset
 
 
-def extract_chromagrams(data_dir, block_size, hop_size, bin_range, bin_division):
-    print('loading dataset from:', data_dir)
-    dataset = SingleToneDataset(data_dir)
+def extract_chromagrams(audio_dir, feature_dir, block_size, hop_size, bin_range, bin_division):
+    print('loading dataset from:', audio_dir)
+    dataset = SingleToneDataset(audio_dir)
     print('dataset shape:', dataset.samples.shape)
 
     ch = ChromagramTransformer(dataset.sample_rate,
         block_size, hop_size, bin_range, bin_division)
 
-    with open(data_dir + '/chromagram_transformer.json', 'w') as f:
+    os.makedirs(feature_dir)
+
+    with open(feature_dir + '/chromagram_transformer.json', 'w') as f:
         json = jsonpickle.encode(ch.get_params())
         f.write(json)
 
@@ -31,7 +34,7 @@ def extract_chromagrams(data_dir, block_size, hop_size, bin_range, bin_division)
 
     print('chomagrams shape:', chromagrams.shape)
 
-    chromagram_file = data_dir + '/chromagrams.npz'
+    chromagram_file = feature_dir + '/chromagrams.npz'
     print('saving chromagrams to:', chromagram_file)
     np.savez_compressed(chromagram_file, chromagrams)
 
@@ -40,8 +43,10 @@ def extract_chromagrams(data_dir, block_size, hop_size, bin_range, bin_division)
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Extract chromagram features')
-    parser.add_argument('data_dir', metavar='DATA_DIR', type=str,
-        help='data directory (both audio/features)')
+    parser.add_argument('audio_dir', metavar='AUDIO_DIR', type=str,
+        help='input directory with audio files')
+    parser.add_argument('feature_dir', metavar='FEATURE_DIR', type=str,
+        help='output directory with features')
     parser.add_argument('-b', '--block-size', type=int, default=4096,
         help='block size')
     parser.add_argument('-p', '--hop-size', type=int, default=2048,
@@ -55,5 +60,5 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-    extract_chromagrams(args.data_dir,
+    extract_chromagrams(args.audio_dir, args.feature_dir,
         args.block_size, args.hop_size, args.bin_range, args.bin_division)
