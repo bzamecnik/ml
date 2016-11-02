@@ -84,11 +84,12 @@ def prepare_inputs(input_audio_dir, input_feature_dir, output_dir, split_seed=42
 
     ## Scale the features
 
-    scaler = MinMaxScaler()
-    scaler.fit(x[ix['train']].reshape(len(ix['train']), -1))
-    # NOTE: The reshapes are necessary since the trainsformer expects 1D values
-    # and we have 2D values.
-    x = scaler.transform(x.reshape(len(x), -1)).reshape(-1, *x.shape[1:])
+    if scaling_enabled:
+        scaler = MinMaxScaler()
+        scaler.fit(x[ix['train']].reshape(len(ix['train']), -1))
+        # NOTE: The reshapes are necessary since the trainsformer expects 1D values
+        # and we have 2D values.
+        x = scaler.transform(x.reshape(len(x), -1)).reshape(-1, *x.shape[1:])
 
     input_shape = x.shape[1:]
     print('input shape (rows, cols):', input_shape)
