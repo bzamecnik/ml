@@ -1,7 +1,7 @@
 """
 Prepares features and targets and creates split indexes.
 
-Chromagram features are scaled and reshaped, targets are encoded.
+Pitchgram features are scaled and reshaped, targets are encoded.
 """
 
 import jsonpickle
@@ -12,7 +12,7 @@ import os
 import pandas as pd
 from sklearn.cross_validation import train_test_split
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
-from tfr.preprocessing import ChromagramTransformer
+from tfr import PitchgramTransformer
 
 from instruments import midi_instruments
 
@@ -25,14 +25,14 @@ def prepare_inputs(input_audio_dir, input_feature_dir, output_dir, split_seed=42
 
     ## Load features
 
-    x = np.load(input_feature_dir + '/chromagrams.npz')['arr_0']
-    # axes: data point, block, chroma vector
+    x = np.load(input_feature_dir + '/pitchgrams.npz')['arr_0']
+    # axes: data point, block, pitch vector
     print('x.shape:', x.shape)
     print('x.size:', x.size)
 
     ## Load targets
 
-    parameters = pd.read_csv(input_dir + '/parameters.csv', index_col=0)
+    parameters = pd.read_csv(input_audio_dir + '/parameters.csv', index_col=0)
     print('parameters.shape:', parameters.shape)
 
     instruments = midi_instruments()
@@ -97,12 +97,12 @@ def prepare_inputs(input_audio_dir, input_feature_dir, output_dir, split_seed=42
         '{}/features_targets.npz'.format(output_dir, split_seed),
         x=x, y=y)
 
-    with open(input_feature_dir + '/chromagram_transformer.json', 'r') as f:
-        chromagram_transformer = ChromagramTransformer(**jsonpickle.decode(f.read()))
+    with open(input_feature_dir + '/pitchgram_transformer.json', 'r') as f:
+        pitchgram_transformer = PitchgramTransformer(**jsonpickle.decode(f.read()))
 
     with open(output_dir + '/preproc_transformers.json', 'w') as f:
         json = jsonpickle.encode((instr_family_le, scaler,
-            chromagram_transformer))
+            pitchgram_transformer))
         f.write(json)
 
 
@@ -124,7 +124,7 @@ def load_data(data_dir):
 
 def load_transformers(data_dir):
     with open(data_dir + '/preproc_transformers.json', 'r') as f:
-        # instr_family_le, scaler, chromagram_transformer
+        # instr_family_le, scaler, pitchgram_transformer
         return jsonpickle.decode(f.read())
 
 

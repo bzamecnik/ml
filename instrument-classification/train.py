@@ -133,7 +133,7 @@ if __name__ == '__main__':
     print('model id:', model_id)
 
     base_dir = 'data/working/single-notes-2000'
-    input_dir = base_dir + '/training-data'
+    input_dir = base_dir + '/features-04/training-data'
     model_dir = base_dir + '/models/' + model_id
     output_dir = model_dir + '/output-data'
     evaluation_dir = model_dir + '/evaluation'

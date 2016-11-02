@@ -83,9 +83,9 @@ class InstrumentClassifier():
         x, fs = sf.read(audio_file)
         x = adjust_input(x, fs)
 
-        x_chromagram = self.ch.transform(x)
-        x_features = self.scaler.transform(x_chromagram.reshape(1, -1)) \
-            .reshape(1, *x_chromagram.shape)
+        x_features = self.ch.transform(x)
+        x_features = self.scaler.transform(x_features.reshape(1, -1)) \
+            .reshape(1, *x_features.shape)
         return x_features
 
     def predict_class_label(self, audio_file):
