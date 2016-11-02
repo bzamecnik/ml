@@ -12,4 +12,4 @@ pandas
 scikit-learn
 soundfile
 tensorflow
-tfr
+tfr==0.1
