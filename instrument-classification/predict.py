@@ -83,10 +83,15 @@ class InstrumentClassifier():
         x, fs = sf.read(audio_file)
         x = adjust_input(x, fs)
 
+        # pitchgram
         x_features = self.ch.transform(x)
+
         if self.scaler is not None:
             x_features = self.scaler.transform(x_features.reshape(1, -1)) \
-                .reshape(1, *x_features.shape)
+
+        # 1 data point with 2D features
+        x_features = x_features.reshape(1, *x_features.shape)
+
         return x_features
 
     def predict_class_label(self, audio_file):
