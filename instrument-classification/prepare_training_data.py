@@ -20,12 +20,12 @@ from instruments import midi_instruments
 jsonpickle_numpy.register_handlers()
 
 
-def prepare_inputs(input_dir, output_dir, split_seed=42):
+def prepare_inputs(input_audio_dir, input_feature_dir, output_dir, split_seed=42, scaling_enabled=True):
     os.makedirs(output_dir, exist_ok=True)
 
     ## Load features
 
-    x = np.load(input_dir + '/chromagrams.npz')['arr_0']
+    x = np.load(input_feature_dir + '/chromagrams.npz')['arr_0']
     # axes: data point, block, chroma vector
     print('x.shape:', x.shape)
     print('x.size:', x.size)
@@ -97,7 +97,7 @@ def prepare_inputs(input_dir, output_dir, split_seed=42):
         '{}/features_targets.npz'.format(output_dir, split_seed),
         x=x, y=y)
 
-    with open(input_dir + '/chromagram_transformer.json', 'r') as f:
+    with open(input_feature_dir + '/chromagram_transformer.json', 'r') as f:
         chromagram_transformer = ChromagramTransformer(**jsonpickle.decode(f.read()))
 
     with open(output_dir + '/preproc_transformers.json', 'w') as f:
@@ -131,4 +131,5 @@ def load_transformers(data_dir):
 if __name__ == '__main__':
     prepare_inputs(
         'data/prepared/single-notes-2000',
-        'data/working/single-notes-2000/training-data')
+        'data/prepared/single-notes-2000/features-04',
+        'data/working/single-notes-2000/features-04/training-data')
