@@ -15,7 +15,7 @@ from sklearn.metrics import roc_auc_score
 from capture import CaptureStdout
 from evaluate import evaluate_model
 from model_arch import create_model
-from prepare_training_data import load_data, load_transformers
+from prepare_training_data import load_data
 
 def train_model(model, x, y, ix, model_dir, evaluation_dir,
     batch_size=32, epoch_count=30, enable_tensorboard=False):
@@ -133,7 +133,7 @@ if __name__ == '__main__':
     print('model id:', model_id)
 
     base_dir = 'data/working/single-notes-2000'
-    input_dir = base_dir + '/features-04/training-data'
+    input_dir = base_dir + '/features-04-unscaled/training-data'
     model_dir = base_dir + '/models/' + model_id
     output_dir = model_dir + '/output-data'
     evaluation_dir = model_dir + '/evaluation'
@@ -143,7 +143,6 @@ if __name__ == '__main__':
     store_model_files(input_dir, model_dir)
 
     x, y, ix = load_data(input_dir)
-    instr_family_le, scaler, _ = load_transformers(input_dir)
 
     model = create_model(input_shape=x.shape[1:], class_count=y.shape[1])
     model.summary()

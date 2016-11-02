@@ -90,6 +90,8 @@ def prepare_inputs(input_audio_dir, input_feature_dir, output_dir, split_seed=42
         # NOTE: The reshapes are necessary since the trainsformer expects 1D values
         # and we have 2D values.
         x = scaler.transform(x.reshape(len(x), -1)).reshape(-1, *x.shape[1:])
+    else:
+        scaler = None
 
     input_shape = x.shape[1:]
     print('input shape (rows, cols):', input_shape)
@@ -133,4 +135,5 @@ if __name__ == '__main__':
     prepare_inputs(
         'data/prepared/single-notes-2000',
         'data/prepared/single-notes-2000/features-04',
-        'data/working/single-notes-2000/features-04/training-data')
+        'data/working/single-notes-2000/features-04-unscaled/training-data',
+        scaling_enabled=False)

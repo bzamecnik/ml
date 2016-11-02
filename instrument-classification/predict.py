@@ -84,8 +84,9 @@ class InstrumentClassifier():
         x = adjust_input(x, fs)
 
         x_features = self.ch.transform(x)
-        x_features = self.scaler.transform(x_features.reshape(1, -1)) \
-            .reshape(1, *x_features.shape)
+        if self.scaler is not None:
+            x_features = self.scaler.transform(x_features.reshape(1, -1)) \
+                .reshape(1, *x_features.shape)
         return x_features
 
     def predict_class_label(self, audio_file):
