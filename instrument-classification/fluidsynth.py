@@ -56,4 +56,4 @@ if __name__ == '__main__':
     if args.audio_file:
         fs.midi_to_audio(args.midi_file, args.audio_file)
     else:
-        fs.play_midi(args.midi_file, args.sample_rate)
+        fs.play_midi(args.midi_file)
