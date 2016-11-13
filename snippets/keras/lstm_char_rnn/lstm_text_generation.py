@@ -76,7 +76,7 @@ for iteration in range(1, 60):
     print()
     print('-' * 50)
     print('Iteration', iteration)
-    model.fit(X, y, batch_size=128, nb_epoch=1)
+    model.fit(X, y, batch_size=1000, nb_epoch=1)
 
     start_index = random.randint(0, len(text) - maxlen - 1)
 
