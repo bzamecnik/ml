@@ -15,7 +15,7 @@ import os
 import pandas as pd
 import soundfile as sf
 
-from fluidsynth import FluidSynth
+from midi2audio import FluidSynth
 from instruments import midi_instruments
 
 def make_instrument(id):

@@ -4,7 +4,7 @@ An example script that generates a simple sequence of chords in the all availabl
 
 import music21
 from music21 import chord, stream
-from fluidsynth import FluidSynth
+from midi2audio import FluidSynth
 import os.path
 from instruments import midi_instruments
 
