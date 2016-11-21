@@ -33,7 +33,7 @@ class Dataset:
 
         path = get_file('nietzsche.txt',
             origin="https://s3.amazonaws.com/text-datasets/nietzsche.txt")
-        self.text = open(path).read().lower()[:10000]
+        self.text = open(path).read().lower()
         print('corpus length:', len(self.text))
 
         chars = sorted(list(set(self.text)))
@@ -99,18 +99,18 @@ class Model:
                 optimizer=optimizer)
             return model
 
-        self.model = create_model(dataset)
+        self.model = create_model(self.dataset)
 
     def fit_with_preview(self):
         # output generated text after each iteration
-        preview_callback = LambdaCallback(on_epoch_end=lambda epoch, logs: self.preview(model, dataset))
-        model.fit(
+        preview_callback = LambdaCallback(on_epoch_end=lambda epoch, logs: self.preview())
+        self.model.fit(
             self.dataset.X, self.dataset.y,
             batch_size=1000, nb_epoch=60,
             callbacks=[preview_callback])
 
     def generate_chars(self, seed_text, length, temperature=1.0):
-        def sample(preds):
+        def sample(preds, temperature):
             # helper function to sample an index from a probability array
             preds = np.asarray(preds).astype('float64')
             preds = np.log(preds) / temperature
@@ -125,7 +125,7 @@ class Model:
             # single data point
             x = window_ohe[np.newaxis]
 
-            probs = model.predict(x, verbose=0)[0]
+            probs = self.model.predict(x, verbose=0)[0]
             next_index = sample(probs, temperature)
 
             yield dataset.le_to_text(next_index)
