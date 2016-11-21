@@ -14,8 +14,9 @@ License: MIT (see https://github.com/fchollet/keras/blob/master/LICENSE)
 '''
 
 from __future__ import print_function
+from keras.callbacks import LambdaCallback
 from keras.models import Sequential
-from keras.layers import Dense, Activation, Dropout
+from keras.layers import Dense, Activation
 from keras.layers import LSTM
 from keras.optimizers import RMSprop
 from keras.utils.data_utils import get_file
@@ -84,14 +85,11 @@ def sample(preds, temperature=1.0):
     probas = np.random.multinomial(1, preds, 1)
     return np.argmax(probas)
 
-# train the model, output generated text after each iteration
-for iteration in range(1, 60):
-    print()
-    print('-' * 50)
-    print('Iteration', iteration)
-    model.fit(X, y, batch_size=1000, nb_epoch=1)
-
+def preview(model, epoch):
     start_index = random.randint(0, len(text) - frame_size - 1)
+
+    print()
+    print('Epoch:', epoch)
 
     for diversity in [0.2, 0.5, 1.0, 1.2]:
         print()
@@ -112,3 +110,9 @@ for iteration in range(1, 60):
             sys.stdout.write(le.inverse_transform(next_index))
             sys.stdout.flush()
         print()
+
+# train the model, output generated text after each iteration
+batch_size = 1000
+model.fit(X, y, batch_size=batch_size, nb_epoch=60, callbacks=[
+    LambdaCallback(on_epoch_end=lambda epoch, logs: preview(model, epoch))
+])
