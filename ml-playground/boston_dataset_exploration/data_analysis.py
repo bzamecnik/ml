@@ -12,6 +12,7 @@ import numpy as np
 import os
 import pandas as pd
 import seaborn as sns
+import seaborn.linearmodels as snslm
 from sklearn.datasets import load_boston
 
 def dataset_to_dataframe(dataset, target_name):
@@ -85,7 +86,7 @@ def attribute_correlations(df, img_file='attr_correlations.png'):
     # - color bar
     # If there a lot of attributes we can disable the annotations:
     # annot=False, sig_stars=False, diag_names=False
-    sns.corrplot(df, ax=ax, cmap=cmap)
+    snslm.corrplot(df, ax=ax, cmap=cmap)
     # remove white borders
     fig.tight_layout()
     fig.savefig(img_file)
