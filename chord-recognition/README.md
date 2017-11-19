@@ -97,6 +97,23 @@ cat '{"floatx": "float32", "backend": "tensorflow", "epsilon": 1e-07}' > \
   ~/.keras/keras.json
 ```
 
+Note (2017-11-19): It surprisingly works after 1.5 year even with Keras 2.0.9 + TensorFlow 1.4! Wow.
+
+### Data
+
+I have original cleaned data in FLAC available, but cannot publish due to copyright restrictions. You can drop me a message...
+
+Preprocessed data (chromagram features + pitch class targets) - cca 332 MB:
+
+- block size: 4096
+- hop size: 2048
+- range of pitch bins: -48,67
+- bin subdivision: 1
+
+```shell
+wget https://data.neural.cz/music/isophonics/beatles/preproc/dataset_2016-05-15.npz
+```
+
 ### Troubleshooting
 
 - `import scipy.misc` gives Segmentation fault
