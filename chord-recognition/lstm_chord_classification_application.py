@@ -5,10 +5,7 @@ import os
 import pandas as pd
 import seaborn as sns
 from sklearn.metrics import hamming_loss, accuracy_score, roc_auc_score
-from tfr.spectrogram import create_window
-from tfr.files import load_wav
-from tfr.analysis import split_to_blocks
-from tfr.reassignment import chromagram
+import tfr
 
 data_dir = '../data'
 
@@ -34,22 +31,12 @@ block_size = 4096
 hop_size = 2048
 
 print('loading audio:', audio_file)
-x, fs = load_wav(audio_file)
-print('splitting audio to blocks')
-x_blocks, times = split_to_blocks(x, block_size, hop_size)
-w = create_window(block_size)
+signal_frames = tfr.SignalFrames(audio_file, frame_size=block_size, hop_size=hop_size)
 print('computing chromagram')
-X_chromagram = chromagram(x_blocks, w, fs, to_log=True)
+# normalized to [0.; 1.]
+X_orig = tfr.pitchgram(signal_frames)
 
 ### Features
-
-# let's rescale the features manually so that the're the same in all songs
-# the range (in dB) is -120 to X.shape[1] (= 115)
-# TODO: there's a bug: should be + 120 on both places!!!
-def normalize(X):
-    return (X.astype('float32') - 120) / (X.shape[1] - 120)
-
-X_orig = normalize(X_chromagram)
 
 print(X_orig.shape)
 
