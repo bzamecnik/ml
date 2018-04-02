@@ -1,0 +1,8 @@
+- [ ] create a Python package structure
+- [ ] generate chords
+  - select base pitch
+  - select chord type (a pitch class set)
+  - make a chord of given type shifted by the base pitch
+  - possibly duplicate some pitches
+    - copy the root tone in the bottom octaves
+    - copy any of the pitch classes to upper octaves
