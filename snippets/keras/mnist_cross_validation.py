@@ -9,6 +9,11 @@ from keras.utils import np_utils
 import pandas as pd
 from sklearn.model_selection import StratifiedKFold
 
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+mpl.rc('figure', figsize=(10, 5))
+
 
 batch_size = 128
 nb_classes = 10
@@ -49,6 +54,7 @@ def create_model():
 
 skf = StratifiedKFold(n_splits=n_splits, shuffle=True)
 results = pd.DataFrame(columns=['loss', 'acc'])
+histories_df = []
 result_stats = None
 for i, indices in enumerate(skf.split(X_cv, y_cv)):
     idx_train, idx_val = indices
@@ -58,13 +64,24 @@ for i, indices in enumerate(skf.split(X_cv, y_cv)):
             model.summary()
     X_train, Y_train = X_cv[idx_train], Y_cv[idx_train]
     X_val, Y_val = X_cv[idx_val], Y_cv[idx_val]
-    model.fit(
+    hist_cb = model.fit(
         X_train, Y_train,
         validation_data=(X_val, Y_val),
         batch_size=batch_size, nb_epoch=nb_epoch,
-        verbose=0)
+        verbose=1)
+    history_df = pd.DataFrame(hist_cb.history)
+    history_df.index.name = 'epoch'
+    history_df.reset_index(inplace=True)
+    history_df['fold'] = i
+    histories_df.append(history_df)
     results.loc[i] = model.evaluate(X_val, Y_val, verbose=0)
     result_stats = pd.DataFrame({'mean': results.mean(axis=0), 'std': results.std(axis=0)})
     print(result_stats)
 
+all_histories_df = pd.concat(histories_df)
+
 print(results)
+print(all_histories_df)
+
+print(results)
+print(histories)
