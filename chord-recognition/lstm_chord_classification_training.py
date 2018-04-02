@@ -3,7 +3,7 @@ Training a model to classify chord (pitch class set) labels from chormagram
 features. The architecture consists of a few 1D convolutional layers followed
 by LSTM and 12 sigmoids at the end (for multi-label classification).
 
-On GTX 980 Ti this model eats 5900 MB memory and one epoch takes ~ 66 seconds.
+On GTX 980 Ti one epoch takes 15 seconds.
 """
 
 import arrow
@@ -33,9 +33,9 @@ mpl.rc('figure', figsize=(10,5))
 
 data_dir = '../data'
 
-max_seq_size = 100
-batch_size = 32
-epoch_count = 3
+max_seq_size = 32
+batch_size = 128
+epoch_count = 5
 
 dataset = np.load(data_dir + '/beatles/ml_dataset/block=4096_hop=2048_bins=-48,67_div=1/dataset_2016-05-15.npz')
 
@@ -263,6 +263,15 @@ Y_valid = Y_valid_seq
 # accuracy: 0.512234461054
 # hamming score: 0.8996643063204826
 # AUC: 0.935884223859
+
+# -- training:
+# accuracy: 0.792382965313
+# hamming score: 0.9659581558434032
+# AUC: 0.991739646375
+# -- validation:
+# accuracy: 0.548976651616
+# hamming score: 0.9113716928073511
+# AUC: 0.948033209277
 model = Sequential()
 model.add(TimeDistributed(Convolution1D(32, 3, activation='relu'), input_shape=(max_seq_size, feature_count, 1)))
 model.add(TimeDistributed(Convolution1D(32, 3, activation='relu')))
@@ -278,8 +287,8 @@ model.add(TimeDistributed(MaxPooling1D(2, 2)))
 model.add(Dropout(0.25))
 model.add(TimeDistributed(Flatten()))
 model.add(BatchNormalization())
-model.add(LSTM(64, return_sequences=True))
-model.add(LSTM(64, return_sequences=True))
+model.add(Bidirectional(LSTM(256, return_sequences=True)))
+model.add(Bidirectional(LSTM(256, return_sequences=True)))
 model.add(Dropout(0.25))
 model.add(TimeDistributed(Dense(12, activation='sigmoid')))
 

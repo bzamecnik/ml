@@ -11,7 +11,7 @@ data_dir = '../data'
 
 # load model
 
-model_id = 'model_2016-05-15-19-03-49'
+model_id = 'model_2017-11-19-19-41-34'
 model_dir = data_dir + '/beatles/models/' + model_id
 model_arch = '%s/%s_arch.json' % (model_dir, model_id)
 model_weights = '%s/%s_weights.h5' % (model_dir, model_id)
@@ -24,8 +24,8 @@ model.compile(loss='binary_crossentropy', optimizer='adam')
 
 # load data
 
-song = "The_Beatles/03_-_A_Hard_Day's_Night/05_-_And_I_Love_Her"
-audio_file = data_dir + '/beatles/audio-cd/' + song + '.wav'
+song = "05_-_And_I_Love_Her"
+audio_file = data_dir + '/beatles/' + song + '.wav'
 
 block_size = 4096
 hop_size = 2048
@@ -34,7 +34,7 @@ print('loading audio:', audio_file)
 signal_frames = tfr.SignalFrames(audio_file, frame_size=block_size, hop_size=hop_size)
 print('computing chromagram')
 # normalized to [0.; 1.]
-X_orig = tfr.pitchgram(signal_frames)
+X_orig = tfr.pitchgram(signal_frames, magnitudes='power_db_normalized')
 
 ### Features
 
