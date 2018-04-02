@@ -20,10 +20,9 @@ from sklearn.metrics import hamming_loss, accuracy_score
 
 from keras.models import model_from_yaml
 
-from tfr.spectrogram import create_window
-from tfr.files import load_wav
-from tfr.analysis import split_to_blocks
 from tfr.reassignment import chromagram
+from tfr.signal import SignalFrames
+from tfr.spectrogram import create_window
 
 ## Load model
 
@@ -62,9 +61,9 @@ block_size = 4096
 hop_size = 2048
 
 print('loading audio:', audio_file)
-x, fs = load_wav(audio_file)
 print('splitting audio to blocks')
-x_blocks, times = split_to_blocks(x, block_size, hop_size)
+signal_frames = SignalFrames(audio_file, frame_size=block_size, hop_size=hop_size)
+x_blocks, x_times, fs = signal_frames.frames, signal_frames.start_times, signal_frames.sample_rate
 w = create_window(block_size)
 print('computing chromagram')
 X_chromagram = chromagram(x_blocks, w, fs, to_log=True)

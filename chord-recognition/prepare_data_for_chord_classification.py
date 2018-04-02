@@ -1,13 +1,13 @@
 # Prepares data for simple chord classification.
 # It computes the chromagram from the audio file and splits the labels to blocks.
 
+import os
+
 import numpy as np
 import pandas as pd
-import os
-from tfr.analysis import split_to_blocks
-from tfr.files import load_wav
-from tfr.spectrogram import create_window
 from tfr.reassignment import chromagram
+from tfr.signal import SignalFrames
+from tfr.spectrogram import create_window
 
 from time_intervals import block_labels
 
@@ -25,14 +25,22 @@ def prepare_chomagram_and_labels(
     chord_file = data_dir  + '/chordlab/' + song + '.lab.pcs.tsv'
     audio_file, chord_file
 
-    # ## Load audio
+    # ## Load audio & Split audio to blocks
     print('loading audio:', audio_file)
 
-    x, fs = load_wav(audio_file)
+    signal_frames = SignalFrames(audio_file, frame_size=block_size, hop_size=hop_size)
+    x_blocks = signal_frames.frames
+    x_time = signal_frames.start_times
+    fs = signal_frames.sample_rate
 
     print('sampling rate:', fs, 'Hz')
-    print('number of samples:', len(x))
-    print('duration in audio:', len(x) / fs, 'sec')
+    print('number of samples:', signal_frames.length)
+    print('duration in audio:', signal_frames.duration, 'sec')
+
+    print('blocks shape:', x_blocks.shape)
+    print('number of blocks:', len(x_blocks))
+    # start times for each block
+    print('last block starts at:', x_times[-1], 'sec')
 
     # ## Load chords
     print('loading chords:', chord_file)
@@ -43,13 +51,7 @@ def prepare_chomagram_and_labels(
     pcs_cols = ['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B']
     label_cols = ['label','root','bass'] + pcs_cols
 
-    # ## Split audio to blocks
-
-    x_blocks, x_times = split_to_blocks(x, block_size, hop_size, fs)
-    print('blocks shape:', x_blocks.shape)
-    print('number of blocks:', len(x_blocks))
-    # start times for each block
-    print('last block starts at:', x_times[-1], 'sec')
+    # ##
 
     # ## Mapping of chords to blocks
 
