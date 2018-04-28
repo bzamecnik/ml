@@ -22,8 +22,9 @@ def extract_pitchgrams(audio_dir, feature_dir, block_size, hop_size, bin_range, 
     dataset = SingleToneDataset(audio_dir)
     print('dataset shape:', dataset.samples.shape)
 
-    ch = PitchgramTransformer(dataset.sample_rate,
-        block_size, hop_size, bin_range, bin_division)
+    ch = PitchgramTransformer(sample_rate=dataset.sample_rate,
+        frame_size=block_size, hop_size=hop_size,
+        bin_range=bin_range, bin_division=bin_division)
 
     os.makedirs(feature_dir)
 
